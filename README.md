@@ -7,6 +7,27 @@ Currently it supports only :
 * (twitch.tv)[https://www.twitch.tv] - video provider
 * (vlc)[https://www.videolan.org] - video player
  
+
+
+# Todo
+## Interface
+- [ ] implement search option
+- [ ] put started streams/vods in viewing tabs
+
+## Twitch
+- [ ] start a VOD at a given time
+- [ ] handle Games section
+- [ ] handle search option in the different sections
+- [ ] option to follow / unfollow
+- [ ] why not implement the Twitch chat
+
+## VLC
+- [ ] - option on play button - start without sound
+- [ ] - preference to start in minimal mode
+- [ ] - preferences to set VLC window:  always-on-top, on all worskspace, 
+
+
+
 # Building from sources
 
 ## Fedora
