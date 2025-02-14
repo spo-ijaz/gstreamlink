@@ -76,12 +76,12 @@ sudo ninja -C builddir_prod install
 # Screenshots
 ## Twitch - followed stream
 
-![image](https://gitlab.gnome.org/spo-ijaz/streamlink-gtk/-/raw/main/screenshots/twitch-streams.png?ref_type=heads))
+![image](https://gitlab.gnome.org/spo-ijaz/streamlink-gtk/-/raw/main/screenshots/twitch-streams.png?ref_type=heads)
 
 ## Twitch - followed channels
 
-![image](https://gitlab.gnome.org/spo-ijaz/streamlink-gtk/-/raw/main/screenshots/twitch-followed-channels.png?ref_type=heads))
+![image](https://gitlab.gnome.org/spo-ijaz/streamlink-gtk/-/raw/main/screenshots/twitch-followed-channels.png?ref_type=heads
 
 ## Twitch - VOD
 
-![image](https://gitlab.gnome.org/spo-ijaz/streamlink-gtk/-/raw/main/screenshots/twith-vod.png?ref_type=heads))
+![image](https://gitlab.gnome.org/spo-ijaz/streamlink-gtk/-/raw/main/screenshots/twitch-vod.png?ref_type=heads)
