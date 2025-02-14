@@ -74,9 +74,9 @@ namespace StreamlinkGtk.Controllers {
             this.window.side_bar_list_box.get_contents.connect (this.get_contents_handler);
 
             // Initialize all available providers, default one is Twitch.
-            this.list_store_plugin_providers.append (new PluginProvider (1, "Twitch 1", "libstreamlink_gtk_plugin_provider_twitch", "streamlink_gtk_providers_twitch_register_plugin"));
-            this.list_store_plugin_providers.append (new PluginProvider (2, "Twitch 2", "libstreamlink_gtk_plugin_provider_twitch", "streamlink_gtk_providers_twitch_register_plugin"));
-            this.list_store_plugin_providers.append (new PluginProvider (3, "Twitch 3", "libstreamlink_gtk_plugin_provider_twitch", "streamlink_gtk_providers_twitch_register_plugin"));
+            this.list_store_plugin_providers.append (new PluginProvider (1, "Twitch", "libstreamlink_gtk_plugin_provider_twitch", "streamlink_gtk_providers_twitch_register_plugin"));
+            //  this.list_store_plugin_providers.append (new PluginProvider (2, "Twitch 2", "libstreamlink_gtk_plugin_provider_twitch", "streamlink_gtk_providers_twitch_register_plugin"));
+            //  this.list_store_plugin_providers.append (new PluginProvider (3, "Twitch 3", "libstreamlink_gtk_plugin_provider_twitch", "streamlink_gtk_providers_twitch_register_plugin"));
 
             // Select the startup provider, it will be Twitch by default.
             uint startup_provider_id = this.store.get_uint ("startup-provider-id") > 0 ? this.store.get_uint ("startup-provider-id") : 1;
