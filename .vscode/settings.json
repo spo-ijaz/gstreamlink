@@ -1,0 +1,4 @@
+{
+	"vala.languageServerPath": "vala-language-server",
+	"mesonbuild.configureOnOpen": true
+}

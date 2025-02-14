@@ -1,31 +1,41 @@
 # streamlink-gtk
 
-A simple (Streamlink)[https://streamlink.github.io/] GUI targeting Gnome desktop environment, built from the ground to support mutliple streaming providers, video players and live/vod providers.
+A simple [Streamlink](khttps://streamlink.github.io/) GUI targeting Gnome desktop environment, built from the ground to support mutliple streaming providers, video players and live/vod providers.
 
 Currently it supports only :
-* (streamlink)[https://streamlink.github.io/] - streaming provider - hence the name :)
-* (twitch.tv)[https://www.twitch.tv] - video provider
-* (vlc)[https://www.videolan.org] - video player
+* streaming providers : [streamlink](https://streamlink.github.io/) - hence the name :)
+* video providers : [twitch.tv](https://www.twitch.tv)
+* video players : [vlc](https://www.videolan.org)
  
 
+**WIP - It's not really ready for everyone, but the basics should works.**
 
 # Todo
 ## Interface
-- [ ] implement search option
-- [ ] put started streams/vods in viewing tabs
+
+- [ ] implement search option.
+- [ ] put started streams/vods in viewing tabs.
+- [ ] new user guidance.
+- [ ] help for twitch provider, to get twitch session id from a web browser.
+- [ ] cleanup UI.
 
 ## Twitch
-- [ ] start a VOD at a given time
-- [ ] handle Games section
-- [ ] handle search option in the different sections
-- [ ] option to follow / unfollow
-- [ ] why not implement the Twitch chat
+
+- [ ] start a VOD at a given time.
+- [ ] handle Games section.
+- [ ] handle search option in the different sections.
+- [ ] option to follow / unfollow.
+- [ ] why not implement the Twitch chat.
 
 ## VLC
-- [ ] - option on play button - start without sound
-- [ ] - preference to start in minimal mode
-- [ ] - preferences to set VLC window:  always-on-top, on all worskspace, 
 
+- [ ] option on play button - start without sound.
+- [ ] preference to start in minimal mode.
+- [ ] preferences to set VLC window:  always-on-top, on all worskspace.
+
+## Streamlink
+
+- [ ] - preferences for some options, to define. 
 
 
 # Building from sources
@@ -61,3 +71,17 @@ meson setup builddir_prod -Dprofile=prod --prefix=/usr --wipe
 ninja -C builddir_prod
 sudo ninja -C builddir_prod install
 ```
+
+
+# Screenshots
+## Twitch - followed stream
+
+![image](https://gitlab.gnome.org/spo-ijaz/streamlink-gtk/-/raw/main/screenshots/twitch-streams.png?ref_type=heads))
+
+## Twitch - followed channels
+
+![image](https://gitlab.gnome.org/spo-ijaz/streamlink-gtk/-/raw/main/screenshots/twitch-followed-channels.png?ref_type=heads))
+
+## Twitch - VOD
+
+![image](https://gitlab.gnome.org/spo-ijaz/streamlink-gtk/-/raw/main/screenshots/twith-vod.png?ref_type=heads))
