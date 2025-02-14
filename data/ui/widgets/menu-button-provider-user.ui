@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.94.1 -->
+<interface domain="org.gnome.gitlab.spoijaz.streamlinkgtk">
+  <!-- interface-name menu-button-provider-user.ui -->
+  <requires lib="gtk" version="4.12"/>
+  <requires lib="libadwaita" version="1.0"/>
+  <template class="StreamlinkGtkWidgetsMenuButtonProviderUser" parent="AdwBin">
+    <property name="child">
+      <object class="GtkMenuButton" id="menu_button">
+        <property name="icon-name">view-more-symbolic</property>
+      </object>
+    </property>
+  </template>
+</interface>

@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<!DOCTYPE cambalache-project SYSTEM "cambalache-project.dtd">
+<cambalache-project version="0.94.0" target_tk="gtk-4.0">
+  <ui>
+	(1,1,"menu-button-provider-user.ui","menu-button-provider-user.ui",None,None,None,None,"org.gnome.gitlab.spoijaz.streamlinkgtk",None,None)
+  </ui>
+  <object>
+	(1,1,"AdwBin","StreamlinkGtkWidgetsMenuButtonProviderUser",None,None,None,None,0,None,None),
+	(1,2,"GtkMenuButton","menu_button",1,None,None,None,0,None,None)
+  </object>
+  <object_property>
+	(1,1,"AdwBin","child",None,None,None,None,None,2,None,None,None,None),
+	(1,2,"GtkMenuButton","icon-name","view-more-symbolic",None,None,None,None,None,None,None,None,None)
+  </object_property>
+</cambalache-project>

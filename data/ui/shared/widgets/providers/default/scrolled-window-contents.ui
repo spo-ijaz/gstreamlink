@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.90.4 -->
+<interface domain="org.gnome.gitlab.spoijaz.streamlinkgtk">
+  <!-- interface-name viewing-scrolled-window.ui -->
+  <requires lib="gio" version="2.44"/>
+  <requires lib="gtk" version="4.12"/>
+  <requires lib="libadwaita" version="1.0"/>
+  <template class="StreamlinkGtkWidgetsProvidersDefaultScrolledWindowContents" parent="AdwBin">
+    <property name="child">
+      <object class="GtkScrolledWindow" id="scrolled_window">
+        <property name="child">
+          <object class="GtkGridView" id="grid_view">
+            <property name="factory">
+              <object class="GtkSignalListItemFactory">
+                <signal name="bind" handler="grid_view_signal_bind_handler"/>
+              </object>
+            </property>
+            <property name="model">
+              <object class="GtkNoSelection">
+                <property name="model">
+                  <object class="GListStore" id="list_store"/>
+                </property>
+              </object>
+            </property>
+            <property name="single-click-activate">True</property>
+          </object>
+        </property>
+      </object>
+    </property>
+  </template>
+</interface>

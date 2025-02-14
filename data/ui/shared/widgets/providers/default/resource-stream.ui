@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.90.4 -->
+<interface domain="org.gnome.gitlab.spoijaz.streamlinkgtk">
+  <!-- interface-name thumbnail-contents-stream.ui -->
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="libadwaita" version="1.4"/>
+  <object class="GtkBox" id="box_started_at">
+    <property name="halign">end</property>
+    <property name="margin-top">3</property>
+    <child>
+      <object class="GtkImage" id="image_started_at">
+        <property name="icon-name">document-open-recent-symbolic</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkLabel" id="label_started_at"/>
+    </child>
+  </object>
+  <object class="GtkBox" id="box_viewers_count">
+    <property name="halign">start</property>
+    <property name="margin-top">3</property>
+    <child>
+      <object class="GtkImage" id="image_viewers_count">
+        <property name="icon-name">face-smile-symbolic</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkLabel" id="label_viewers_count"/>
+    </child>
+  </object>
+  <object class="GtkBox" id="box_play">
+    <property name="halign">center</property>
+    <property name="margin-top">3</property>
+    <child>
+      <object class="AdwSplitButton" id="split_button_play">
+        <property name="icon-name">media-playback-start-symbolic</property>
+        <property name="label">play</property>
+      </object>
+    </child>
+  </object>
+</interface>

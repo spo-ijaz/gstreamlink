@@ -1,0 +1,6 @@
+option('profile',
+  type: 'combo',
+  choices: [ 'prod', 'dev' ],
+  value: 'prod',
+  description: 'Choose wisely.',
+)

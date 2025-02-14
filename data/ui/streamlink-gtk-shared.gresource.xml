@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/org/gnome/gitlab/spoijaz/streamlinkgtk">
+    <file>styles.css</file>
+    <file preprocess="xml-stripblanks">shared/widgets/providers/default/scrolled-window-contents.ui</file>
+    <file preprocess="xml-stripblanks">shared/widgets/providers/default/resource.ui</file>
+    <file preprocess="xml-stripblanks">shared/widgets/providers/default/resource-stream.ui</file>
+    <file preprocess="xml-stripblanks">shared/widgets/providers/default/resource-vod.ui</file>
+  </gresource>
+</gresources>

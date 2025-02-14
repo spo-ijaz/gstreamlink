@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.90.4 -->
+<interface domain="org.gnome.gitlab.spoijaz.streamlinkgtk">
+  <!-- interface-name drop-down-providers.ui -->
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="libadwaita" version="1.0"/>
+  <template class="StreamlinkGtkWidgetsDropDownPluginProviders" parent="AdwBin">
+    <property name="child">
+      <object class="GtkDropDown" id="drop_down"/>
+    </property>
+  </template>
+</interface>

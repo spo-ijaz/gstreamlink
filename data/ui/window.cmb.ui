@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.94.1 -->
+<interface domain="org.gnome.gitlab.spoijaz.streamlinkgtk">
+  <!-- interface-name window.ui -->
+  <requires lib="gio" version="2.0"/>
+  <requires lib="gtk" version="4.12"/>
+  <requires lib="libadwaita" version="1.4"/>
+  <template class="StreamlinkGtkWindow" parent="AdwApplicationWindow">
+    <property name="content">
+      <object class="AdwNavigationSplitView" id="split_view_navigation">
+        <property name="content">
+          <object class="AdwNavigationPage">
+            <property name="child">
+              <object class="AdwToastOverlay" id="toast_overlay">
+                <child>
+                  <object class="GtkOverlay" id="overlay">
+                    <property name="child">
+                      <object class="AdwToolbarView" id="toolbar_view_contents">
+                        <child type="top">
+                          <object class="AdwHeaderBar" id="header_bar">
+                            <property name="title-widget">
+                              <object class="GtkCenterBox">
+                                <property name="center-widget">
+                                  <object class="AdwViewSwitcher" id="view_switcher">
+                                    <property name="policy">wide</property>
+                                    <property name="stack">
+                                      <object class="AdwViewStack" id="view_stack">
+                                        <child>
+                                          <object class="AdwViewStackPage" id="view_stack_page_contents">
+                                            <property name="child">
+                                              <object class="AdwBin"/>
+                                            </property>
+                                            <property name="icon-name">video-display-symbolic</property>
+                                            <property name="name">stack_page_contents</property>
+                                            <property name="title">Contents</property>
+                                          </object>
+                                        </child>
+                                        <child>
+                                          <object class="AdwViewStackPage" id="view_stack_page_running_players">
+                                            <property name="child">
+                                              <object class="AdwBin"/>
+                                            </property>
+                                            <property name="icon-name">applications-multimedia-symbolic</property>
+                                            <property name="name">stack_page_running_players</property>
+                                            <property name="title">Viewing</property>
+                                          </object>
+                                        </child>
+                                      </object>
+                                    </property>
+                                  </object>
+                                </property>
+                                <property name="end-widget">
+                                  <object class="GtkBox" id="header_bar_provider_box"/>
+                                </property>
+                                <property name="hexpand">True</property>
+                                <property name="hexpand-set">True</property>
+                              </object>
+                            </property>
+                          </object>
+                        </child>
+                        <child type="top">
+                          <object class="AdwBanner" id="banner_login">
+                            <property name="button-label">Login</property>
+                            <property name="title">You need to login</property>
+                          </object>
+                        </child>
+                      </object>
+                    </property>
+                  </object>
+                </child>
+              </object>
+            </property>
+            <property name="title"> </property>
+          </object>
+        </property>
+        <property name="max-sidebar-width">310.0</property>
+        <property name="min-sidebar-width">230.0</property>
+        <property name="show-content">True</property>
+        <property name="sidebar">
+          <object class="AdwNavigationPage">
+            <property name="child">
+              <object class="AdwToolbarView" id="toolbar_view_sidebar">
+                <property name="content">
+                  <object class="GtkScrolledWindow" id="sidebar_scrolled_win"/>
+                </property>
+                <child type="top">
+                  <object class="AdwHeaderBar" id="side_bar_header_bar">
+                    <child type="end">
+                      <object class="GtkBox" id="sidebar_header_bar_box">
+                        <child type="end">
+                          <object class="GtkMenuButton">
+                            <property name="halign">start</property>
+                            <property name="icon-name">open-menu-symbolic</property>
+                            <property name="menu-model">primary_menu</property>
+                            <property name="primary">True</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </property>
+            <property name="title"> </property>
+          </object>
+        </property>
+        <property name="sidebar-width-unit">px</property>
+      </object>
+    </property>
+    <property name="default-height">800</property>
+    <property name="default-width">950</property>
+    <property name="height-request">200</property>
+    <property name="width-request">320</property>
+    <child>
+      <object class="AdwBreakpoint">
+        <!-- Custom object fragments -->
+        <condition>max-width: 590px</condition>
+        <setter object="split_view_navigation" property="collapsed">True</setter>
+      </object>
+    </child>
+    <child>
+      <object class="GtkCssProvider" id="css_provider"/>
+    </child>
+  </template>
+  <menu id="primary_menu">
+    <item>
+      <attribute name="action">app.preferences</attribute>
+      <attribute name="label" translatable="yes">_Preferences</attribute>
+    </item>
+    <item>
+      <attribute name="action">win.show-help-overlay</attribute>
+      <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
+    </item>
+    <item>
+      <attribute name="action">app.about</attribute>
+      <attribute name="label" translatable="yes">_About Streamlink-gtk</attribute>
+    </item>
+    <item>
+      <attribute name="action">app.quit</attribute>
+      <attribute name="label">Quit</attribute>
+    </item>
+  </menu>
+  <object class="GtkButton" id="button_load_more_results">
+    <property name="css-classes">suggested-action opaque</property>
+    <property name="halign">center</property>
+    <property name="label">load more results</property>
+    <property name="margin-bottom">20</property>
+    <property name="valign">end</property>
+  </object>
+</interface>

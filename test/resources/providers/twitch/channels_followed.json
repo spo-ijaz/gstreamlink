@@ -1,0 +1,128 @@
+{
+    "total": 28,
+    "data": [
+        {
+            "broadcaster_id": "82858070",
+            "broadcaster_login": "nowtechteam",
+            "broadcaster_name": "NowtechTeam",
+            "followed_at": "2024-07-25T06:30:30Z"
+        },
+        {
+            "broadcaster_id": "473416637",
+            "broadcaster_login": "snookerlivestreams",
+            "broadcaster_name": "SnookerLiveStreams",
+            "followed_at": "2024-04-08T22:32:08Z"
+        },
+        {
+            "broadcaster_id": "150995363",
+            "broadcaster_login": "revisionseminars",
+            "broadcaster_name": "RevisionSeminars",
+            "followed_at": "2024-03-27T08:57:16Z"
+        },
+        {
+            "broadcaster_id": "97037121",
+            "broadcaster_login": "nico_oni",
+            "broadcaster_name": "Nico_Oni",
+            "followed_at": "2024-02-28T21:15:42Z"
+        },
+        {
+            "broadcaster_id": "624262569",
+            "broadcaster_login": "enjoyko_",
+            "broadcaster_name": "エン_ジョイ子",
+            "followed_at": "2023-12-31T08:25:34Z"
+        },
+        {
+            "broadcaster_id": "134850221",
+            "broadcaster_login": "rtainjapan",
+            "broadcaster_name": "RTAinJapan",
+            "followed_at": "2023-12-29T10:04:11Z"
+        },
+        {
+            "broadcaster_id": "137573929",
+            "broadcaster_login": "hugolisoir",
+            "broadcaster_name": "Hugolisoir",
+            "followed_at": "2023-11-06T22:40:47Z"
+        },
+        {
+            "broadcaster_id": "521737347",
+            "broadcaster_login": "paleontologizing",
+            "broadcaster_name": "Paleontologizing",
+            "followed_at": "2023-06-26T21:51:29Z"
+        },
+        {
+            "broadcaster_id": "898304651",
+            "broadcaster_login": "sciencefiction2000",
+            "broadcaster_name": "ScienceFiction2000",
+            "followed_at": "2023-04-10T21:56:44Z"
+        },
+        {
+            "broadcaster_id": "119917354",
+            "broadcaster_login": "revisionparty",
+            "broadcaster_name": "RevisionParty",
+            "followed_at": "2023-04-09T16:57:52Z"
+        },
+        {
+            "broadcaster_id": "800136178",
+            "broadcaster_login": "silenceonjoue",
+            "broadcaster_name": "SilenceOnJoue",
+            "followed_at": "2023-01-24T22:53:28Z"
+        },
+        {
+            "broadcaster_id": "107656494",
+            "broadcaster_login": "kilg0re_tr0ut",
+            "broadcaster_name": "Kilg0re_Tr0ut",
+            "followed_at": "2022-10-12T07:20:58Z"
+        },
+        {
+            "broadcaster_id": "51115394",
+            "broadcaster_login": "midnightsumo",
+            "broadcaster_name": "MidnightSumo",
+            "followed_at": "2022-09-16T06:17:57Z"
+        },
+        {
+            "broadcaster_id": "99828449",
+            "broadcaster_login": "amigabill",
+            "broadcaster_name": "AmigaBill",
+            "followed_at": "2022-09-04T18:11:34Z"
+        },
+        {
+            "broadcaster_id": "131642287",
+            "broadcaster_login": "amigalive",
+            "broadcaster_name": "AmigaLive",
+            "followed_at": "2022-06-02T14:17:51Z"
+        },
+        {
+            "broadcaster_id": "445883327",
+            "broadcaster_login": "mo5assoretro",
+            "broadcaster_name": "MO5AssoRetro",
+            "followed_at": "2022-04-29T12:26:57Z"
+        },
+        {
+            "broadcaster_id": "27895236",
+            "broadcaster_login": "zeldathon",
+            "broadcaster_name": "Zeldathon",
+            "followed_at": "2021-12-29T06:44:01Z"
+        },
+        {
+            "broadcaster_id": "436425093",
+            "broadcaster_login": "oldtimeycomputershow",
+            "broadcaster_name": "OldTimeyComputerShow",
+            "followed_at": "2021-11-06T16:45:10Z"
+        },
+        {
+            "broadcaster_id": "488678599",
+            "broadcaster_login": "artefr",
+            "broadcaster_name": "artefr",
+            "followed_at": "2021-10-22T17:18:25Z"
+        },
+        {
+            "broadcaster_id": "722517652",
+            "broadcaster_login": "gemcentacxx",
+            "broadcaster_name": "ゲームセンタ",
+            "followed_at": "2021-10-14T20:29:11Z"
+        }
+    ],
+    "pagination": {
+        "cursor": "eyJiIjpudWxsLCJhIjp7IkN1cnNvciI6ImV5SjBjQ0k2SW5WelpYSTZNVE15TkRRMU5UUTVPbVp2Ykd4dmQzTWlMQ0owY3lJNkluVnpaWEk2TnpJeU5URTNOalV5SWl3aWFYQWlPaUoxYzJWeU9qRXpNalEwTlRVME9UcG1iMnhzYjNkeklpd2lhWE1pT2lJeE5qTTBNalF6TXpVeE5ESTFOak0xT1RBMkluMD0ifX0"
+    }
+}

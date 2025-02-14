@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.94.1 -->
+<interface>
+  <!-- interface-name preferences-group.ui -->
+  <requires lib="gtk" version="4.16"/>
+  <requires lib="libadwaita" version="1.6"/>
+  <template class="StreamlinkGtkWidgetsProvidersTwitchPreferencesPage" parent="AdwPreferencesPage">
+    <child>
+      <object class="AdwPreferencesGroup">
+        <property name="description">All options for the Twitch provider</property>
+        <property name="separate-rows">True</property>
+        <property name="title">Twitch preferences</property>
+        <child>
+          <object class="GtkListBox">
+            <child>
+              <object class="AdwEntryRow" id="twitch_session_id">
+                <property name="input-hints">no-emoji | no-spellcheck</property>
+                <property name="title">Twitch session ID</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

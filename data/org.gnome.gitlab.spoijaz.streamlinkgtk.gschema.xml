@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="streamlink-gtk">
+  <schema id="org.gnome.gitlab.spoijaz.streamlinkgtk"
+    path="/org/gnome/gitlab/spoijaz/streamlinkgtk/">
+    <key name="provider-user-configurations" type="a(usssb)">
+      <default>[(0,"-", "-", "-", false)]</default>
+      <summary>All provider user settings.</summary>
+      <description></description>
+    </key>
+    <key name="startup-provider-id" type="u">
+      <default>1</default>
+      <summary>Selected provider on startup.</summary>
+      <description>This is the last selected provider.</description>
+    </key>
+    <key name="window-width" type="i">
+      <default>950</default>
+    </key>
+    <key name="window-height" type="i">
+      <default>800</default>
+    </key>
+    <key name="window-is-maximized" type="b">
+      <default>false</default>
+    </key>
+    <key name="preferences-gui-minimize-gui" type="b">
+      <default>false</default>
+    </key>
+  </schema>
+</schemalist>

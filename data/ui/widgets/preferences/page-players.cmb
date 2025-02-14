@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<!DOCTYPE cambalache-project SYSTEM "cambalache-project.dtd">
+<cambalache-project version="0.17.3" target_tk="gtk-4.0">
+  <ui>
+	(1,1,"preferences-interface.ui","page-players.ui",None,None,None,None,"org.gnome.gitlab.spoijaz.streamlinkgtk",None,None)
+  </ui>
+  <ui_library>
+	(1,"libadwaita","1.5",None)
+  </ui_library>
+  <object>
+	(1,1,"AdwPreferencesPage","StreamlinkGtkPreferencesPagePlayers",None,None,None,None,-1,None,None),
+	(1,2,"AdwPreferencesGroup",None,1,None,None,None,-1,None,None),
+	(1,3,"AdwPreferencesGroup",None,1,None,None,None,1,None,None),
+	(1,4,"AdwComboRow","combo_row_default_player",2,None,None,None,-1,None,None),
+	(1,5,"GListStore","list_store_default_player",4,None,None,None,-1,None,None)
+  </object>
+  <object_property>
+	(1,1,"AdwPreferencesPage","icon-name","multimedia-player-symbolic",None,None,None,None,None,None,None,None,None),
+	(1,1,"AdwPreferencesPage","title","Players",1,None,None,None,None,None,None,None,None),
+	(1,1,"GtkWidget","name","page_player",None,None,None,None,None,None,None,None,None),
+	(1,2,"AdwPreferencesGroup","title","Default player",1,None,None,None,None,None,None,None,None),
+	(1,3,"AdwPreferencesGroup","title","Players settings",1,None,None,None,None,None,None,None,None),
+	(1,4,"AdwActionRow","subtitle","Player to use",None,None,None,None,None,None,None,None,None),
+	(1,4,"AdwComboRow","model",None,None,None,None,None,5,None,None,None,None),
+	(1,4,"AdwPreferencesRow","title","Player",1,None,None,None,None,None,None,None,None)
+  </object_property>
+</cambalache-project>

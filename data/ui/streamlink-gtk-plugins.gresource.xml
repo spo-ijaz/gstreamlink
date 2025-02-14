@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/org/gnome/gitlab/spoijaz/streamlinkgtk">
+    <file>styles.css</file>
+    <file preprocess="xml-stripblanks">plugins/providers/twitch/preferences-page.ui</file>
+  </gresource>
+</gresources>

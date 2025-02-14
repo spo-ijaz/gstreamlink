@@ -1,0 +1,397 @@
+{
+    "data": [
+        {
+            "broadcaster_id": "107656494",
+            "broadcaster_login": "kilg0re_tr0ut",
+            "broadcaster_name": "Kilg0re_Tr0ut",
+            "broadcaster_language": "en",
+            "game_id": "4120",
+            "game_name": "Vampire: The Masquerade - Redemption",
+            "title": "Kilg0re Plays Vampire: The Masquerade: Redemption (PC 2000)(Take 2) on an Athlon 4600 in WinXP",
+            "delay": 0,
+            "tags": [
+                "English",
+                "Retro",
+                "Mopes"
+            ],
+            "content_classification_labels": [
+                "MatureGame"
+            ],
+            "is_branded_content": true
+        },
+        {
+            "broadcaster_id": "119917354",
+            "broadcaster_login": "revisionparty",
+            "broadcaster_name": "RevisionParty",
+            "broadcaster_language": "en",
+            "game_id": "509663",
+            "game_name": "Special Events",
+            "title": "Revision 2024 [Chat in Discord]",
+            "delay": 0,
+            "tags": [
+                "English",
+                "demoscene"
+            ],
+            "content_classification_labels": [],
+            "is_branded_content": false
+        },
+        {
+            "broadcaster_id": "131642287",
+            "broadcaster_login": "amigalive",
+            "broadcaster_name": "AmigaLive",
+            "broadcaster_language": "en",
+            "game_id": "27284",
+            "game_name": "Retro",
+            "title": "AMIGAugust - Knightmare (djh0ffman)",
+            "delay": 0,
+            "tags": [
+                "English",
+                "Multiplayer",
+                "Retro",
+                "Amiga",
+                "PlayingwithViewers",
+                "AMIGAugust"
+            ],
+            "content_classification_labels": [],
+            "is_branded_content": false
+        },
+        {
+            "broadcaster_id": "134850221",
+            "broadcaster_login": "rtainjapan",
+            "broadcaster_name": "RTAinJapan",
+            "broadcaster_language": "ja",
+            "game_id": "492828",
+            "game_name": "Dragon Quest Monsters: Joker 3",
+            "title": "ドラゴンクエストモンスターズ ジョーカー3 プロフェッショナル - DQMJ RTA Relay #DQMリレー",
+            "delay": 0,
+            "tags": [
+                "speedrun",
+                "RTA",
+                "日本語"
+            ],
+            "content_classification_labels": [],
+            "is_branded_content": false
+        },
+        {
+            "broadcaster_id": "137573929",
+            "broadcaster_login": "hugolisoir",
+            "broadcaster_name": "Hugolisoir",
+            "broadcaster_language": "fr",
+            "game_id": "71375",
+            "game_name": "Star Citizen",
+            "title": "🚀La 3.24 ENFIN dispo sur le PTU / Est-ce qu'elle a des petits secrets ?",
+            "delay": 0,
+            "tags": [
+                "starcitizen",
+                "artemis",
+                "français",
+                "simulation",
+                "gestion",
+                "Français",
+                "destinationcachée"
+            ],
+            "content_classification_labels": [],
+            "is_branded_content": true
+        },
+        {
+            "broadcaster_id": "150995363",
+            "broadcaster_login": "revisionseminars",
+            "broadcaster_name": "RevisionSeminars",
+            "broadcaster_language": "en",
+            "game_id": "509663",
+            "game_name": "Special Events",
+            "title": "Revision 2024 Seminars",
+            "delay": 0,
+            "tags": [
+                "English"
+            ],
+            "content_classification_labels": [],
+            "is_branded_content": false
+        },
+        {
+            "broadcaster_id": "27895236",
+            "broadcaster_login": "zeldathon",
+            "broadcaster_name": "Zeldathon",
+            "broadcaster_language": "en",
+            "game_id": "417752",
+            "game_name": "Talk Shows \u0026 Podcasts",
+            "title": "📻 Zeldathon Radio - 86.1 WLOZ - Zeldathon 1986 schedule reveal",
+            "delay": 0,
+            "tags": [
+                "English",
+                "Zelda",
+                "StJudePlayLive"
+            ],
+            "content_classification_labels": [],
+            "is_branded_content": false
+        },
+        {
+            "broadcaster_id": "436425093",
+            "broadcaster_login": "oldtimeycomputershow",
+            "broadcaster_name": "OldTimeyComputerShow",
+            "broadcaster_language": "en",
+            "game_id": "27284",
+            "game_name": "Retro",
+            "title": "The Old Timey Computer Show | !2023 !schedule !mrotcs !neonrf !5years",
+            "delay": 0,
+            "tags": [
+                "English"
+            ],
+            "content_classification_labels": [],
+            "is_branded_content": false
+        },
+        {
+            "broadcaster_id": "445883327",
+            "broadcaster_login": "mo5assoretro",
+            "broadcaster_name": "MO5AssoRetro",
+            "broadcaster_language": "fr",
+            "game_id": "509658",
+            "game_name": "Just Chatting",
+            "title": "Live FAQ Game Story a Versailles !",
+            "delay": 0,
+            "tags": [
+                "console",
+                "Francais",
+                "jeuxvideo",
+                "Francais",
+                "Français",
+                "retrogames",
+                "Retro",
+                "informatique"
+            ],
+            "content_classification_labels": [],
+            "is_branded_content": false
+        },
+        {
+            "broadcaster_id": "473416637",
+            "broadcaster_login": "snookerlivestreams",
+            "broadcaster_name": "SnookerLiveStreams",
+            "broadcaster_language": "en",
+            "game_id": "18446",
+            "game_name": "Snooker",
+            "title": "British Open Qualifiers 2024 Table 1 Day 4 Live Matches HD 60 FPS",
+            "delay": 0,
+            "tags": [
+                "Snooker",
+                "2024",
+                "live",
+                "British",
+                "Open",
+                "Qualifiers",
+                "English"
+            ],
+            "content_classification_labels": [],
+            "is_branded_content": false
+        },
+        {
+            "broadcaster_id": "488678599",
+            "broadcaster_login": "artefr",
+            "broadcaster_name": "artefr",
+            "broadcaster_language": "fr",
+            "game_id": "509663",
+            "game_name": "Special Events",
+            "title": "🃏 Jour De Play avec @LamHua I Le jeu de Quineapple !commands !discord !défi",
+            "delay": 0,
+            "tags": [
+                "discussion",
+                "Français",
+                "talkshow",
+                "actualité",
+                "week",
+                "gaming",
+                "jeux",
+                "vidéo"
+            ],
+            "content_classification_labels": [],
+            "is_branded_content": false
+        },
+        {
+            "broadcaster_id": "51115394",
+            "broadcaster_login": "midnightsumo",
+            "broadcaster_name": "MidnightSumo",
+            "broadcaster_language": "en",
+            "game_id": "509658",
+            "game_name": "Just Chatting",
+            "title": "Japanese food and culture videos! The best curated content from around YouTube! | !foodplaylist | Pokemon Kaizo starts at 2pm Pacific time!",
+            "delay": 0,
+            "tags": [
+                "English",
+                "Japan",
+                "ADHD",
+                "Sumo",
+                "Pokemon",
+                "Wrestling",
+                "Japanese",
+                "Cooking",
+                "Food",
+                "Travel"
+            ],
+            "content_classification_labels": [],
+            "is_branded_content": false
+        },
+        {
+            "broadcaster_id": "521737347",
+            "broadcaster_login": "paleontologizing",
+            "broadcaster_name": "Paleontologizing",
+            "broadcaster_language": "en",
+            "game_id": "509672",
+            "game_name": "IRL",
+            "title": "UTAH DINOSAUR DIG 🦴⛏️ Day 19 🦖 Excavating a new species of iguanodont and chatting about the future of fossil discovery in eastern Utah",
+            "delay": 0,
+            "tags": [
+                "Educational",
+                "FamilyFriendly",
+                "English",
+                "Fossils",
+                "Paleontology",
+                "Science",
+                "Evolution",
+                "Dinosaurs",
+                "Fieldwork",
+                "Outdoors"
+            ],
+            "content_classification_labels": [],
+            "is_branded_content": false
+        },
+        {
+            "broadcaster_id": "624262569",
+            "broadcaster_login": "enjoyko_",
+            "broadcaster_name": "エン_ジョイ子",
+            "broadcaster_language": "ja",
+            "game_id": "27284",
+            "game_name": "Retro",
+            "title": "【FC】ハローキティワールド🎈🎀初見",
+            "delay": 0,
+            "tags": [
+                "水",
+                "ヒントネタバレアドバイスは求めてからで",
+                "滑皮秀信",
+                "そこそこおもろい",
+                "刃牙線",
+                "日本語",
+                "丸呑み界隈",
+                "体育2",
+                "BalloonFight"
+            ],
+            "content_classification_labels": [],
+            "is_branded_content": false
+        },
+        {
+            "broadcaster_id": "722517652",
+            "broadcaster_login": "gemcentacxx",
+            "broadcaster_name": "ゲームセンタ",
+            "broadcaster_language": "en",
+            "game_id": "",
+            "game_name": "",
+            "title": "x",
+            "delay": 0,
+            "tags": [
+                "ゲームショー",
+                "レッツプレイ",
+                "スピードラン",
+                "アジア系",
+                "日本"
+            ],
+            "content_classification_labels": [],
+            "is_branded_content": false
+        },
+        {
+            "broadcaster_id": "800136178",
+            "broadcaster_login": "silenceonjoue",
+            "broadcaster_name": "SilenceOnJoue",
+            "broadcaster_language": "fr",
+            "game_id": "417752",
+            "game_name": "Talk Shows \u0026 Podcasts",
+            "title": "Silence on joue en live ! L'épisode final de la saison 17",
+            "delay": 0,
+            "tags": [
+                "Français"
+            ],
+            "content_classification_labels": [],
+            "is_branded_content": false
+        },
+        {
+            "broadcaster_id": "82858070",
+            "broadcaster_login": "nowtechteam",
+            "broadcaster_name": "NowtechTeam",
+            "broadcaster_language": "fr",
+            "game_id": "509658",
+            "game_name": "Just Chatting",
+            "title": "Recap et FAQ (MATINALE TECH/SOCIÉTÉ) 🔸 LE MUG NOWTECH 🔸 !mug !replay !discord !planning",
+            "delay": 0,
+            "tags": [
+                "technologie",
+                "tech",
+                "youtube",
+                "news",
+                "roleplaying",
+                "actualité",
+                "presse",
+                "matinale",
+                "Français"
+            ],
+            "content_classification_labels": [],
+            "is_branded_content": false
+        },
+        {
+            "broadcaster_id": "898304651",
+            "broadcaster_login": "sciencefiction2000",
+            "broadcaster_name": "ScienceFiction2000",
+            "broadcaster_language": "fr",
+            "game_id": "509658",
+            "game_name": "Just Chatting",
+            "title": "En Vacances !discord !poute",
+            "delay": 0,
+            "tags": [
+                "Français"
+            ],
+            "content_classification_labels": [],
+            "is_branded_content": false
+        },
+        {
+            "broadcaster_id": "97037121",
+            "broadcaster_login": "nico_oni",
+            "broadcaster_name": "Nico_Oni",
+            "broadcaster_language": "fr",
+            "game_id": "509658",
+            "game_name": "Just Chatting",
+            "title": "HOT TECH | Le JV en grève face à l'IA, SearchGPT veut détrôner Google, RIP Xbox 360 !patreon !kofi",
+            "delay": 0,
+            "tags": [
+                "Chill",
+                "tech",
+                "hardware",
+                "news",
+                "FGC",
+                "Journalisme",
+                "Français"
+            ],
+            "content_classification_labels": [],
+            "is_branded_content": false
+        },
+        {
+            "broadcaster_id": "99828449",
+            "broadcaster_login": "amigabill",
+            "broadcaster_name": "AmigaBill",
+            "broadcaster_language": "en",
+            "game_id": "27284",
+            "game_name": "Retro",
+            "title": "Commodore Amiga -  Live Now with GregOfFlorida! A600GS, Extreme CDXL Video, New Amiga Games, Demos, Amiga News \u0026 More! #AMIGAugust",
+            "delay": 0,
+            "tags": [
+                "retro",
+                "AmigaBill",
+                "Commodore",
+                "Amiga",
+                "CommodoreAmiga",
+                "Retrogamer",
+                "Retrogaming",
+                "Podcast",
+                "Demoscene",
+                "arcade"
+            ],
+            "content_classification_labels": [],
+            "is_branded_content": false
+        }
+    ]
+}

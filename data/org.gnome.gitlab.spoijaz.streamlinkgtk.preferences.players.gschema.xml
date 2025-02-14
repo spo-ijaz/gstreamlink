@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="streamlink-gtk">
+  <schema id="org.gnome.gitlab.spoijaz.streamlinkgtk.preferences.players"
+    path="/org/gnome/gitlab/spoijaz/streamlinkgtk/preferences/players/">
+    <key name="default-player" type="i">
+      <default>1</default>
+    </key>
+  </schema>
+</schemalist>

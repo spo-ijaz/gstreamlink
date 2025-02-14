@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<!DOCTYPE cambalache-project SYSTEM "cambalache-project.dtd">
+<cambalache-project version="0.94.0" target_tk="gtk-4.0">
+  <ui>
+	(1,1,"preferences-interface.ui","page-streaming-providers.ui",None,None,None,None,"org.gnome.gitlab.spoijaz.streamlinkgtk",None,None)
+  </ui>
+  <ui_library>
+	(1,"gtk","4.16",None),
+	(1,"libadwaita","1.6",None)
+  </ui_library>
+  <object>
+	(1,1,"AdwPreferencesPage","StreamlinkGtkPreferencesPageStreamingProviders",None,None,None,None,0,None,None),
+	(1,2,"AdwPreferencesGroup",None,1,None,None,None,0,None,None),
+	(1,5,"AdwComboRow","combo_row_streaming_provider",2,None,None,None,0,None,None),
+	(1,6,"GtkSignalListItemFactory","combo_row_streaming_provider_factory",5,None,None,None,0,None,None)
+  </object>
+  <object_property>
+	(1,1,"AdwPreferencesPage","icon-name","preferences-system-network-proxy-symbolic",None,None,None,None,None,None,None,None,None),
+	(1,1,"AdwPreferencesPage","title","Streaming",None,None,None,None,None,None,None,None,None),
+	(1,1,"GtkWidget","name","page_streaming_providers",None,None,None,None,None,None,None,None,None),
+	(1,2,"AdwPreferencesGroup","title","Default streaming",1,None,None,None,None,None,None,None,None),
+	(1,5,"AdwActionRow","icon-name","preferences-system-network-proxy-symbolic",None,None,None,None,None,None,None,None,None),
+	(1,5,"AdwActionRow","subtitle","Streaming provider to use by default",1,None,None,None,None,None,None,None,None),
+	(1,5,"AdwComboRow","factory",None,None,None,None,None,6,None,None,None,None),
+	(1,5,"AdwPreferencesRow","title","Streaming provider",1,None,None,None,None,None,None,None,None)
+  </object_property>
+  <object_signal>
+	(2,1,6,"GtkSignalListItemFactory","setup","combo_row_streaming_provider_setup_handler",None,0,0,0,None),
+	(3,1,6,"GtkSignalListItemFactory","bind","combo_row_streaming_provider_bind_handler",None,0,0,0,None)
+  </object_signal>
+</cambalache-project>

@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<!DOCTYPE cambalache-project SYSTEM "cambalache-project.dtd">
+<cambalache-project version="0.17.3" target_tk="gtk-4.0">
+  <ui>
+	(1,1,"preferences-interface.ui","page-interface.ui",None,None,None,None,"org.gnome.gitlab.spoijaz.streamlinkgtk",None,None)
+  </ui>
+  <ui_library>
+	(1,"libadwaita","1.5",None)
+  </ui_library>
+  <object>
+	(1,1,"AdwPreferencesPage","StreamlinkGtkPreferencesPageInterface",None,None,None,None,-1,None,None),
+	(1,2,"AdwPreferencesGroup",None,1,None,None,None,-1,None,None),
+	(1,4,"AdwPreferencesGroup",None,1,None,None,None,-1,None,None),
+	(1,5,"AdwSwitchRow","switch_row_minimize_gui",2,None,None,None,-1,None,None)
+  </object>
+  <object_property>
+	(1,1,"AdwPreferencesPage","icon-name","preferences-system-symbolic",None,None,None,None,None,None,None,None,None),
+	(1,1,"AdwPreferencesPage","title","Interface",1,None,None,None,None,None,None,None,None),
+	(1,1,"GtkWidget","name","page_interface",None,None,None,None,None,None,None,None,None),
+	(1,2,"AdwPreferencesGroup","title","Interface",None,None,None,None,None,None,None,None,None),
+	(1,4,"AdwPreferencesGroup","title","Notifications",1,None,None,None,None,None,None,None,None),
+	(1,5,"AdwActionRow","icon-name","zoom-out-symbolic",None,None,None,None,None,None,None,None,None),
+	(1,5,"AdwActionRow","subtitle","When a stream gets launched",1,None,None,None,None,None,None,None,None),
+	(1,5,"AdwPreferencesRow","title","Minimize GUI",1,None,None,None,None,None,None,None,None)
+  </object_property>
+</cambalache-project>
