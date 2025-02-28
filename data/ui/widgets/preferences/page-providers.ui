@@ -7,7 +7,7 @@
   <template class="StreamlinkGtkPreferencesPageProviders" parent="AdwPreferencesPage">
     <property name="icon-name">preferences-system-network-proxy-symbolic</property>
     <property name="name">page_streaming_providers</property>
-    <property name="title">Streaming</property>
+    <property name="title">Providers</property>
     <child>
       <object class="AdwPreferencesGroup">
         <property name="title" translatable="yes">Default provider</property>

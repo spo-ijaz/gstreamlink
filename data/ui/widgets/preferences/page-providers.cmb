@@ -16,7 +16,7 @@
   </object>
   <object_property>
 	(1,1,"AdwPreferencesPage","icon-name","preferences-system-network-proxy-symbolic",None,None,None,None,None,None,None,None,None),
-	(1,1,"AdwPreferencesPage","title","Streaming",None,None,None,None,None,None,None,None,None),
+	(1,1,"AdwPreferencesPage","title","Providers",None,None,None,None,None,None,None,None,None),
 	(1,1,"GtkWidget","name","page_streaming_providers",None,None,None,None,None,None,None,None,None),
 	(1,2,"AdwPreferencesGroup","title","Default provider",1,None,None,None,None,None,None,None,None),
 	(1,5,"AdwActionRow","icon-name","video-display-symbolic",None,None,None,None,None,None,None,None,None),
