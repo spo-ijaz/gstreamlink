@@ -1,6 +1,6 @@
 /* application.vala
  *
- * Copyright 2024 PORQUET Sébastien
+ * Copyright 2025 PORQUET Sébastien
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -72,24 +72,23 @@ namespace StreamlinkGtk {
 
             string[] developers = { "PORQUET Sébastien <sebastien.porquet@ijaz.fr>" };
 
-            var about = new Adw.AboutWindow () {
-                transient_for = this.active_window,
+            var about = new Adw.AboutDialog () {
                 application_name = "Streamlink GTK",
                 application_icon = AppConfig.APP_ID,
                 developer_name = "PORQUET Sébastien",
                 version = AppConfig.PACKAGE_VERSION,
                 developers = developers,
-                copyright = "© 2024 PORQUET Sébastien",
+                copyright = "© 2025 PORQUET Sébastien",
                 license_type = Gtk.License.GPL_3_0
             };
 
-            about.present ();
+            about.present (this.active_window);
         }
 
         private void on_preferences_action () {
 
-            AppPreferences dialog_preferences = new AppPreferences (this.provider_plugin_controller);
-            dialog_preferences.present (this.active_window);
+            PreferencesWindow preferences_window = new PreferencesWindow (this.provider_plugin_controller);
+            preferences_window.present (this.active_window);
         }
 
         private void on_provider_preferences_action () {

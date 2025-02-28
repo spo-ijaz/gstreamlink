@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- Created with Cambalache 0.90.4 -->
+<!-- Created with Cambalache 0.94.1 -->
 <interface domain="org.gnome.gitlab.spoijaz.streamlinkgtk">
   <!-- interface-name preferences-interface.ui -->
   <requires lib="libadwaita" version="1.5"/>
-  <template class="StreamlinkGtkPreferencesPageInterface" parent="AdwPreferencesPage">
+  <template class="StreamlinkGtkPreferencesPageGeneral" parent="AdwPreferencesPage">
     <property name="icon-name">preferences-system-symbolic</property>
     <property name="name">page_interface</property>
     <property name="title" translatable="yes">Interface</property>
@@ -17,11 +17,12 @@
             <property name="title" translatable="yes">Minimize GUI</property>
           </object>
         </child>
-      </object>
-    </child>
-    <child>
-      <object class="AdwPreferencesGroup">
-        <property name="title" translatable="yes">Notifications</property>
+        <child>
+          <object class="AdwSwitchRow" id="switch_row_enable_notification">
+            <property name="subtitle">If activated, it will display a notifiation when a stream start, a new video popup...</property>
+            <property name="title" translatable="yes">Enable notifications</property>
+          </object>
+        </child>
       </object>
     </child>
   </template>

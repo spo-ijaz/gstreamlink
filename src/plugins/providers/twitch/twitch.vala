@@ -1,6 +1,6 @@
 /* twitch.vala
  *
- * Copyright 2024 PORQUET Sébastien
+ * Copyright 2025 PORQUET Sébastien
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -47,7 +47,11 @@ namespace StreamlinkGtk.Providers.Twitch {
         public string redirect_uri { get;   default = "http://localhost:3000"; }
         public IScrolledWindowContents scrolled_window_contents { get; set; }
         public Adw.PreferencesPage preferences_page { get; set; }
+        public uint auto_refresh_interval { get; }
+        public bool enable_notifications { get; }
+
         public ProviderPluginLoader provider_plugin_loader { get; set; }
+
 
         private TwitchSettings store;
         private Cache cache;
@@ -104,9 +108,6 @@ namespace StreamlinkGtk.Providers.Twitch {
             Variant variant = this.store.get_value ("website-oauth");
             string extra_args = "";
             string website_oauth = variant.get_string ();
-
-            debug (website_oauth);
-
 
             switch (streaming_provider.name) {
 

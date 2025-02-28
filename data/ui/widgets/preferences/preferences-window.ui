@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.94.1 -->
+<interface>
+  <!-- interface-name preferences-window.ui -->
+  <requires lib="libadwaita" version="1.6"/>
+  <template class="StreamlinkGtkPreferencesPreferencesWindow" parent="AdwPreferencesDialog">
+    <property name="search-enabled">True</property>
+    <property name="visible-page-name">general-page</property>
+  </template>
+  <object class="AdwNavigationPage" id="navigation_page"/>
+</interface>

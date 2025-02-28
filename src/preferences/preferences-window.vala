@@ -1,6 +1,6 @@
-/* dialog.vala
+/* preferences-window.vala
  *
- * Copyright 2024 PORQUET Sébastien
+ * Copyright 2025 PORQUET Sébastien
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,23 +19,26 @@
  */
 
 using Adw;
+using Gtk;
 using StreamlinkGtk.Controllers;
-
 namespace StreamlinkGtk.Preferences {
 
-    public class AppPreferences : PreferencesDialog {
+    [GtkTemplate (ui = "/org/gnome/gitlab/spoijaz/streamlinkgtk/widgets/preferences/preferences-window.ui")]
 
+    public class PreferencesWindow : Adw.PreferencesDialog {
+        
         public ProviderPluginController provider_plugin_controller { get; construct; }
+
+        [GtkChild]
+        public unowned Adw.NavigationPage navigation_page;
 
         construct {
 
-            //  this.add (new PageInterface ());
-            this.add (new PageStreamingProviders (this.provider_plugin_controller));
-            //  this.add (new PagePlayers ());
+            this.add (new PageGeneral ());
+            this.add (new PageProviders (this.provider_plugin_controller));
         }
 
-        public AppPreferences (ProviderPluginController provider_plugin_controller) {
-
+        public PreferencesWindow (ProviderPluginController provider_plugin_controller) {
             Object (provider_plugin_controller: provider_plugin_controller);
         }
     }

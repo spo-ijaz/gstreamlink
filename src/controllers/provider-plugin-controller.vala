@@ -1,6 +1,6 @@
 /* provider-plugin-controller.vala
  *
- * Copyright 2024 PORQUET Sébastien
+ * Copyright 2025 PORQUET Sébastien
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -145,7 +145,7 @@ namespace StreamlinkGtk.Controllers {
                 this.oauth_login_handler ();
             });
 
-            // If we need a login for this provider.
+            // If we need to login for this provider.
             if (this.provider.user_login_mandatory) {
 
                 this.debug_log ("login mandatory.");

@@ -1,6 +1,6 @@
 /* page-streaming-providers.vala
  *
- * Copyright 2024 PORQUET Sébastien
+ * Copyright 2025 PORQUET Sébastien
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -96,22 +96,6 @@ namespace StreamlinkGtk.Preferences {
             if (label != null && plugin_provider != null) {
 
                 label.set_text (plugin_provider.name);
-                ////  text.activate.connect (() => {
-
-                ////    string previous_hostname = host_row.hostname;
-                ////    try {
-
-                ////        Services.HostsRegex regex = new Services.HostsRegex (host_row.ip_address, host_row.hostname);
-                ////        this.hosts_file_service.set_hostname (regex, text.text);
-                ////        host_row.hostname = text.text;
-                ////        text.remove_css_class ("wrong_input");
-                ////    } catch (InvalidArgument invalid_argument) {
-
-                ////        debug ("InvalidArgument: %s", invalid_argument.message);
-                ////        host_row.hostname = previous_hostname;
-                ////        text.add_css_class ("wrong_input");
-                ////    }
-                ////  });
             }
         }
 

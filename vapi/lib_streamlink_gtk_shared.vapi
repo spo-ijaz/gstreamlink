@@ -15,6 +15,8 @@ namespace StreamlinkGtk {
 				public abstract void registered (StreamlinkGtk.Services.ProviderPluginLoader loader);
 				public abstract async bool update_provider_user_info_async (StreamlinkGtk.Models.ProviderUser provider_user);
 				public abstract string authorize_url { get; set; }
+				public abstract uint auto_refresh_interval { get; }
+				public abstract bool enable_notifications { get; }
 				public abstract uint id { get; }
 				public abstract string name { get; }
 				public abstract Adw.PreferencesPage preferences_page { get; set; }
@@ -222,6 +224,11 @@ namespace StreamlinkGtk {
 			public static unowned StreamlinkGtk.Settings.AppSettings get_default ();
 			public uint current_provider_id { private get; set; }
 			public StreamlinkGtk.Models.ProviderUser provider_user { owned get; set; }
+		}
+		[CCode (cheader_filename = "lib_streamlink_gtk_shared.h")]
+		public class PreferencesGeneralSettings : GLib.Settings {
+			public PreferencesGeneralSettings ();
+			public static unowned StreamlinkGtk.Settings.PreferencesGeneralSettings get_default ();
 		}
 		[CCode (cheader_filename = "lib_streamlink_gtk_shared.h")]
 		public class PreferencesProvidersSettings : GLib.Settings {

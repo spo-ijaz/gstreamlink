@@ -92,6 +92,7 @@
 	(3,50,"AdwViewStackPage","child",None,0,None,None,None,51,None,None,None,None),
 	(3,50,"AdwViewStackPage","icon-name","applications-multimedia-symbolic",0,None,None,None,None,None,None,None,None),
 	(3,50,"AdwViewStackPage","name","stack_page_running_players",0,None,None,None,None,None,None,None,None),
-	(3,50,"AdwViewStackPage","title","Viewing",0,None,None,None,None,None,None,None,None)
+	(3,50,"AdwViewStackPage","title","Viewing",0,None,None,None,None,None,None,None,None),
+	(3,50,"AdwViewStackPage","visible","False",None,None,None,None,None,None,None,None,None)
   </object_property>
 </cambalache-project>

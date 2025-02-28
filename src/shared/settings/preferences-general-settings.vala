@@ -1,6 +1,6 @@
 /* preferences-interface-settings.vala
  *
- * Copyright 2024 PORQUET Sébastien
+ * Copyright 2025 PORQUET Sébastien
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,22 +20,22 @@
 
 namespace StreamlinkGtk.Settings {
 
-    public class PreferencesInterfaceSettings : GLib.Settings {
+    public class PreferencesGeneralSettings : GLib.Settings {
 
-        private static PreferencesInterfaceSettings _preferences_interface_settings;
+        private static PreferencesGeneralSettings _preferences_interface_settings;
 
-        public static unowned PreferencesInterfaceSettings get_default () {
+        public static unowned PreferencesGeneralSettings get_default () {
 
             if (_preferences_interface_settings == null) {
 
-                _preferences_interface_settings = new PreferencesInterfaceSettings ();
+                _preferences_interface_settings = new PreferencesGeneralSettings ();
             }
 
             return _preferences_interface_settings;
         }
 
-        public PreferencesInterfaceSettings () {
-            Object (schema_id: AppConfig.APP_ID + ".preferences.interface");
+        public PreferencesGeneralSettings () {
+            Object (schema_id: AppConfig.APP_ID + ".preferences.general");
         }
     }
 }

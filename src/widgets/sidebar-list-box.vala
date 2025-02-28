@@ -1,6 +1,6 @@
 /* sidebar-list-box.vala
  *
- * Copyright 2024 PORQUET Sébastien
+ * Copyright 2025 PORQUET Sébastien
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,7 +39,6 @@ namespace StreamlinkGtk.Widgets {
 
             this.list_box = new ListBox();
             this.provider_controller.provider_setup_done.connect(this.update_provider_list_box_rows);
-
             this.list_box.row_activated.connect(this.row_activated_handler);
         }
 
@@ -47,15 +46,26 @@ namespace StreamlinkGtk.Widgets {
             Object(provider_controller: provider_controller);
         }
 
+        /**
+         * Called when the provider is setup and ready to be used.
+         */
         private void update_provider_list_box_rows(IProviderPlugin provider) {
 
             this.list_box.remove_all();
             provider.get_side_bar_list_box_rows_async.begin((obj, res) => {
 
+                bool first_contents_selector_found = false;
                 Array<ISideBarListBoxRow> list_box_rows;
                 provider.get_side_bar_list_box_rows_async.end(res, out list_box_rows);
 
                 foreach (ISideBarListBoxRow list_box_row in list_box_rows) {
+
+                    // Select the first contents selector row.
+                    if (first_contents_selector_found == false && list_box_row.is_content_selector == true) {
+
+                        first_contents_selector_found = true;
+                        this.row_activated_handler(list_box_row);
+                    }
 
                     this.list_box.append(list_box_row);
                 }

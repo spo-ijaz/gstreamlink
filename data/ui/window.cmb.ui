@@ -43,6 +43,7 @@
                                             <property name="icon-name">applications-multimedia-symbolic</property>
                                             <property name="name">stack_page_running_players</property>
                                             <property name="title">Viewing</property>
+                                            <property name="visible">False</property>
                                           </object>
                                         </child>
                                       </object>

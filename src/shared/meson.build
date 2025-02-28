@@ -43,6 +43,7 @@ lib_streamlink_gtk_shared_sources = shared_library(
         'services/tools.vala',
 
         'settings/app-settings.vala',
+        'settings/preferences-general-settings.vala',
         'settings/preferences-providers-settings.vala',
 
         'streaming-provider.vala',

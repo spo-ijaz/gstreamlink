@@ -1,6 +1,6 @@
 /* preferences-group.vala
  *
- * Copyright 2024 PORQUET Sébastien
+ * Copyright 2025 PORQUET Sébastien
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,22 +26,44 @@ namespace StreamlinkGtk.Widgets.Providers.Twitch {
 
     [GtkTemplate (ui = "/org/gnome/gitlab/spoijaz/streamlinkgtk/plugins/providers/twitch/preferences-page.ui")]
 
-
     public class PreferencesPage : Adw.PreferencesPage {
 
         [GtkChild]
         public unowned Adw.EntryRow twitch_session_id;
+        [GtkChild]
+        public unowned Adw.SwitchRow switch_enable_notifications;
+        [GtkChild]
+        public unowned Adw.SpinRow spin_auto_refresh_interval;
 
         private TwitchSettings store;
+        private Gtk.Image switch_enable_notifications_icon;
 
         construct {
 
+
+
             this.store = TwitchSettings.get_default ();
+            this.store.changed.connect (on_store_changed);
             this.store.bind ("website-oauth", this.twitch_session_id, "text", SettingsBindFlags.DEFAULT);
+            this.store.bind ("enable-notifications", this.switch_enable_notifications, "active", SettingsBindFlags.DEFAULT);
+            this.store.bind ("refresh-interval", this.spin_auto_refresh_interval, "value", SettingsBindFlags.DEFAULT);
+
+            this.switch_enable_notifications_icon = new Gtk.Image.from_icon_name (this.store.get_boolean ("enable-notifications") ? "preferences-system-notifications-symbolic" : "notifications-disabled-symbolic");
+            this.switch_enable_notifications.add_prefix (this.switch_enable_notifications_icon);
         }
 
         public PreferencesPage () {
             Object ();
+        }
+
+        private void on_store_changed (string key) {
+
+
+            if (key == "enable-notifications") {
+
+                this.switch_enable_notifications_icon.set_from_icon_name (this.store.get_boolean ("enable-notifications") ? "preferences-system-notifications-symbolic" : "notifications-disabled-symbolic");
+                this.spin_auto_refresh_interval.set_sensitive (this.store.get_boolean ("enable-notifications"));
+            }
         }
     }
 }

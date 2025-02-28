@@ -14,7 +14,6 @@ Currently it supports only :
 ## Interface
 
 - [ ] implement search option.
-- [ ] put started streams/vods in viewing tabs.
 - [ ] new user guidance.
 - [ ] help for twitch provider, to get twitch session id from a web browser.
 - [ ] cleanup UI.
@@ -76,12 +75,4 @@ sudo ninja -C builddir_prod install
 # Screenshots
 ## Twitch - followed stream
 
-![image](https://gitlab.gnome.org/spo-ijaz/streamlink-gtk/-/raw/main/screenshots/twitch-streams.png?ref_type=heads)
-
-## Twitch - followed channels
-
-![image](https://gitlab.gnome.org/spo-ijaz/streamlink-gtk/-/raw/main/screenshots/twitch-followed-channels.png?ref_type=heads)
-
-## Twitch - VOD
-
-![image](https://gitlab.gnome.org/spo-ijaz/streamlink-gtk/-/raw/main/screenshots/twitch-vod.png?ref_type=heads)
+![image](https://gitlab.gnome.org/spo-ijaz/streamlink-gtk/-/raw/main/screenshots/twitch_start.png?ref_type=heads)

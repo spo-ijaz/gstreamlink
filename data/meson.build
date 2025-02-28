@@ -30,7 +30,7 @@ test(
 install_data(
     [
         streamlink_gtk_app_id + '.gschema.xml',
-        streamlink_gtk_app_id + '.preferences.interface.gschema.xml',
+        streamlink_gtk_app_id + '.preferences.general.gschema.xml',
         streamlink_gtk_app_id + '.preferences.players.gschema.xml',
         streamlink_gtk_app_id + '.preferences.providers.gschema.xml',
         streamlink_gtk_app_id + '.preferences.streaming-providers.gschema.xml',

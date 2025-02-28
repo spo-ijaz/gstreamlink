@@ -1,6 +1,6 @@
 /* i-provider.vala
  *
- * Copyright 2024 PORQUET Sébastien
+ * Copyright 2025 PORQUET Sébastien
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -44,6 +44,8 @@ namespace StreamlinkGtk.Interfaces.Providers {
         public abstract IScrolledWindowContents scrolled_window_contents { get; set; }
         // Configuration
         public abstract PreferencesPage preferences_page { get; set; }
+        public abstract bool enable_notifications { get; }
+        public abstract uint auto_refresh_interval { get; }
 
         /**
          * Plugin.
@@ -76,8 +78,8 @@ namespace StreamlinkGtk.Interfaces.Providers {
         public abstract async void get_next_contents_async ();
 
         /**
-         * Streming provider plugin.
+         * Streaming provider plugin.
          */
-        public abstract string get_extra_args_for_streaming_provider(IStreamingProviderPlugin streaming_provider);
+        public abstract string get_extra_args_for_streaming_provider (IStreamingProviderPlugin streaming_provider);
     }
 }

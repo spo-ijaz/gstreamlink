@@ -32,6 +32,10 @@ namespace StreamlinkGtk {
 				[GtkTemplate (ui = "/org/gnome/gitlab/spoijaz/streamlinkgtk/plugins/providers/twitch/preferences-page.ui")]
 				public class PreferencesPage : Adw.PreferencesPage {
 					[GtkChild]
+					public weak Adw.SpinRow spin_auto_refresh_interval;
+					[GtkChild]
+					public weak Adw.SwitchRow switch_enable_notifications;
+					[GtkChild]
 					public weak Adw.EntryRow twitch_session_id;
 					public PreferencesPage ();
 				}

@@ -12,8 +12,10 @@ streamlink_gtk_sources += [
     'models/plugin-provider.vala',
     'models/plugin-streaming-provider.vala',
 
-    'preferences/page-streaming-providers.vala',
-    'preferences/app-preferences.vala',
+    'preferences/page-general.vala',
+    'preferences/page-providers.vala',
+    # 'preferences/page-streaming-providers.vala',
+    'preferences/preferences-window.vala',
     'preferences/provider-preferences.vala',
 
     'widgets/drop-down-plugin-providers.vala',

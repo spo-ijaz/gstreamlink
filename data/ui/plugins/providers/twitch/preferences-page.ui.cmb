@@ -12,13 +12,29 @@
 	(1,1,"AdwPreferencesGroup",None,4,None,None,None,0,None,None),
 	(1,2,"GtkListBox",None,1,None,None,None,0,None,None),
 	(1,3,"AdwEntryRow","twitch_session_id",2,None,None,None,0,None,None),
-	(1,4,"AdwPreferencesPage","StreamlinkGtkWidgetsProvidersTwitchPreferencesPage",None,None,None,None,0,None,None)
+	(1,4,"AdwPreferencesPage","StreamlinkGtkWidgetsProvidersTwitchPreferencesPage",None,None,None,None,0,None,None),
+	(1,5,"AdwSwitchRow","switch_enable_notifications",2,None,None,None,1,None,None),
+	(1,6,"AdwSpinRow","spin_auto_refresh_interval",2,None,None,None,2,None,None),
+	(1,7,"GtkAdjustment",None,6,None,None,None,0,None,None)
   </object>
   <object_property>
 	(1,1,"AdwPreferencesGroup","description","All options for the Twitch provider",None,None,None,None,None,None,None,None,None),
 	(1,1,"AdwPreferencesGroup","separate-rows","True",None,None,None,None,None,None,None,None,None),
 	(1,1,"AdwPreferencesGroup","title","Twitch preferences",None,None,None,None,None,None,None,None,None),
+	(1,2,"GtkListBox","activate-on-single-click","False",None,None,None,None,None,None,None,None,None),
 	(1,3,"AdwEntryRow","input-hints","no-emoji | no-spellcheck",None,None,None,None,None,None,None,None,None),
-	(1,3,"AdwPreferencesRow","title","Twitch session ID",None,None,None,None,None,None,None,None,None)
+	(1,3,"AdwPreferencesRow","title","Twitch session ID",None,None,None,None,None,None,None,None,None),
+	(1,5,"AdwActionRow","subtitle","If activated, it will display a notifiation when a stream start.",None,None,None,None,None,None,None,None,None),
+	(1,5,"AdwPreferencesRow","title","Notifications enabled",None,None,None,None,None,None,None,None,None),
+	(1,6,"AdwActionRow","icon-name","resources-symbolic",None,None,None,None,None,None,None,None,None),
+	(1,6,"AdwActionRow","subtitle","How often do you want to check your followed channels status ?",None,None,None,None,None,None,None,None,None),
+	(1,6,"AdwPreferencesRow","title","Refresh interval (in minutes)",None,None,None,None,None,None,None,None,None),
+	(1,6,"AdwSpinRow","adjustment",None,None,None,None,None,7,None,None,None,None),
+	(1,6,"GtkWidget","sensitive","False",None,None,None,None,None,None,None,None,None),
+	(1,7,"GtkAdjustment","lower","1.0",None,None,None,None,None,None,None,None,None),
+	(1,7,"GtkAdjustment","page-increment","10.0",None,None,None,None,None,None,None,None,None),
+	(1,7,"GtkAdjustment","step-increment","1.0",None,None,None,None,None,None,None,None,None),
+	(1,7,"GtkAdjustment","upper","720.0",None,None,None,None,None,None,None,None,None),
+	(1,7,"GtkAdjustment","value","5.0",None,None,None,None,None,None,None,None,None)
   </object_property>
 </cambalache-project>

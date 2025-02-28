@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.94.1 -->
+<interface domain="org.gnome.gitlab.spoijaz.streamlinkgtk">
+  <!-- interface-name preferences-interface.ui -->
+  <requires lib="gtk" version="4.16"/>
+  <requires lib="libadwaita" version="1.6"/>
+  <template class="StreamlinkGtkPreferencesPageProviders" parent="AdwPreferencesPage">
+    <property name="icon-name">preferences-system-network-proxy-symbolic</property>
+    <property name="name">page_streaming_providers</property>
+    <property name="title">Streaming</property>
+    <child>
+      <object class="AdwPreferencesGroup">
+        <property name="title" translatable="yes">Default provider</property>
+        <child>
+          <object class="AdwComboRow" id="combo_row_provider">
+            <property name="factory">
+              <object class="GtkSignalListItemFactory" id="combo_row_provider_factory">
+                <signal name="setup" handler="combo_row_provider_setup_handler"/>
+                <signal name="bind" handler="combo_row_provider_bind_handler"/>
+              </object>
+            </property>
+            <property name="icon-name">video-display-symbolic</property>
+            <property name="subtitle" translatable="yes">Provider to use by default</property>
+            <property name="title" translatable="yes">Provider</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

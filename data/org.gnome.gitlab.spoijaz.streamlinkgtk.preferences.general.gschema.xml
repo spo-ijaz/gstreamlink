@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="streamlink-gtk">
+  <schema id="org.gnome.gitlab.spoijaz.streamlinkgtk.preferences.general"
+    path="/org/gnome/gitlab/spoijaz/streamlinkgtk/preferences/general/">
+    <key name="minimize-gui" type="b">
+      <default>false</default>
+    </key>
+    <key name="enable-notifications" type="b">
+      <default>false</default>
+      <summary>If activated, it will display a notifiation when a stream start.</summary>
+      <description></description>
+    </key>
+  </schema>
+</schemalist>
