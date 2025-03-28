@@ -21,8 +21,10 @@ lib_streamlink_gtk_shared_sources = shared_library(
 
         # 'models/channel.vala',
         'models/contents.vala',
+        'models/plugin.vala',
         'models/plugin-loader-error.vala',
         'models/plugin-info.vala',
+        'models/plugin-provider.vala',
         'models/provider-user.vala',
         'models/providers/contents-selector.vala',
         'models/providers/pagination-cursor.vala',
@@ -38,6 +40,7 @@ lib_streamlink_gtk_shared_sources = shared_library(
         'services/api-request.vala',
         'services/cache.vala',
         'services/oauth-token-receiver.vala',
+        'services/provider-async-tasks.vala',
         'services/provider-plugin-loader.vala',
         'services/streaming-provider-plugin-loader.vala',
         'services/tools.vala',

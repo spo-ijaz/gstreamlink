@@ -19,6 +19,7 @@
  */
 
 using Adw;
+using GLib;
 using Gtk;
 using StreamlinkGtk.Interfaces.Providers;
 using StreamlinkGtk.Interfaces.StreamingProviders;
@@ -46,6 +47,7 @@ namespace StreamlinkGtk.Providers.Twitch {
         public string authorize_url { get;   set; }
         public string redirect_uri { get;   default = "http://localhost:3000"; }
         public IScrolledWindowContents scrolled_window_contents { get; set; }
+        public Gtk.Application application { get; set; }
         public Adw.PreferencesPage preferences_page { get; set; }
         public uint auto_refresh_interval { get; }
         public bool enable_notifications { get; }
@@ -250,6 +252,33 @@ namespace StreamlinkGtk.Providers.Twitch {
             }
 
             this.got_contents ();
+        }
+
+        /**
+         * For now, it's just to display a notification when a new streame is online.
+         */
+        public async void perform_async_tasks () {
+
+            debug ("[twtich] Processing async tasks");
+            // @todo should check if logged
+            Contents streams_contents = yield this.get_contents_stream_followed_async ();
+
+
+
+            //  if (this.store.get_uint ("last-number-of-live-streams") > streams_contents.resources.length) {
+
+                // Create a notification
+                Notification notif = new Notification("Hello from GLib.Notification");
+                notif.set_body("This is a test notification.");
+                notif.set_priority(NotificationPriority.NORMAL);
+
+                // Send notification
+                this.application.send_notification( "new-live-stream", notif);
+                
+                this.store.set_uint ("last-number-of-live-streams", streams_contents.resources.length);
+            //  }
+
+            this.store.set_string ("last-async-execution-time", new DateTime.now ().to_string ());
         }
 
         /*

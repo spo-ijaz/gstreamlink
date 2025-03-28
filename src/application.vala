@@ -24,7 +24,6 @@ using StreamlinkGtk.Preferences;
 
 namespace StreamlinkGtk {
 
-
     public class Application : Adw.Application {
 
         public ProviderPluginController provider_plugin_controller { get; construct; }
@@ -47,7 +46,7 @@ namespace StreamlinkGtk {
             this.set_accels_for_action ("app.preferences", { "<primary>p" });
             this.set_accels_for_action ("app.quit", { "<primary>q" });
 
-            this.provider_plugin_controller = new ProviderPluginController ();
+            this.provider_plugin_controller = new ProviderPluginController (this);
         }
 
         public override void activate () {

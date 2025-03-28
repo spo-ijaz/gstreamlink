@@ -42,6 +42,7 @@ namespace StreamlinkGtk.Interfaces.Providers {
         public abstract string authorize_url { get; set; }
         public abstract string redirect_uri { get; }
         public abstract IScrolledWindowContents scrolled_window_contents { get; set; }
+        public abstract Gtk.Application application { get; set; }
         // Configuration
         public abstract PreferencesPage preferences_page { get; set; }
         public abstract bool enable_notifications { get; }
@@ -81,5 +82,10 @@ namespace StreamlinkGtk.Interfaces.Providers {
          * Streaming provider plugin.
          */
         public abstract string get_extra_args_for_streaming_provider (IStreamingProviderPlugin streaming_provider);
+
+        /**
+         * Actions to perform on a regular basis like to check new live streams, new videos, etc.
+         */
+        public abstract async void perform_async_tasks ();
     }
 }

@@ -17,5 +17,15 @@
       <summary>Refresh interval (in minutes)</summary>
       <description></description>
     </key>
+    <key name="last-async-execution-time" type="s">
+      <default>""</default>
+      <summary>Last time we run the async tasks.</summary>
+      <description>.</description>
+    </key>
+    <key name="last-number-of-live-streams" type="u">
+      <default>0</default>
+      <summary>Store the number of live stream</summary>
+      <description></description>
+    </key>
   </schema>
 </schemalist>
