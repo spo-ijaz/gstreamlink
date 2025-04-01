@@ -47,7 +47,6 @@ namespace StreamlinkGtk.Providers.Twitch {
         public string authorize_url { get;   set; }
         public string redirect_uri { get;   default = "http://localhost:3000"; }
         public IScrolledWindowContents scrolled_window_contents { get; set; }
-        public Gtk.Application application { get; set; }
         public Adw.PreferencesPage preferences_page { get; set; }
         public uint auto_refresh_interval { get; }
         public bool enable_notifications { get; }
@@ -259,26 +258,58 @@ namespace StreamlinkGtk.Providers.Twitch {
          */
         public async void perform_async_tasks () {
 
-            debug ("[twtich] Processing async tasks");
-            // @todo should check if logged
+            if (this.store.get_boolean ("enable-notifications") == false) {
+
+                return;
+            }
+
+            DateTime current_time = new DateTime.now ();
+            DateTime previous_run = new DateTime.from_iso8601 (this.store.get_string ("last-async-execution-time"), new GLib.TimeZone.local ());
+
+            int64 difference_microseconds = current_time.difference (previous_run);
+            int64 difference_minutes = difference_microseconds / 60000000;
+
+            if (difference_minutes < this.store.get_uint  ("refresh-interval")) {
+
+                return;
+            }
+
+            // @todo should check if we need to check if user is logged here.
             Contents streams_contents = yield this.get_contents_stream_followed_async ();
 
+            string[] current_stream_ids = streams_contents.get_resource_ids ().to_array ();
+            string[] previous_stream_ids = this.store.get_strv ("last-live-stream-ids");
 
+            foreach (StreamlinkGtk.Models.Resource resource in streams_contents.resources) {
 
-            //  if (this.store.get_uint ("last-number-of-live-streams") > streams_contents.resources.length) {
+                bool is_new_stream = true;
+                if (previous_stream_ids.length > 0) {
 
-                // Create a notification
-                Notification notif = new Notification("Hello from GLib.Notification");
-                notif.set_body("This is a test notification.");
-                notif.set_priority(NotificationPriority.NORMAL);
+                    foreach (var previous_stream_id in previous_stream_ids) {
 
-                // Send notification
-                this.application.send_notification( "new-live-stream", notif);
-                
-                this.store.set_uint ("last-number-of-live-streams", streams_contents.resources.length);
-            //  }
+                        if (previous_stream_id == resource.id) {
 
-            this.store.set_string ("last-async-execution-time", new DateTime.now ().to_string ());
+                            is_new_stream = false;
+                            break;
+                        }
+                    }
+                }
+
+                if (is_new_stream == true) {
+
+                    Notification notification = new Notification (resource.title + " is live !");
+                    notification.set_body ((resource as StreamlinkGtk.Models.ResourceStream).viewers_count.to_string () + " viewers, since " + (resource as StreamlinkGtk.Models.ResourceStream).elapsed_time.to_string ());
+
+                    File icon_file = File.new_for_path (this.cache.thumbnails_channels_cache_dir + "/twitch_" + resource.title + ".jpg");
+                    notification.set_icon (new FileIcon (icon_file));
+
+                    notification.set_priority (NotificationPriority.NORMAL);
+                    this.notification (resource.id, notification);
+                }
+            }
+
+            this.store.set_value ("last-live-stream-ids", current_stream_ids);
+            this.store.set_string ("last-async-execution-time", current_time.to_string ());
         }
 
         /*
@@ -439,12 +470,12 @@ namespace StreamlinkGtk.Providers.Twitch {
 
                 string content_url = this.base_url + "/" + stream_data.get_object ().get_member ("user_login").get_string ();
                 StreamlinkGtk.Models.Resource resource = new StreamlinkGtk.Models.ResourceStream (
+                                                                                                  stream_data.get_object ().get_member ("id").get_string (),
                                                                                                   title,
                                                                                                   thumbnail,
                                                                                                   content_url,
                                                                                                   started_at,
-                                                                                                  num_viewers
-                );
+                                                                                                  num_viewers);
                 Array<string> css_classes = new Array<string> ();
                 css_classes.append_val ("title-3");
 

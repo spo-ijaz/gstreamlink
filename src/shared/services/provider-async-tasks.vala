@@ -33,11 +33,13 @@ namespace StreamlinkGtk.Services {
         public Gtk.Application application { get; construct; }
 
         private MainLoop loop;
-        private AppSettings store;
+        private AppSettings store_app;
+        private PreferencesGeneralSettings store_preferences_general;
 
         construct {
 
-            this.store = AppSettings.get_default();
+            this.store_app = AppSettings.get_default();
+            this.store_preferences_general = PreferencesGeneralSettings.get_default();
         }
 
         public ProviderAsyncTasks(string name, ListStore list_store_plugin_providers, Gtk.Application application) {
@@ -51,7 +53,7 @@ namespace StreamlinkGtk.Services {
         public void run() {
 
             this.loop = new MainLoop();
-            Timeout.add(2000, start_async_tasks);
+            Timeout.add_seconds(60, start_async_tasks);
             loop.run();
         }
 
@@ -72,14 +74,19 @@ namespace StreamlinkGtk.Services {
                     ProviderPluginLoader loader = new ProviderPluginLoader();
                     IProviderPlugin provider = loader.load(plugin_provider.library_name, plugin_provider.register_plugin_function_name);
                     provider.activate();
-                    provider.application = this.application;
-                    provider.provider_user = this.store.provider_user;
+                    provider.provider_user = this.store_app.provider_user;
                     provider.initialize_api_request();
+
+                    if (this.store_preferences_general.get_boolean("enable-notifications")) {
+
+                        provider.notification.connect(this.on_notification);
+                    }
 
                     debug("Calling perform_async_tasks() for %s", plugin_provider.name);
                     provider.perform_async_tasks.begin((obj, res) => {
                         provider.provider_plugin_loader.unload();
                     });
+                
                 } catch (PluginLoaderError e) {
 
                     print("Error: %s\n", e.message);
@@ -87,6 +94,11 @@ namespace StreamlinkGtk.Services {
             }
 
             return true;
+        }
+
+        private void on_notification(string notification_id, Notification notification) {
+
+            this.application.send_notification(this.application.get_application_id() + notification_id, notification);
         }
     }
 }

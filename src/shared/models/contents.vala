@@ -18,6 +18,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+using Gee;
 using Gtk;
 using StreamlinkGtk.Models.Providers;
 
@@ -40,6 +41,18 @@ namespace StreamlinkGtk.Models {
         public Contents (uint contents_id, string title) {
             Object (contents_id : contents_id,
                     title: title);
+        }
+
+        public ArrayList<string> get_resource_ids () {
+
+            ArrayList<string> ids = new ArrayList<string> ();
+
+            foreach (Resource resource in this.resources) {
+
+                ids.add (resource.id);
+            }
+
+            return ids;
         }
     }
 }

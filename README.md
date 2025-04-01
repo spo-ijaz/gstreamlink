@@ -20,6 +20,7 @@ Currently it supports only :
 
 ## Twitch
 
+- [x] handle notification of new streams
 - [ ] start a VOD at a given time.
 - [ ] handle Games section.
 - [ ] handle search option in the different sections.
@@ -34,8 +35,7 @@ Currently it supports only :
 
 ## Streamlink
 
-- [ ] - preferences for some options, to define. 
-
+- [x] - enable global notification
 
 # Building from sources
 

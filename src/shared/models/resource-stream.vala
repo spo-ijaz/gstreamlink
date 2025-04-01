@@ -34,15 +34,17 @@ namespace StreamlinkGtk.Models {
         public string elapsed_time { get; set; }
 
         construct {
-
         }
 
-        public ResourceStream (string title,
+        public ResourceStream (
+            string id,
+            string title,
             Thumbnail thumbnail,
             string content_url,
             DateTime started_at,
             int viewers_count) {
             Object (
+                    id: id,
                     title: title,
                     thumbnail: thumbnail,
                     content_url: content_url,

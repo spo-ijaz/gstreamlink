@@ -110,8 +110,8 @@ namespace StreamlinkGtk.Controllers {
             this.provider_changed_handler (startup_plugin_provider);
 
             // Start thread handling async providers tasks.
-            //ProviderAsyncTasks provider_async_tasks = new ProviderAsyncTasks ("Provider Async Tasks Thread", this.list_store_plugin_providers, this.application);
-            //new Thread<void> ("Provider Async Tasks Thread", provider_async_tasks.run);
+            ProviderAsyncTasks provider_async_tasks = new ProviderAsyncTasks ("Provider Async Tasks Thread", this.list_store_plugin_providers, this.application);
+            new Thread<void> ("Provider Async Tasks Thread", provider_async_tasks.run);
         }
 
         private void activate_plugin_provider (PluginProvider plugin_provider) {

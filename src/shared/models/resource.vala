@@ -38,6 +38,8 @@ namespace StreamlinkGtk.Models {
 
         public abstract Resource.type contents_type { get; set; }
 
+        public string id { get; construct; }
+
         public string title { get; construct; }
 
         public Array<string> title_css_classes { get; set; }
