@@ -13,6 +13,7 @@ Currently it supports only :
 # Todo
 ## Interface
 
+- [x] - enable global notification
 - [ ] implement search option.
 - [ ] new user guidance.
 - [ ] help for twitch provider, to get twitch session id from a web browser.
@@ -33,9 +34,6 @@ Currently it supports only :
 - [ ] preference to start in minimal mode.
 - [ ] preferences to set VLC window:  always-on-top, on all worskspace.
 
-## Streamlink
-
-- [x] - enable global notification
 
 # Building from sources
 

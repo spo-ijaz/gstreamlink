@@ -49,7 +49,7 @@ namespace StreamlinkGtk {
         [GtkChild]
         public unowned ScrolledWindow sidebar_scrolled_win;
         [GtkChild]
-        public unowned ToolbarView toolbar_view_contents;      
+        public unowned ToolbarView toolbar_view_contents;
         [GtkChild]
         public unowned Adw.HeaderBar header_bar;
         [GtkChild]
@@ -68,8 +68,14 @@ namespace StreamlinkGtk {
         public unowned Button button_load_more_results;
         [GtkChild]
         public unowned ToastOverlay toast_overlay;
+        [GtkChild]
+        public unowned ToggleButton search_toggle_button;
+        [GtkChild]
+        public unowned SearchBar search_bar;
+        [GtkChild]
+        public unowned SearchEntry search_entry;
 
-        public  DropDownPluginProviders drop_down_plugin_providers;
+        public DropDownPluginProviders drop_down_plugin_providers;
 
         construct {
 
@@ -77,7 +83,7 @@ namespace StreamlinkGtk {
 
             Gdk.Display display = Gdk.Display.get_default ();
             StyleContext.add_provider_for_display (display, css_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER);
-            
+
             // Initialize header bar
             this.drop_down_plugin_providers = new DropDownPluginProviders ();
             this.header_bar_provider_box.append (this.drop_down_plugin_providers);
@@ -109,12 +115,46 @@ namespace StreamlinkGtk {
                         "maximized", SettingsBindFlags.DEFAULT);
         }
 
-        public Window (Application application, ProviderPluginController provider_controller) {
+        // public Window (ProviderPluginController provider_controller) {
+
+        // Object (
+        // provider_controller: provider_controller
+        // );
+        // }
+
+        public Window (Adw.Application application, ProviderPluginController provider_controller) {
 
             Object (
                     application: application,
                     provider_controller: provider_controller
             );
+
+            SimpleAction action = new SimpleAction ("focus_search_bar", null);
+            action.activate.connect (this.on_focus_search_bar);
+
+            application.add_action (action);
+            application.set_accels_for_action ("app.focus_search_bar", { "<primary>f" });
+        }
+
+        [GtkCallback]
+        private void signal_search_toggle_button_toggled () {
+
+            debug ("------------------- signal_search_toggle_button_toggled");
+            this.search_bar.visible = this.search_toggle_button.active;
+            this.view_stack_page_contents.visible = !this.search_toggle_button.active;
+        }
+
+        private void on_focus_search_bar () {
+
+            debug ("------------------- on_focus_search_bar");
+            if (this.search_toggle_button.active) {
+
+                this.search_toggle_button.set_active (false);
+            } else {
+
+                this.search_toggle_button.set_active (true);
+                // this.search_entry.grab_focus ();
+            }
         }
     }
 }

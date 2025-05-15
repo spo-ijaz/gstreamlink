@@ -18,7 +18,6 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-// using StreamlinkGtk.Settings;
 using StreamlinkGtk.Controllers;
 using StreamlinkGtk.Preferences;
 
@@ -27,7 +26,6 @@ namespace StreamlinkGtk {
     public class Application : Adw.Application {
 
         public ProviderPluginController provider_plugin_controller { get; construct; }
-
         public Application () {
 
             Object (application_id: AppConfig.APP_ID, flags: ApplicationFlags.DEFAULT_FLAGS);
@@ -55,14 +53,9 @@ namespace StreamlinkGtk {
             var win = this.active_window;
 
             if (win == null) {
+
                 win = new StreamlinkGtk.Window (this, this.provider_plugin_controller);
             }
-
-            // Initialize all services & settings.
-            // Services.Cache.get_default ();
-            // PreferencesStreamingProvidersSettings.get_default ();
-            // PreferencesInterfaceSettings.get_default ();
-            // AppSettings.get_default ();
 
             win.present ();
         }

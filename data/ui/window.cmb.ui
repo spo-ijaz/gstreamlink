@@ -48,10 +48,25 @@
                                         </child>
                                       </object>
                                     </property>
+                                    <child>
+                                      <object class="GtkSearchBar" id="search_bar">
+                                        <child>
+                                          <object class="GtkSearchEntry" id="search_entry"/>
+                                        </child>
+                                      </object>
+                                    </child>
                                   </object>
                                 </property>
                                 <property name="end-widget">
-                                  <object class="GtkBox" id="header_bar_provider_box"/>
+                                  <object class="GtkBox" id="header_bar_provider_box">
+                                    <child>
+                                      <object class="GtkToggleButton" id="search_toggle_button">
+                                        <property name="can-shrink">True</property>
+                                        <property name="icon-name">edit-find-symbolic</property>
+                                        <signal name="toggled" handler="signal_search_toggle_button_toggled"/>
+                                      </object>
+                                    </child>
+                                  </object>
                                 </property>
                                 <property name="hexpand">True</property>
                                 <property name="hexpand-set">True</property>
