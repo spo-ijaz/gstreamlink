@@ -1,0 +1,11 @@
+name: Claude 3 Sonnet
+version: 0.0.1
+schema: v1
+models:
+  - provider: anthropic
+    model: claude-3-sonnet-20240229
+    apiKey: sk-ant-api03-oMm9Ro4f1egSXkg4N5crEqN3m46d2Q4hQdwmlatDPkMpPMiORgBvPzos1odZDp2Ju1lVdhGVEWQ6G23fd_KK_Q-G3i5YgA
+    name: Claude 3.7 Sonnet
+    roles:
+      - chat
+      - edit

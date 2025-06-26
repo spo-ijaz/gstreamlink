@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- Created with Cambalache 0.94.1 -->
+<!-- Created with Cambalache 0.96.1 -->
 <interface domain="org.gnome.gitlab.spoijaz.streamlinkgtk">
   <!-- interface-name thumbnail-contents-stream.ui -->
-  <requires lib="gtk" version="4.0"/>
-  <requires lib="libadwaita" version="1.4"/>
+  <requires lib="gtk" version="4.18"/>
+  <requires lib="libadwaita" version="1.7"/>
   <object class="GtkBox" id="box_published_info">
     <property name="halign">end</property>
     <property name="margin-top">3</property>
@@ -52,7 +52,13 @@
       <object class="AdwSplitButton" id="split_button_play">
         <property name="icon-name">media-playback-start-symbolic</property>
         <property name="label">play</property>
+        <property name="popover">
+          <object class="GtkPopover"/>
+        </property>
       </object>
     </child>
+  </object>
+  <object class="GtkBox" id="box_play_at_time">
+    <property name="halign">start</property>
   </object>
 </interface>

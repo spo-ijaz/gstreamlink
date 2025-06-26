@@ -18,6 +18,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+using Gee;
 using StreamlinkGtk.Interfaces;
 using StreamlinkGtk.Interfaces.Providers;
 using StreamlinkGtk.Interfaces.StreamingProviders;
@@ -40,17 +41,18 @@ namespace StreamlinkGtk.Interfaces {
 
 
         protected string[] spawn_env;
-        protected string[] spawn_args;
+        //protected string[] spawn_args;
+        protected  ArrayList<string> spawn_args;
 
         construct {
 
             this.spawn_env = Environ.get ();
+            this.spawn_args = new ArrayList<string> ();
         }
 
         public virtual async void play (Models.Resource thumbnail_contents, IProviderPlugin provider_plugin) {
 
             try {
-
 
                 Models.ResourceStream thumbnail_contents_stream = thumbnail_contents as Models.ResourceStream;
 
@@ -65,7 +67,7 @@ namespace StreamlinkGtk.Interfaces {
                 }
 
                 Process.spawn_async_with_pipes ("/",
-                                                this.spawn_args,
+                                                this.spawn_args.to_array(),
                                                 this.spawn_env,
                                                 SpawnFlags.SEARCH_PATH | SpawnFlags.DO_NOT_REAP_CHILD,
                                                 null,

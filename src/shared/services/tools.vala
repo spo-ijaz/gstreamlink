@@ -22,10 +22,10 @@ namespace StreamlinkGtk.Services {
 
     class Tools : Object {
 
-        public static string elapsed_time(DateTime from_date, DateTime to_date) {
+        public static string elapsed_time (DateTime from_date, DateTime to_date) {
 
             // debug("%s -> %s", from_date.to_string(), to_date.to_string());
-            int64 date_diff_seconds = to_date.to_unix() - from_date.to_unix();
+            int64 date_diff_seconds = to_date.to_unix () - from_date.to_unix ();
             int64 elapsed_minutes = 0;
             int64 elapsed_hours = 0;
             int64 elapsed_days = 0;
@@ -38,7 +38,7 @@ namespace StreamlinkGtk.Services {
                 elapsed_days = (date_diff_seconds / 3600) / 24;
                 date_diff_seconds = date_diff_seconds - (elapsed_days * 86400);
 
-                elapsed_time += elapsed_days.to_string() + "d ";
+                elapsed_time += elapsed_days.to_string () + "d ";
                 // elapsed_time += elapsed_days.to_string() + " day" + (elapsed_days > 1 ? "s " : " ");
             }
 
@@ -48,7 +48,7 @@ namespace StreamlinkGtk.Services {
                 elapsed_hours = (date_diff_seconds / 60) / 60;
                 date_diff_seconds = date_diff_seconds - (elapsed_hours * 3600);
 
-                elapsed_time += elapsed_hours.to_string() + "h ";
+                elapsed_time += elapsed_hours.to_string () + "h ";
                 // elapsed_time += elapsed_hours.to_string() + " hour" + (elapsed_hours > 1 ? "s " : " ");
             }
 
@@ -58,15 +58,67 @@ namespace StreamlinkGtk.Services {
                 elapsed_minutes = date_diff_seconds / 60;
                 date_diff_seconds = date_diff_seconds - (elapsed_minutes * 60);
 
-                elapsed_time += elapsed_minutes.to_string() + "m ";
+                elapsed_time += elapsed_minutes.to_string () + "m ";
                 // elapsed_time += elapsed_minutes.to_string() + " minute" + (elapsed_minutes > 1 ? "s " : " ");
             }
 
-            elapsed_time += date_diff_seconds.to_string() + "s";
+            elapsed_time += date_diff_seconds.to_string () + "s";
             // elapsed_time += date_diff_seconds.to_string() + " second" + (date_diff_seconds > 1 ? "s" : "");
 
 
             return elapsed_time;
+        }
+
+        /**
+         * Get the number of seconds from a Twitch VOD duration string, ex : 1d2h32m8s
+
+         * @param duration The duration string
+         * @return The number of seconds
+         */
+        public static int get_num_seconds_from_twitch_vod_duration (string duration) {
+
+            int total_seconds = 0;
+
+            try {
+                // Match groups like "1d", "2h", "32m", "8s"
+                Regex regex = new Regex (@"(\\d+)([dhms])");
+                MatchInfo match_info;
+
+                if (regex.match (duration, 0, out match_info)) {
+                    do {
+                        int value = int.parse (match_info.fetch (1));
+                        string unit = match_info.fetch (2);
+
+                        switch (unit) {
+                        case "d":
+                            total_seconds += value * 86400; // 1 day = 86400 seconds
+                            break;
+                        case "h":
+                            total_seconds += value * 3600; // 1 hour = 3600 seconds
+                            break;
+                        case "m":
+                            total_seconds += value * 60; // 1 minute = 60 seconds
+                            break;
+                        case "s":
+                            total_seconds += value; // 1 second = 1 second
+                            break;
+                        }
+                    } while (match_info.next ());
+                }
+            } catch (RegexError e) {
+
+                stderr.printf ("RegexError: %s\n", e.message);
+            }
+
+            return total_seconds;
+        }
+
+        public static string format_to_hh_mm_dd (int total_seconds) {
+
+            int hours = total_seconds / 3600;
+            int minutes = (total_seconds % 3600) / 60;
+            int seconds = total_seconds % 60;
+            return "%02d:%02d:%02d".printf (hours, minutes, seconds);
         }
     }
 }

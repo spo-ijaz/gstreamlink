@@ -1,4 +1,4 @@
-/* resource-stream.vala
+/* resource-vod.vala
  *
  * Copyright 2025 PORQUET Sébastien
  *
@@ -18,53 +18,52 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
- using Adw;
- using Gtk;
- using StreamlinkGtk.Services;
- 
- namespace StreamlinkGtk.Widgets.Providers.Default {
- 
-     public class ResourceVod : Resource {
- 
-         private Label label_published_at;
-         private Label label_duration;
-         private Label label_viewers_count;
- 
-         construct {
- 
-             Builder builder = new Builder.from_resource ("/org/gnome/gitlab/spoijaz/streamlinkgtk/shared/widgets/providers/default/resource-vod.ui");
-             this.label_published_at = builder.get_object ("label_published_at") as Label;
-             this.label_duration = builder.get_object ("label_duration") as Label;
-             this.label_viewers_count = builder.get_object ("label_viewers_count") as Label;
- 
-             Box box_viewers_count = builder.get_object ("box_viewers_count") as Box;
-             Box box_published_info = builder.get_object ("box_published_info") as Box;
-             Box box_play = builder.get_object ("box_play") as Box;
-             SplitButton split_button_play = builder.get_object ("split_button_play") as SplitButton;
- 
-             this.grid_options.attach (box_viewers_count, 0, 0, 1, 1);
-             this.grid_options.attach (box_play, 1, 0, 1, 1);
-             this.grid_options.attach (box_published_info, 2, 0, 1, 1);
+using Adw;
+using Gtk;
+using StreamlinkGtk.Services;
 
+namespace StreamlinkGtk.Widgets.Providers.Default {
 
-             split_button_play.clicked.connect (() => {
- 
-                 this.play_button_clicked (this.resource);
-             });
-         }
- 
-         public ResourceVod () {
-             Object ();
-         }
- 
-         public void initialize_from_vod (Models.ResourceVod resource_vod) {
- 
-             base.initialize (resource_vod);
+    public class ResourceVod : Resource {
 
-             this.label_published_at.label = "  " + resource_vod.published_at.format("%a %d %b %Y");
-             this.label_duration.label = "  " + resource_vod.duration.to_string ();
-             this.label_viewers_count.label = "  " + resource_vod.viewers_count.to_string ();
-         }
-     }
- }
- 
+        private Label label_published_at;
+        private Label label_duration;
+        private Label label_viewers_count;
+
+        construct {
+
+            Builder builder = new Builder.from_resource ("/org/gnome/gitlab/spoijaz/streamlinkgtk/shared/widgets/providers/default/resource-vod.ui");
+            this.label_published_at = builder.get_object ("label_published_at") as Label;
+            this.label_duration = builder.get_object ("label_duration") as Label;
+            this.label_viewers_count = builder.get_object ("label_viewers_count") as Label;
+
+            Box box_viewers_count = builder.get_object ("box_viewers_count") as Box;
+            Box box_published_info = builder.get_object ("box_published_info") as Box;
+            Box box_play = builder.get_object ("box_play") as Box;
+            SplitButton split_button_play = builder.get_object ("split_button_play") as SplitButton;
+
+            this.grid_options.attach (box_viewers_count, 0, 0, 1, 1);
+            this.grid_options.attach (box_play, 1, 0, 1, 1);
+            this.grid_options.attach (box_published_info, 2, 0, 1, 1);
+
+            split_button_play.clicked.connect (() => {
+
+                this.play_button_clicked (this.resource);
+            });
+        }
+
+        public ResourceVod () {
+            Object ();
+        }
+
+        public void initialize_from_vod (Models.ResourceVod resource_vod) {
+
+            base.initialize (resource_vod);
+
+            this.label_published_at.label = "  " + resource_vod.published_at.format ("%a %d %b %Y");
+            this.label_duration.label = "  " + resource_vod.duration.to_string ();
+            this.label_viewers_count.label = "  " + resource_vod.viewers_count.to_string ();
+            this.grid_options.attach (new ResourceVodPlayAtTime(resource_vod), 0, 2, 3, 1);
+        }
+    }
+}

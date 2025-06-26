@@ -25,8 +25,7 @@ namespace StreamlinkGtk.StreamingProviders {
 
     public class Streamlink : StreamingProvider  {
 
-        //  public override IPlayerProvider player { get; set; }
-
+        // public override IPlayerProvider player { get; set; }
         public override string name { get; set; default = "Streamlink"; }
 
         public string exec_path { get; set; }
@@ -34,15 +33,56 @@ namespace StreamlinkGtk.StreamingProviders {
         construct {
 
             this.exec_path = "streamlink";
-            //  this.player = new Vlc ();
+            // this.player = new Vlc ();
         }
 
         public override async void play (Models.Resource thumbnail_contents, IProviderPlugin provider_plugin) {
 
-            this.spawn_args = { "streamlink", provider_plugin.get_extra_args_for_streaming_provider (this), thumbnail_contents.content_url, "best"};
-            
-            //  this.spawn_args = { "streamlink", thumbnail_contents.content_url, "best"};
-            yield base.play(thumbnail_contents, provider_plugin);
+            this.spawn_args.clear ();
+            this.spawn_args.add ("streamlink");
+
+            string provider_plugin_extra_args = provider_plugin.get_extra_args_for_streaming_provider (this);
+            if (provider_plugin_extra_args != "") {
+
+                this.spawn_args.add (provider_plugin_extra_args);
+            }
+
+            this.get_extra_arg_vod_start_at (thumbnail_contents);
+
+            this.spawn_args.add (thumbnail_contents.content_url);
+            this.spawn_args.add ("best");
+
+
+            // this.spawn_args = {
+            // "streamlink",
+            // provider_plugin.get_extra_args_for_streaming_provider (this),
+            // this.get_extra_arg_vod_start_at (thumbnail_contents),
+            // thumbnail_contents.content_url,
+            // "best"
+            // };
+
+            // this.spawn_args = { "streamlink", thumbnail_contents.content_url, "best"};
+            yield base.play (thumbnail_contents, provider_plugin);
+        }
+
+        private void get_extra_arg_vod_start_at (Models.Resource resource) {
+
+            if (resource is Models.ResourceVod) {
+
+                if ((resource as Models.ResourceVod).start_at_seconds > 0) {
+
+                    this.spawn_args.add ("--hls-start-offset=" + this.format_to_hh_mm_dd ((resource as Models.ResourceVod).start_at_seconds));
+                }
+            }
+        }
+
+        // convert seconds to DD:HH:MM:SS string
+        private string format_to_hh_mm_dd (int total_seconds) {
+
+            int hours = total_seconds / 3600;
+            int minutes = (total_seconds % 3600) / 60;
+            int seconds = total_seconds % 60;
+            return "%02d:%02d:%02d".printf (hours, minutes, seconds);
         }
     }
 

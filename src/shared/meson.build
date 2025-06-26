@@ -54,6 +54,7 @@ lib_streamlink_gtk_shared_sources = shared_library(
         'widgets/providers/default/resource.vala',
         'widgets/providers/default/resource-stream.vala',
         'widgets/providers/default/resource-vod.vala',
+        'widgets//providers/default/resource-vod-play-at-time.vala',
         'widgets/providers/default/scrolled-window-contents.vala',
     ],
     vala_header: 'lib_streamlink_gtk_shared.h',

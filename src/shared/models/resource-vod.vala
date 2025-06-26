@@ -31,6 +31,8 @@ namespace StreamlinkGtk.Models {
 
         public string duration { get; set; }
 
+        public int start_at_seconds { get; set; default = 0; }
+
         public int viewers_count { get; set; }
 
         construct {

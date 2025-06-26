@@ -113,9 +113,11 @@ namespace StreamlinkGtk.Providers.Twitch {
             switch (streaming_provider.name) {
 
             case "Streamlink":
+
                 if (website_oauth != "") {
                     extra_args += "--twitch-api-header=Authorization=OAuth " + website_oauth;
                 }
+
                 break;
 
             default:
