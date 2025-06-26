@@ -22,7 +22,7 @@ Currently it supports only :
 ## Twitch
 
 - [x] handle notification of new streams
-- [ ] start a VOD at a given time.
+- [x] start a VOD at a given time.
 - [ ] handle Games section.
 - [ ] handle search option in the different sections.
 - [ ] option to follow / unfollow.
