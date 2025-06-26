@@ -32,7 +32,7 @@ namespace StreamlinkGtk.StreamingProviders {
 
         construct {
 
-            this.exec_path = "streamlink";
+            //this.exec_path = "streamlink";
             // this.player = new Vlc ();
         }
 
