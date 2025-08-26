@@ -23,10 +23,14 @@ using GLib;
 using StreamlinkGtk.Settings;
 using StreamlinkGtk.Interfaces.Providers;
 using StreamlinkGtk.Models;
+using StreamlinkGtk.Models.Providers;
+
 
 namespace StreamlinkGtk.Services {
 
     public class ProviderAsyncTasks : Object {
+
+        public signal void get_contents(ContentsSelector contents_selector);
 
         public string name { get; construct; }
         public ListStore list_store_plugin_providers { get; construct; }
@@ -42,7 +46,10 @@ namespace StreamlinkGtk.Services {
             this.store_preferences_general = PreferencesGeneralSettings.get_default();
         }
 
-        public ProviderAsyncTasks(string name, ListStore list_store_plugin_providers, Gtk.Application application) {
+        public ProviderAsyncTasks(string name,
+            ListStore list_store_plugin_providers,
+            Gtk.Application application) {
+
             Object(
                    name: name,
                    list_store_plugin_providers: list_store_plugin_providers,
@@ -84,9 +91,17 @@ namespace StreamlinkGtk.Services {
 
                     debug("Calling perform_async_tasks() for %s", plugin_provider.name);
                     provider.perform_async_tasks.begin((obj, res) => {
+
+                        bool post_async_action;
+                        ContentsSelector contents_selector;
+                        provider.perform_async_tasks.end(res, out post_async_action, out contents_selector);
+                        if (post_async_action) {
+
+                            this.get_contents(contents_selector);
+                        }
+
                         provider.provider_plugin_loader.unload();
                     });
-                
                 } catch (PluginLoaderError e) {
 
                     print("Error: %s\n", e.message);

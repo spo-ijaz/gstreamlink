@@ -258,13 +258,10 @@ namespace StreamlinkGtk.Providers.Twitch {
         /**
          * For now, it's just to display a notification when a new streame is online.
          */
-        public async void perform_async_tasks () {
+        public async void perform_async_tasks (out bool post_async_action, out ContentsSelector contents_selector) {
 
-            if (this.store.get_boolean ("enable-notifications") == false) {
-
-                return;
-            }
-
+            post_async_action = false;
+            contents_selector = new ContentsSelector (ContentsId.STREAMS_FOLLOWED, null);
             DateTime current_time = new DateTime.now ();
             DateTime previous_run = new DateTime.from_iso8601 (this.store.get_string ("last-async-execution-time"), new GLib.TimeZone.local ());
 
@@ -272,6 +269,13 @@ namespace StreamlinkGtk.Providers.Twitch {
             int64 difference_minutes = difference_microseconds / 60000000;
 
             if (difference_minutes < this.store.get_uint  ("refresh-interval")) {
+
+                return;
+            }
+
+            post_async_action = true;
+
+            if (this.store.get_boolean ("enable-notifications") == false) {
 
                 return;
             }

@@ -13,16 +13,19 @@ Currently it supports only :
 # Todo
 ## Interface
 
-- [x] - enable global notification
+- [x] enable global notification.
 - [ ] implement search option.
 - [ ] new user guidance.
 - [ ] help for twitch provider, to get twitch session id from a web browser.
 - [ ] cleanup UI.
+- [ ] inform user that streamkink process is started when we click play button.
+- [ ] tab for stdout/stderr.
 
 ## Twitch
 
-- [x] handle notification of new streams
+- [x] handle notification of new streams.
 - [x] start a VOD at a given time.
+- [x] refresh followed streams every x minutes. (depending configured check interval)
 - [ ] handle Games section.
 - [ ] handle search option in the different sections.
 - [ ] option to follow / unfollow.
@@ -33,6 +36,10 @@ Currently it supports only :
 - [ ] option on play button - start without sound.
 - [ ] preference to start in minimal mode.
 - [ ] preferences to set VLC window:  always-on-top, on all worskspace.
+
+## General
+- [ ] make sure there is at least on video player.
+- [ ] streamlink is available.
 
 
 # Building from sources

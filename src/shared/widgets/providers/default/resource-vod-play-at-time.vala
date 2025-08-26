@@ -39,7 +39,9 @@ namespace StreamlinkGtk.Widgets.Providers.Default {
             // vbox.set_margin_end (2);
 
             this.scale = new Scale.with_range (Orientation.HORIZONTAL, 0, Tools.get_num_seconds_from_twitch_vod_duration (resource_vod.duration), 1);
+            //this.scale.set_adjustment (new Adjustment (0, 0, Tools.get_num_seconds_from_twitch_vod_duration (resource_vod.duration), 60, 1, 0));
             this.scale.set_draw_value (false);
+
             this.scale.set_digits (0);
             this.scale.set_hexpand (true);
             this.scale.set_valign (Align.CENTER);
