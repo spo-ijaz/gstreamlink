@@ -5,7 +5,7 @@ namespace StreamlinkGtk {
 		[CCode (cheader_filename = "lib_streamlink_gtk_plugin_streaming_provider_streamlink.h")]
 		public class Streamlink : StreamlinkGtk.Interfaces.StreamingProvider {
 			public Streamlink ();
-			public override async void play (StreamlinkGtk.Models.Resource thumbnail_contents, StreamlinkGtk.Interfaces.Providers.IProviderPlugin provider_plugin);
+			public override async void play (StreamlinkGtk.Models.Resource thumbnail_contents);
 			public string exec_path { get; set; }
 			public override string name { get; set; }
 		}

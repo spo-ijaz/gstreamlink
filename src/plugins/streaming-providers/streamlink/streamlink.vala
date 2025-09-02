@@ -32,16 +32,31 @@ namespace StreamlinkGtk.StreamingProviders {
 
         construct {
 
-            //this.exec_path = "streamlink";
+            // this.exec_path = "streamlink";
             // this.player = new Vlc ();
         }
+        public override async void play (Models.Resource thumbnail_contents) {
 
-        public override async void play (Models.Resource thumbnail_contents, IProviderPlugin provider_plugin) {
+            // streamlink --player vlc --player-args=--qt-minimal-view --video-on-top --twitch-api-header=Authorization=OAuth yc2u3ow5qe912yo9vbz1cnsieuizcx --hls-start-offset=00:16:45 https://www.twitch.tv/videos/2515177815 best 
+            // streamlink --player vlc --player-args=--qt-minimal-view --video-on-top --twitch-api-header=Authorization=OAuth yc2u3ow5qe912yo9vbz1cnsieuizcx https://www.twitch.tv/nico_oni best
+
+
 
             this.spawn_args.clear ();
             this.spawn_args.add ("streamlink");
 
-            string provider_plugin_extra_args = provider_plugin.get_extra_args_for_streaming_provider (this);
+            // Player args.
+            this.spawn_args.add ("--player");
+            this.spawn_args.add (this.player_plugin.exec_name);
+
+            //  string player_plugin_extra_args = this.player_plugin.get_extra_args_for_streaming_provider (this);
+            //  if (player_plugin_extra_args != "") {
+
+            //      this.spawn_args.add ("--player-args=" + player_plugin_extra_args);
+            //  }
+
+            // Video provider args
+            string provider_plugin_extra_args = this.provider_plugin.get_extra_args_for_streaming_provider (this);
             if (provider_plugin_extra_args != "") {
 
                 this.spawn_args.add (provider_plugin_extra_args);
@@ -62,7 +77,7 @@ namespace StreamlinkGtk.StreamingProviders {
             // };
 
             // this.spawn_args = { "streamlink", thumbnail_contents.content_url, "best"};
-            yield base.play (thumbnail_contents, provider_plugin);
+            yield base.play (thumbnail_contents);
         }
 
         private void get_extra_arg_vod_start_at (Models.Resource resource) {

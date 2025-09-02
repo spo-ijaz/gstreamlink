@@ -20,17 +20,12 @@
 
 using Adw;
 using Gtk;
-// using StreamlinkGtk.Interfaces;
 using StreamlinkGtk.Interfaces.Providers;
 using StreamlinkGtk.Models;
 using StreamlinkGtk.Models.Providers;
 using StreamlinkGtk.Preferences;
 using StreamlinkGtk.Services;
-// using StreamlinkGtk.Providers;
-using StreamlinkGtk.Services;
 using StreamlinkGtk.Settings;
-// using StreamlinkGtk.StreamingProviders;
-// using StreamlinkGtk.Widgets;
 
 namespace StreamlinkGtk.Controllers {
 
@@ -128,9 +123,9 @@ namespace StreamlinkGtk.Controllers {
                 this.provider = loader.load (plugin_provider.library_name, plugin_provider.register_plugin_function_name);
                 this.provider.activate ();
 
-                // this.window.drop_down_providers.drop_down.selected = (startup_provider_id - 1);
-                this.store.current_provider_id = plugin_provider.id;
-                this.store.set_uint ("startup-provider-id", plugin_provider.id);
+                //  // this.window.drop_down_providers.drop_down.selected = (startup_provider_id - 1);
+                //  this.store.current_provider_id = plugin_provider.id;
+                //  this.store.set_uint ("startup-provider-id", plugin_provider.id);
             } catch (PluginLoaderError e) {
 
                 print ("Error: %s\n", e.message);

@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- Created with Cambalache 0.90.4 -->
+<!-- Created with Cambalache 0.96.1 -->
 <interface domain="org.gnome.gitlab.spoijaz.streamlinkgtk">
   <!-- interface-name preferences-interface.ui -->
+  <requires lib="gtk" version="4.18"/>
   <requires lib="libadwaita" version="1.5"/>
-  <requires lib="gio" version="2.44"/>
   <template class="StreamlinkGtkPreferencesPagePlayers" parent="AdwPreferencesPage">
     <property name="icon-name">multimedia-player-symbolic</property>
     <property name="name">page_player</property>
@@ -12,10 +12,14 @@
       <object class="AdwPreferencesGroup">
         <property name="title" translatable="yes">Default player</property>
         <child>
-          <object class="AdwComboRow" id="combo_row_default_player">
-            <property name="model">
-              <object class="GListStore" id="list_store_default_player"/>
+          <object class="AdwComboRow" id="combo_row_player">
+            <property name="factory">
+              <object class="GtkSignalListItemFactory" id="combo_row_player_factory">
+                <signal name="bind" handler="combo_row_player_bind_handler"/>
+                <signal name="setup" handler="combo_row_player_setup_handler"/>
+              </object>
             </property>
+            <property name="icon-name">video-display-symbolic</property>
             <property name="subtitle">Player to use</property>
             <property name="title" translatable="yes">Player</property>
           </object>
@@ -24,7 +28,25 @@
     </child>
     <child>
       <object class="AdwPreferencesGroup">
-        <property name="title" translatable="yes">Players settings</property>
+        <property name="description">Settings common to all player</property>
+        <property name="title">Common settings</property>
+        <child>
+          <object class="AdwSwitchRow" id="player_on_all_workspaces">
+            <property name="title">Visible on all workspace</property>
+          </object>
+        </child>
+        <child>
+          <object class="AdwSwitchRow" id="player_on_top">
+            <property name="title">Always on top</property>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="AdwPreferencesGroup">
+        <child>
+          <object class="AdwBin" id="selected_player_preferences"/>
+        </child>
       </object>
     </child>
   </template>

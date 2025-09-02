@@ -2,8 +2,14 @@
 <schemalist gettext-domain="streamlink-gtk">
   <schema id="org.gnome.gitlab.spoijaz.streamlinkgtk.preferences.players"
     path="/org/gnome/gitlab/spoijaz/streamlinkgtk/preferences/players/">
-    <key name="default-player" type="i">
+    <key name="startup-player-id" type="i">
       <default>1</default>
+    </key>
+    <key name="player-on-all-workspaces" type="b">
+      <default>false</default>
+    </key>
+    <key name="player-on-top" type="b">
+      <default>false</default>
     </key>
   </schema>
 </schemalist>

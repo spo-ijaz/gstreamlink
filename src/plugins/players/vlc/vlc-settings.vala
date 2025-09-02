@@ -1,4 +1,4 @@
-/* plugin-provider.vala
+/* twitch-settings.vala
  *
  * Copyright 2025 PORQUET Sébastien
  *
@@ -18,18 +18,24 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-namespace StreamlinkGtk.Models {
+ namespace StreamlinkGtk.Players.Vlc {
 
-    public class PluginProvider : Plugin {
+    public class VlcSettings : GLib.Settings {
 
-        public PluginProvider (uint id, string name, string library_name, string register_plugin_function_name) {
+        private static VlcSettings _vlc_settings;
 
-            Object (
-                    id: id,
-                    name: name,
-                    library_name: library_name,
-                    register_plugin_function_name: register_plugin_function_name
-            );
+        public static unowned VlcSettings get_default () {
+
+            if (_vlc_settings == null) {
+
+                _vlc_settings = new VlcSettings ();
+            }
+
+            return _vlc_settings;
+        }
+
+        public VlcSettings () {
+            Object (schema_id: AppConfig.APP_ID + ".plugins.players.vlc");
         }
     }
 }

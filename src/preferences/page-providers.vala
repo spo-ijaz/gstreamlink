@@ -32,7 +32,6 @@ namespace StreamlinkGtk.Preferences {
 
     public class PageProviders : PreferencesPage {
 
-
         [GtkChild]
         public unowned Adw.ComboRow combo_row_provider;
         [GtkChild]

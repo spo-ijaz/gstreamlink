@@ -49,12 +49,15 @@ namespace StreamlinkGtk {
 		}
 		namespace StreamingProviders {
 			[CCode (cheader_filename = "lib_streamlink_gtk_shared.h")]
-			public interface IStreamingProviderPlugin : StreamlinkGtk.Interfaces.IExecOptions {
+			public interface IStreamingProviderPlugin : GLib.Object {
 				public abstract void activate ();
 				public abstract void deactivate ();
-				public abstract async void play (StreamlinkGtk.Models.Resource resource, StreamlinkGtk.Interfaces.Providers.IProviderPlugin provider_plugin);
+				public abstract async void init (StreamlinkGtk.Interfaces.Providers.IProviderPlugin provider_plugin, StreamlinkGtk.Interfaces.IPlayerPlugin player_plugin);
+				public abstract async void play (StreamlinkGtk.Models.Resource resource);
 				public abstract void registered (StreamlinkGtk.Services.StreamingProviderPluginLoader loader);
 				public abstract string name { get; set; }
+				public abstract StreamlinkGtk.Interfaces.IPlayerPlugin player_plugin { get; set; }
+				public abstract StreamlinkGtk.Interfaces.Providers.IProviderPlugin provider_plugin { get; set; }
 				public abstract StreamlinkGtk.Models.RunningPlayer running_player { get; set; }
 				public abstract StreamlinkGtk.Services.StreamingProviderPluginLoader streaming_provider_plugin_loader { get; set; }
 				public signal void player_started (StreamlinkGtk.Models.RunningPlayer running_player);
@@ -62,16 +65,27 @@ namespace StreamlinkGtk {
 			}
 		}
 		[CCode (cheader_filename = "lib_streamlink_gtk_shared.h")]
-		public abstract class StreamingProvider : GLib.Object, StreamlinkGtk.Interfaces.IExecOptions, StreamlinkGtk.Interfaces.StreamingProviders.IStreamingProviderPlugin {
+		public abstract class StreamingProvider : GLib.Object, StreamlinkGtk.Interfaces.StreamingProviders.IStreamingProviderPlugin {
 			protected Gee.ArrayList<string> spawn_args;
 			protected string[] spawn_env;
 			protected StreamingProvider ();
-			public virtual async void play (StreamlinkGtk.Models.Resource thumbnail_contents, StreamlinkGtk.Interfaces.Providers.IProviderPlugin provider_plugin);
+			public virtual async void play (StreamlinkGtk.Models.Resource thumbnail_contents);
 			public abstract string name { get; set; }
 			public StreamlinkGtk.Services.StreamingProviderPluginLoader provider_plugin_loader { get; set; }
 		}
 		[CCode (cheader_filename = "lib_streamlink_gtk_shared.h")]
 		public interface IExecOptions : GLib.Object {
+		}
+		[CCode (cheader_filename = "lib_streamlink_gtk_shared.h")]
+		public interface IPlayerPlugin : GLib.Object {
+			public abstract void activate ();
+			public abstract void deactivate ();
+			public abstract string get_extra_args_for_streaming_provider (StreamlinkGtk.Interfaces.StreamingProviders.IStreamingProviderPlugin streaming_provider);
+			public abstract Gtk.Widget get_preferences ();
+			public abstract void registered (StreamlinkGtk.Services.PlayerPluginLoader loader);
+			public abstract string exec_name { get; }
+			public abstract string name { get; }
+			public abstract StreamlinkGtk.Services.PlayerPluginLoader player_plugin_loader { get; set; }
 		}
 	}
 	namespace Models {
@@ -106,6 +120,10 @@ namespace StreamlinkGtk {
 			public string library_name { get; construct; }
 			public string name { get; construct; }
 			public string register_plugin_function_name { get; construct; }
+		}
+		[CCode (cheader_filename = "lib_streamlink_gtk_shared.h")]
+		public class PluginPlayer : StreamlinkGtk.Models.Plugin {
+			public PluginPlayer (uint id, string name, string library_name, string register_plugin_function_name);
 		}
 		[CCode (cheader_filename = "lib_streamlink_gtk_shared.h")]
 		public class PluginProvider : StreamlinkGtk.Models.Plugin {
@@ -218,6 +236,12 @@ namespace StreamlinkGtk {
 			public signal void got_access_token (string access_token);
 		}
 		[CCode (cheader_filename = "lib_streamlink_gtk_shared.h")]
+		public class PlayerPluginLoader : GLib.Object {
+			public PlayerPluginLoader ();
+			public StreamlinkGtk.Interfaces.IPlayerPlugin load (string path, string register_plugin_function_name) throws StreamlinkGtk.Models.PluginLoaderError;
+			public void unload ();
+		}
+		[CCode (cheader_filename = "lib_streamlink_gtk_shared.h")]
 		public class ProviderAsyncTasks : GLib.Object {
 			public ProviderAsyncTasks (string name, GLib.ListStore list_store_plugin_providers, Gtk.Application application);
 			public void quit ();
@@ -256,6 +280,11 @@ namespace StreamlinkGtk {
 		public class PreferencesGeneralSettings : GLib.Settings {
 			public PreferencesGeneralSettings ();
 			public static unowned StreamlinkGtk.Settings.PreferencesGeneralSettings get_default ();
+		}
+		[CCode (cheader_filename = "lib_streamlink_gtk_shared.h")]
+		public class PreferencesPlayersSettings : GLib.Settings {
+			public PreferencesPlayersSettings ();
+			public static unowned StreamlinkGtk.Settings.PreferencesPlayersSettings get_default ();
 		}
 		[CCode (cheader_filename = "lib_streamlink_gtk_shared.h")]
 		public class PreferencesProvidersSettings : GLib.Settings {

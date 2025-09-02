@@ -12,6 +12,11 @@
       <summary>Selected provider on startup.</summary>
       <description>This is the last selected provider.</description>
     </key>
+    <key name="startup-player-id" type="u">
+      <default>1</default>
+      <summary>Selected player on startup.</summary>
+      <description>This is the last selected player.</description>
+    </key>
     <key name="window-width" type="i">
       <default>950</default>
     </key>

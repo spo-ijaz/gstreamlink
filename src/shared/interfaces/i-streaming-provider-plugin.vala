@@ -29,14 +29,19 @@ using StreamlinkGtk.Services;
 
 namespace StreamlinkGtk.Interfaces.StreamingProviders {
 
-    public interface IStreamingProviderPlugin : IExecOptions {
+    public interface IStreamingProviderPlugin : Object {
+        
+        public abstract IProviderPlugin provider_plugin { get; set; }
+        public abstract IPlayerPlugin player_plugin { get; set; }
 
         public signal void player_started (RunningPlayer running_player);
         public signal void player_stopped (RunningPlayer running_player);
 
         public abstract Models.RunningPlayer running_player { get; set; }
 
-        public abstract async void play (Models.Resource resource, IProviderPlugin provider_plugin);
+        public abstract async void init (IProviderPlugin provider_plugin, IPlayerPlugin player_plugin);
+
+        public abstract async void play (Models.Resource resource);
 
         /**
          * Plugin.

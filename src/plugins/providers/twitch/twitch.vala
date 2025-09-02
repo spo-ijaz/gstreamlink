@@ -101,7 +101,7 @@ namespace StreamlinkGtk.Providers.Twitch {
         }
 
         public void deactivate () {
-            debug ("Provider plugin - Twitch - deactivate");
+            debug ("Provider plugin - Twitch - deactivate\n");
         }
 
         public string get_extra_args_for_streaming_provider (IStreamingProviderPlugin streaming_provider) {

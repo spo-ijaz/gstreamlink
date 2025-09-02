@@ -19,21 +19,30 @@
  */
 
 using Gtk;
-using StreamlinkGtk.Interfaces;
+using StreamlinkGtk.Interfaces.StreamingProviders;
+using StreamlinkGtk.Models;
+using StreamlinkGtk.Models.Providers;
+using StreamlinkGtk.Services;
 
-namespace StreamlinkGtk.Interfaces.PlayerProviders {
+namespace StreamlinkGtk.Interfaces {
 
-    public interface IPlayerPlugin : IExecOptions {
+    public interface IPlayerPlugin : Object  {
 
         public abstract Widget get_preferences();
+        public abstract string name { get; }
+        public abstract string exec_name { get; }
 
         /**
          * Plugin.
          */
-         public abstract string name { get; set; }
-         public abstract PlayerPluginLoader streaming_provider_plugin_loader { get; set; }
-         public abstract void registered (PlayerPluginLoader loader);
-         public abstract void activate ();
-         public abstract void deactivate ();
+        public abstract PlayerPluginLoader player_plugin_loader { get; set; }
+        public abstract void registered (PlayerPluginLoader loader);
+        public abstract void activate ();
+        public abstract void deactivate ();
+
+        /**
+         * Streaming provider plugin.
+         */
+        public abstract string get_extra_args_for_streaming_provider (IStreamingProviderPlugin streaming_provider);
     }
 }

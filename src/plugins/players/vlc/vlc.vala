@@ -18,22 +18,77 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+using Adw;
+using GLib;
+using StreamlinkGtk.Services;
 using StreamlinkGtk.Interfaces;
+using StreamlinkGtk.Interfaces.StreamingProviders;
+using StreamlinkGtk.Players.Vlc;
+using StreamlinkGtk.Settings;
 
-namespace StreamlinkGtk.PlayerProviders {
+namespace StreamlinkGtk.PlayerProviders.Vlc {
 
-    public class Vlc : Object, IExecOptions {
+    public class Vlc : Object, IPlayerPlugin {
+
+        public string name { get; default = "VLC"; }
+        public string exec_name { get; default = "vlc"; }
+
+        public PlayerPluginLoader player_plugin_loader { get; set; }
 
         public string exec_path { get; construct; default = "vlc"; }
 
-        public Gtk.Widget get_preferences () {
-            return new Adw.Bin ();
+        private PreferencesPlayersSettings player_store;
+        private VlcSettings store;
+
+        construct {
+
+            this.store = VlcSettings.get_default ();
+            this.player_store = PreferencesPlayersSettings.get_default ();
         }
 
-        public string exec_path2 { get; construct; default = "vlc"; }
+        public Gtk.Widget get_preferences () {
+            return new StreamlinkGtk.Widgets.Players.Vlc.PreferencesGroup ();
+        }
 
-        // public Gtk.Widget get_preferences () {
-        // assert_not_reached ();
-        // }
+        public void activate () {
+            debug ("Player plugin - VLC - activate\n");
+        }
+
+        public void deactivate () {
+            debug ("Player plugin - VLC - deactivate\n");
+        }
+
+        public void registered (PlayerPluginLoader player_plugin_loader) {
+            this.player_plugin_loader = player_plugin_loader;
+        }
+
+        public string get_extra_args_for_streaming_provider (IStreamingProviderPlugin streaming_provider) {
+
+            // streamlink --player vlc --player-args="--video-on-top --qt-minimal-view" https://www.twitch.tv/akwartz best
+
+            // VLC settings
+            string extra_args = "";
+
+            Variant variant = this.store.get_value ("minimal-player-layout");
+            if (variant.get_boolean ()) {
+                extra_args += "--qt-minimal-view";
+            }
+
+
+            // Common player settings
+            variant = this.player_store.get_value ("player-on-top");
+            if (variant.get_boolean ()) {
+                if (extra_args.length > 1) {
+                    extra_args += " ";
+                }
+                extra_args += "--video-on-top";
+            }
+
+            return extra_args;
+        }
+    }
+
+    public Type register_plugin (Module module) {
+        return typeof (Vlc);
     }
 }

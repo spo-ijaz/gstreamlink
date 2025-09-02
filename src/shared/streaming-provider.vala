@@ -28,8 +28,10 @@ using StreamlinkGtk.Services;
 
 namespace StreamlinkGtk.Interfaces {
 
-    public abstract class StreamingProvider : Object, IExecOptions, IStreamingProviderPlugin   {
+    public abstract class StreamingProvider : Object, IStreamingProviderPlugin   {
 
+        public IProviderPlugin provider_plugin { get; private set; }
+        public IPlayerPlugin player_plugin { get; private set; }
         //  public abstract IPlayerProvider player { get; set; }
         public override Models.RunningPlayer running_player { get; set; }
         public override StreamingProviderPluginLoader streaming_provider_plugin_loader { get; set; }
@@ -38,7 +40,6 @@ namespace StreamlinkGtk.Interfaces {
          * Plugin.
          */
         public abstract string name { get; set; }
-
 
         protected string[] spawn_env;
         //protected string[] spawn_args;
@@ -50,7 +51,14 @@ namespace StreamlinkGtk.Interfaces {
             this.spawn_args = new ArrayList<string> ();
         }
 
-        public virtual async void play (Models.Resource thumbnail_contents, IProviderPlugin provider_plugin) {
+         public async void init (IProviderPlugin provider_plugin, IPlayerPlugin player_plugin)
+        {
+            this.provider_plugin = provider_plugin;
+            this.player_plugin = player_plugin;
+        }
+
+
+        public virtual async void play (Models.Resource thumbnail_contents) {
 
             try {
 
@@ -62,8 +70,11 @@ namespace StreamlinkGtk.Interfaces {
                 int standard_output;
                 int standard_error;
 
+                //  foreach (var item in spawn_args) {
+                //      print ("\n> %s\n", item);
+                //  }
                 foreach (var item in spawn_args) {
-                    print ("\n> %s\n", item);
+                    print ("%s ", item);
                 }
 
                 Process.spawn_async_with_pipes ("/",

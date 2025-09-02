@@ -26,13 +26,15 @@ namespace StreamlinkGtk {
     public class Application : Adw.Application {
 
         public ProviderPluginController provider_plugin_controller { get; construct; }
+        public PlayerPluginController player_plugin_controller { get; construct; }
+       
         public Application () {
 
             Object (application_id: AppConfig.APP_ID, flags: ApplicationFlags.DEFAULT_FLAGS);
         }
 
         construct {
-
+            
             ActionEntry[] action_entries = {
                 { "about", this.on_about_action },
                 { "preferences", this.on_preferences_action },
@@ -45,6 +47,7 @@ namespace StreamlinkGtk {
             this.set_accels_for_action ("app.quit", { "<primary>q" });
 
             this.provider_plugin_controller = new ProviderPluginController (this);
+            this.player_plugin_controller = new PlayerPluginController (this);
         }
 
         public override void activate () {
@@ -54,7 +57,11 @@ namespace StreamlinkGtk {
 
             if (win == null) {
 
-                win = new StreamlinkGtk.Window (this, this.provider_plugin_controller);
+                win = new StreamlinkGtk.Window (
+                                                this,
+                                                this.provider_plugin_controller,
+                                                this.player_plugin_controller
+                );
             }
 
             win.present ();
@@ -79,7 +86,10 @@ namespace StreamlinkGtk {
 
         private void on_preferences_action () {
 
-            PreferencesWindow preferences_window = new PreferencesWindow (this.provider_plugin_controller);
+            PreferencesWindow preferences_window = new PreferencesWindow (
+                                                                          this.provider_plugin_controller,
+                                                                          this.player_plugin_controller
+            );
             preferences_window.present (this.active_window);
         }
 

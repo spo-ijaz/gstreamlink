@@ -33,6 +33,7 @@ namespace StreamlinkGtk {
 
         public StreamingProviderPluginController streaming_provider_controller { get; construct; }
         public ProviderPluginController provider_controller { get; construct; }
+        public PlayerPluginController player_controller { get; construct; }
         public SideBarListBox side_bar_list_box { get; construct; }
         public MenuButtonProviderUser menu_button_provider_user { get; construct; }
 
@@ -78,7 +79,6 @@ namespace StreamlinkGtk {
         public DropDownPluginProviders drop_down_plugin_providers;
 
         construct {
-
             css_provider.load_from_resource ("/org/gnome/gitlab/spoijaz/streamlinkgtk/styles.css");
 
             Gdk.Display display = Gdk.Display.get_default ();
@@ -100,9 +100,14 @@ namespace StreamlinkGtk {
             this.header_bar_provider_box.append (this.menu_button_provider_user);
 
             // Initialize controllers.
-            this.streaming_provider_controller = new StreamingProviderPluginController (view_stack_page_running_players);
-
             this.provider_controller.startup_initialization (this);
+            this.player_controller.startup_initialization (this);
+            this.streaming_provider_controller = new StreamingProviderPluginController (
+                                                                                        view_stack_page_running_players,
+                                                                                        this.player_controller,
+                                                                                        this.provider_controller
+            );
+
 
             AppSettings store = AppSettings.get_default ();
 
@@ -115,18 +120,14 @@ namespace StreamlinkGtk {
                         "maximized", SettingsBindFlags.DEFAULT);
         }
 
-        // public Window (ProviderPluginController provider_controller) {
-
-        // Object (
-        // provider_controller: provider_controller
-        // );
-        // }
-
-        public Window (Adw.Application application, ProviderPluginController provider_controller) {
+        public Window (Adw.Application application,
+            ProviderPluginController provider_controller,
+            PlayerPluginController player_controller) {
 
             Object (
                     application: application,
-                    provider_controller: provider_controller
+                    provider_controller: provider_controller,
+                    player_controller: player_controller
             );
 
             SimpleAction action = new SimpleAction ("focus_search_bar", null);

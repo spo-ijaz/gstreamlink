@@ -4,4 +4,7 @@
     <file>styles.css</file>
     <file preprocess="xml-stripblanks">plugins/providers/twitch/preferences-page.ui</file>
   </gresource>
+  <gresource prefix="/org/gnome/gitlab/spoijaz/streamlinkgtk">
+    <file preprocess="xml-stripblanks">plugins/players/vlc/preferences-widget.ui</file>
+  </gresource>
 </gresources>

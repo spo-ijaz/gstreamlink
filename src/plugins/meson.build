@@ -8,7 +8,10 @@ streamlink_plugin_deps = [
 lib_streamlink_gtk_plugin_player_vlc = shared_library(
     'streamlink_gtk_plugin_player_vlc',
     [
+        lib_streamlink_gtk_plugins_resources,
         'players/vlc/vlc.vala',
+        'players/vlc/vlc-settings.vala',
+        'players/vlc/widgets/preferences-group.vala',
     ],
     vala_header: 'lib_streamlink_gtk_plugin_player_vlc.h',
     vala_vapi: vapi_dir / 'lib_streamlink_gtk_plugin_player_vlc.vapi',

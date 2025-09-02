@@ -13,7 +13,7 @@ lib_streamlink_gtk_shared_sources = shared_library(
         lib_streamlink_gtk_shared_resources,
 
         'interfaces/i-exec-options.vala',
-        # 'interfaces/i-player-provider.vala',
+        'interfaces/i-player-plugin.vala',
         'interfaces/i-streaming-provider-plugin.vala',
         'interfaces/providers/i-scrolled-window-contents.vala',
         'interfaces/providers/i-provider-plugin.vala',
@@ -24,6 +24,7 @@ lib_streamlink_gtk_shared_sources = shared_library(
         'models/plugin.vala',
         'models/plugin-loader-error.vala',
         'models/plugin-info.vala',
+        'models/plugin-player.vala',
         'models/plugin-provider.vala',
         'models/provider-user.vala',
         'models/providers/contents-selector.vala',
@@ -40,6 +41,7 @@ lib_streamlink_gtk_shared_sources = shared_library(
         'services/api-request.vala',
         'services/cache.vala',
         'services/oauth-token-receiver.vala',
+        'services/player-plugin-loader.vala',
         'services/provider-async-tasks.vala',
         'services/provider-plugin-loader.vala',
         'services/streaming-provider-plugin-loader.vala',
@@ -47,6 +49,7 @@ lib_streamlink_gtk_shared_sources = shared_library(
 
         'settings/app-settings.vala',
         'settings/preferences-general-settings.vala',
+        'settings/preferences-players-settings.vala',
         'settings/preferences-providers-settings.vala',
 
         'streaming-provider.vala',

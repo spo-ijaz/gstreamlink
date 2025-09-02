@@ -17,7 +17,8 @@
  *
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
- namespace StreamlinkGtk.Models {
+
+namespace StreamlinkGtk.Models {
 
     public class PluginPlayer : Plugin {
 

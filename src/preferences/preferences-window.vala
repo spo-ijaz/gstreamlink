@@ -21,6 +21,7 @@
 using Adw;
 using Gtk;
 using StreamlinkGtk.Controllers;
+
 namespace StreamlinkGtk.Preferences {
 
     [GtkTemplate (ui = "/org/gnome/gitlab/spoijaz/streamlinkgtk/widgets/preferences/preferences-window.ui")]
@@ -28,6 +29,7 @@ namespace StreamlinkGtk.Preferences {
     public class PreferencesWindow : Adw.PreferencesDialog {
         
         public ProviderPluginController provider_plugin_controller { get; construct; }
+        public PlayerPluginController player_plugin_controller { get; construct; }
 
         [GtkChild]
         public unowned Adw.NavigationPage navigation_page;
@@ -36,10 +38,18 @@ namespace StreamlinkGtk.Preferences {
 
             this.add (new PageGeneral ());
             this.add (new PageProviders (this.provider_plugin_controller));
+            this.add (new PagePlayers (this.player_plugin_controller));
         }
 
-        public PreferencesWindow (ProviderPluginController provider_plugin_controller) {
-            Object (provider_plugin_controller: provider_plugin_controller);
+        public PreferencesWindow (
+            ProviderPluginController provider_plugin_controller,
+            PlayerPluginController player_plugin_controller
+
+        ) {
+            Object (
+                provider_plugin_controller: provider_plugin_controller,
+                player_plugin_controller: player_plugin_controller
+            );
         }
     }
 }

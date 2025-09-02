@@ -24,12 +24,15 @@ using StreamlinkGtk.Interfaces.Providers;
 using StreamlinkGtk.Interfaces.StreamingProviders;
 using StreamlinkGtk.Models;
 using StreamlinkGtk.Services;
+using StreamlinkGtk.Controllers;
 
 namespace StreamlinkGtk.StreamingProviders {
 
     public class StreamingProviderPluginController : Object {
 
         public ViewStackPage view_stack_page_running_players { get; construct; }
+        public ProviderPluginController provider_plugin_controller { get; construct; }
+        public PlayerPluginController player_plugin_controller { get; construct; }
 
         // private ScrolledWindowRunningPlayers scrolled_window_viewing;
         private IStreamingProviderPlugin streaming_provider;
@@ -56,16 +59,22 @@ namespace StreamlinkGtk.StreamingProviders {
             // this.streaming_provider.player_stopped.connect(this.player_stopped_handler);
         }
 
-        public StreamingProviderPluginController (ViewStackPage view_stack_page_running_players) {
+        public StreamingProviderPluginController (
+            ViewStackPage view_stack_page_running_players,
+            PlayerPluginController player_plugin_controller,
+            ProviderPluginController provider_plugin_controller
+        ) {
             Object (
-                    view_stack_page_running_players: view_stack_page_running_players
+                    view_stack_page_running_players: view_stack_page_running_players,
+                    player_plugin_controller: player_plugin_controller,
+                    provider_plugin_controller: provider_plugin_controller
             );
         }
 
         public void play_resource (Models.Resource resource, IProviderPlugin provider_plugin) {
 
             debug ("---------> %s ", resource.title);
-            this.streaming_provider.play.begin(resource, provider_plugin, (obj, res) => {
+            this.streaming_provider.play.begin(resource, (obj, res) => {
 
                 this.streaming_provider.play.end(res);
             });
@@ -79,6 +88,7 @@ namespace StreamlinkGtk.StreamingProviders {
                 StreamingProviderPluginLoader loader = new StreamingProviderPluginLoader ();
                 this.streaming_provider = loader.load (plugin_streaming_provider.library_name, plugin_streaming_provider.register_plugin_function_name);
                 this.streaming_provider.activate ();
+                this.streaming_provider.init (this.provider_plugin_controller.provider, this.player_plugin_controller.player);
 
                 // this.window.drop_down_providers.drop_down.selected = (startup_provider_id - 1);
                 // this.store.current_provider_id = plugin_provider.id;
