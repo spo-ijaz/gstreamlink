@@ -81,3 +81,9 @@ sudo ninja -C builddir_prod install
 ## Twitch - followed stream
 
 ![image](https://gitlab.gnome.org/spo-ijaz/streamlink-gtk/-/raw/main/screenshots/twitch_start.png?ref_type=heads)
+
+## Twitch session id
+
+```javascript
+document.cookie.split('; ').find(row => row.startsWith('auth-token=')).split('=')[1]
+```
