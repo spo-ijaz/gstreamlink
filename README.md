@@ -14,10 +14,10 @@ Currently it supports only :
 ## Interface
 
 - [x] enable global notification.
-- [ ] implement search option.
-- [ ] new user guidance.
-- [ ] help for twitch provider, to get twitch session id from a web browser.
-- [ ] cleanup UI.
+- [ ] implement search option.
+- [ ] new user guidance.
+- [ ] help for twitch provider, to get twitch session id from a web browser.
+- [ ] cleanup UI.
 - [ ] inform user that streamkink process is started when we click play button.
 - [ ] tab for stdout/stderr.
 
@@ -27,18 +27,18 @@ Currently it supports only :
 - [x] start a VOD at a given time.
 - [x] refresh followed streams every x minutes. (depending configured check interval)
 - [ ] handle Games section.
-- [ ] handle search option in the different sections.
-- [ ] option to follow / unfollow.
+- [ ] handle search option in the different sections.
+- [ ] option to follow / unfollow.
 - [ ] why not implement the Twitch chat.
 
 ## VLC
 
 - [ ] option on play button - start without sound.
-- [ ] preference to start in minimal mode.
+- [ ] preference to start in minimal mode.
 - [ ] preferences to set VLC window:  always-on-top, on all worskspace.
 
 ## General
-- [ ] make sure there is at least on video player.
+- [ ] make sure there is at least on video player.
 - [ ] streamlink is available.
 
 
@@ -54,6 +54,7 @@ dnf install -y meson gtk4-devel json-glib-devel libadwaita-devel libsoup3-devel 
 
 ```bash
 apt install -y meson valac libgtk-4-dev libgee-0.8-dev libjson-glib-dev libadwaita-1-dev libsoup-3.0-dev 
+
 ```
 
 # Development

@@ -1,6 +1,6 @@
 /* user.vala
  *
- * Copyright 2025 PORQUET Sébastien
+ * Copyright 2026 PORQUET Sébastien
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@ namespace Streamlink.Models {
 
     class User {
 
-        public uint id { get set; }
+        public uint id { get; set; }
         public string name { get; set; }
     }
 }

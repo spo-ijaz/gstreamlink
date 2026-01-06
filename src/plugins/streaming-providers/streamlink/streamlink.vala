@@ -1,6 +1,6 @@
 /* streamlink.vala
  *
- * Copyright 2025 PORQUET Sébastien
+ * Copyright 2026 PORQUET Sébastien
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,10 +37,10 @@ namespace StreamlinkGtk.StreamingProviders {
         }
         public override async void play (Models.Resource thumbnail_contents) {
 
-            // streamlink --player vlc --player-args=--qt-minimal-view --video-on-top --twitch-api-header=Authorization=OAuth yc2u3ow5qe912yo9vbz1cnsieuizcx --hls-start-offset=00:16:45 https://www.twitch.tv/videos/2515177815 best 
-            // streamlink --player vlc --player-args=--qt-minimal-view --video-on-top --twitch-api-header=Authorization=OAuth yc2u3ow5qe912yo9vbz1cnsieuizcx https://www.twitch.tv/nico_oni best
-
-
+            // streamlink --player vlc --player-args="--qt-minimal-view --video-on-top" --twitch-api-header=Authorization=OAuth yc2u3ow5qe912yo9vbz1cnsieuizcx --hls-start-offset=00:16:45 https://www.twitch.tv/videos/2515177815 best
+            // streamlink --player vlc --player-args=--qt-minimal-view --video-on-top --twitch-api-header=Authorization=OAuth yc2u3ow5qe912yo9vbz1cnsieuizcx https://www.twitch.tv/akwartz best
+            // raw - working
+            // streamlink --player vlc --player-args="--qt-minimal-view --video-on-top" --twitch-api-header="Authorization=OAuth yc2u3ow5qe912yo9vbz1cnsieuizcx" "https://www.twitch.tv/akwartz" best
 
             this.spawn_args.clear ();
             this.spawn_args.add ("streamlink");

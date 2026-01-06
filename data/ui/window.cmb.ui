@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- Created with Cambalache 0.96.1 -->
+<!-- Created with Cambalache 0.96.3 -->
 <interface domain="org.gnome.gitlab.spoijaz.streamlinkgtk">
   <!-- interface-name window.ui -->
   <requires lib="gio" version="2.0"/>
@@ -11,96 +11,114 @@
         <property name="content">
           <object class="AdwNavigationPage">
             <property name="child">
-              <object class="AdwToastOverlay" id="toast_overlay">
-                <child>
-                  <object class="GtkOverlay" id="overlay">
-                    <property name="child">
-                      <object class="AdwToolbarView" id="toolbar_view_contents">
-                        <child type="top">
-                          <object class="AdwHeaderBar" id="header_bar">
-                            <property name="title-widget">
-                              <object class="GtkCenterBox">
-                                <property name="center-widget">
-                                  <object class="AdwViewSwitcher" id="view_switcher">
-                                    <property name="policy">wide</property>
-                                    <property name="stack">
-                                      <object class="AdwViewStack" id="view_stack">
-                                        <child>
-                                          <object class="AdwViewStackPage" id="view_stack_page_contents">
-                                            <property name="child">
-                                              <object class="AdwBin"/>
-                                            </property>
-                                            <property name="icon-name">video-display-symbolic</property>
-                                            <property name="name">stack_page_contents</property>
-                                            <property name="title">Contents</property>
+              <object class="GtkPaned">
+                <property name="end-child">
+                  <object class="AdwTabOverview" id="log_tab_overview">
+                    <property name="enable-new-tab">True</property>
+                    <property name="open">True</property>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="baseline-position">top</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <object class="AdwTabBar" id="log_tab_bar">
+                            <property name="valign">start</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwTabView" id="log_tab_view">
+                            <property name="vexpand">True</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </property>
+                <property name="orientation">vertical</property>
+                <property name="position">600</property>
+                <property name="start-child">
+                  <object class="AdwToastOverlay" id="toast_overlay">
+                    <child>
+                      <object class="GtkOverlay" id="overlay">
+                        <property name="child">
+                          <object class="AdwToolbarView" id="toolbar_view_contents">
+                            <child type="top">
+                              <object class="AdwHeaderBar" id="header_bar">
+                                <property name="title-widget">
+                                  <object class="GtkCenterBox">
+                                    <property name="center-widget">
+                                      <object class="AdwViewSwitcher" id="view_switcher">
+                                        <property name="policy">wide</property>
+                                        <property name="stack">
+                                          <object class="AdwViewStack" id="view_stack">
+                                            <child>
+                                              <object class="AdwViewStackPage" id="view_stack_page_contents">
+                                                <property name="child">
+                                                  <object class="AdwBin"/>
+                                                </property>
+                                                <property name="icon-name">video-display-symbolic</property>
+                                                <property name="name">stack_page_contents</property>
+                                                <property name="title">Contents</property>
+                                              </object>
+                                            </child>
+                                            <child>
+                                              <object class="AdwViewStackPage" id="view_stack_page_running_players">
+                                                <property name="child">
+                                                  <object class="AdwBin"/>
+                                                </property>
+                                                <property name="icon-name">applications-multimedia-symbolic</property>
+                                                <property name="name">stack_page_running_players</property>
+                                                <property name="title">Viewing</property>
+                                                <property name="visible">False</property>
+                                              </object>
+                                            </child>
                                           </object>
-                                        </child>
+                                        </property>
                                         <child>
-                                          <object class="AdwViewStackPage" id="view_stack_page_running_players">
-                                            <property name="child">
-                                              <object class="AdwBin"/>
-                                            </property>
-                                            <property name="icon-name">applications-multimedia-symbolic</property>
-                                            <property name="name">stack_page_running_players</property>
-                                            <property name="title">Viewing</property>
-                                            <property name="visible">False</property>
+                                          <object class="GtkSearchBar" id="search_bar">
+                                            <child>
+                                              <object class="GtkSearchEntry" id="search_entry"/>
+                                            </child>
                                           </object>
                                         </child>
                                       </object>
                                     </property>
-                                    <child>
-                                      <object class="GtkSearchBar" id="search_bar">
+                                    <property name="end-widget">
+                                      <object class="GtkBox" id="header_bar_provider_box">
                                         <child>
-                                          <object class="GtkSearchEntry" id="search_entry"/>
+                                          <object class="GtkToggleButton" id="search_toggle_button">
+                                            <property name="can-shrink">True</property>
+                                            <property name="icon-name">edit-find-symbolic</property>
+                                            <signal name="toggled" handler="signal_search_toggle_button_toggled"/>
+                                          </object>
                                         </child>
                                       </object>
-                                    </child>
+                                    </property>
+                                    <property name="hexpand">True</property>
+                                    <property name="hexpand-set">True</property>
                                   </object>
                                 </property>
-                                <property name="end-widget">
-                                  <object class="GtkBox" id="header_bar_provider_box">
-                                    <child>
-                                      <object class="GtkToggleButton" id="search_toggle_button">
-                                        <property name="can-shrink">True</property>
-                                        <property name="icon-name">edit-find-symbolic</property>
-                                        <signal name="toggled" handler="signal_search_toggle_button_toggled"/>
-                                      </object>
-                                    </child>
-                                  </object>
-                                </property>
-                                <property name="hexpand">True</property>
-                                <property name="hexpand-set">True</property>
                               </object>
-                            </property>
-                          </object>
-                        </child>
-                        <child type="top">
-                          <object class="AdwBanner" id="banner_login">
-                            <property name="button-label">Login</property>
-                            <property name="title">You need to login</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkBox">
-                            <child>
-                              <object class="GtkScrolledWindow"/>
                             </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkRevealer">
+                            <child type="top">
+                              <object class="AdwBanner" id="banner_login">
+                                <property name="button-label">Login</property>
+                                <property name="title">You need to login</property>
+                              </object>
+                            </child>
                             <child>
-                              <object class="AdwButtonRow">
-                                <property name="start-icon-name">utilities-terminal-symbolic</property>
-                                <property name="title">Log</property>
+                              <object class="GtkBox">
+                                <child>
+                                  <object class="GtkScrolledWindow"/>
+                                </child>
                               </object>
                             </child>
                           </object>
-                        </child>
+                        </property>
                       </object>
-                    </property>
+                    </child>
                   </object>
-                </child>
+                </property>
               </object>
             </property>
             <property name="title"> </property>

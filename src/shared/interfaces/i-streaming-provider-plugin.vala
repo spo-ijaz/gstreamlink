@@ -1,6 +1,6 @@
 /* i-streaming-provider.vala
  *
- * Copyright 2025 PORQUET Sébastien
+ * Copyright 2026 PORQUET Sébastien
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,12 +30,14 @@ using StreamlinkGtk.Services;
 namespace StreamlinkGtk.Interfaces.StreamingProviders {
 
     public interface IStreamingProviderPlugin : Object {
-        
+
         public abstract IProviderPlugin provider_plugin { get; set; }
         public abstract IPlayerPlugin player_plugin { get; set; }
 
         public signal void player_started (RunningPlayer running_player);
         public signal void player_stopped (RunningPlayer running_player);
+        public signal void std_out(string std_out);
+        public signal void std_error(string std_error);
 
         public abstract Models.RunningPlayer running_player { get; set; }
 

@@ -1,6 +1,6 @@
 /* streaming-provider.vala
  *
- * Copyright 2025 PORQUET Sébastien
+ * Copyright 2026 PORQUET Sébastien
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ using StreamlinkGtk.Services;
 
 namespace StreamlinkGtk.Interfaces {
 
-    public abstract class StreamingProvider : Object, IStreamingProviderPlugin   {
+    public abstract class StreamingProvider : Object, IStreamingProviderPlugin {
 
         public IProviderPlugin provider_plugin { get; private set; }
         public IPlayerPlugin player_plugin { get; private set; }
@@ -51,12 +51,11 @@ namespace StreamlinkGtk.Interfaces {
             this.spawn_args = new ArrayList<string> ();
         }
 
-         public async void init (IProviderPlugin provider_plugin, IPlayerPlugin player_plugin)
+        public async void init (IProviderPlugin provider_plugin, IPlayerPlugin player_plugin)
         {
             this.provider_plugin = provider_plugin;
             this.player_plugin = player_plugin;
         }
-
 
         public virtual async void play (Models.Resource thumbnail_contents) {
 
@@ -70,22 +69,22 @@ namespace StreamlinkGtk.Interfaces {
                 int standard_output;
                 int standard_error;
 
-                //  foreach (var item in spawn_args) {
-                //      print ("\n> %s\n", item);
-                //  }
+            //  foreach (var item in spawn_args) {
+            //      print ("\n> %s\n", item);
+            //  }
                 foreach (var item in spawn_args) {
                     print ("%s ", item);
                 }
 
                 Process.spawn_async_with_pipes ("/",
-                                                this.spawn_args.to_array(),
-                                                this.spawn_env,
-                                                SpawnFlags.SEARCH_PATH | SpawnFlags.DO_NOT_REAP_CHILD,
-                                                null,
-                                                out child_pid,
-                                                out standard_input,
-                                                out standard_output,
-                                                out standard_error);
+                        this.spawn_args.to_array (),
+                        this.spawn_env,
+                        SpawnFlags.SEARCH_PATH | SpawnFlags.DO_NOT_REAP_CHILD,
+                        null,
+                        out child_pid,
+                        out standard_input,
+                        out standard_output,
+                        out standard_error);
 
                 IOChannel output = new IOChannel.unix_new (standard_output);
                 output.add_watch (IOCondition.IN | IOCondition.HUP, (channel, condition) => {
@@ -98,12 +97,12 @@ namespace StreamlinkGtk.Interfaces {
                 });
 
                 Models.RunningPlayer thumbnail_viewing = new Models.RunningPlayer (
-                                                                                   child_pid,
-                                                                                   thumbnail_contents_stream.title,
-                                                                                   thumbnail_contents_stream.thumbnail,
-                                                                                   thumbnail_contents_stream.content_url,
-                                                                                   thumbnail_contents_stream.started_at,
-                                                                                   thumbnail_contents_stream.viewers_count
+                        child_pid,
+                        thumbnail_contents_stream.title,
+                        thumbnail_contents_stream.thumbnail,
+                        thumbnail_contents_stream.content_url,
+                        thumbnail_contents_stream.started_at,
+                        thumbnail_contents_stream.viewers_count
                 );
 
                 this.player_started (thumbnail_viewing);
@@ -119,22 +118,31 @@ namespace StreamlinkGtk.Interfaces {
             }
         }
 
-        private static bool process_line (IOChannel channel, IOCondition condition, string stream_name) {
+        private bool process_line (IOChannel channel, IOCondition condition, string stream_name) {
 
             if (condition == IOCondition.HUP) {
                 print ("%s: The fd has been closed.\n", stream_name);
+                this.std_out ("The fd has been closed.\n");
                 return false;
             }
 
             try {
+
                 string line;
                 channel.read_line (out line, null, null);
                 print ("|||-> %s: %s", stream_name, line);
+                this.std_out (line + "\n");
             } catch (IOChannelError e) {
+
                 print ("%s: IOChannelError: %s\n", stream_name, e.message);
+                this.std_error ("IOChannelError: " + e.message + "\n");
+
                 return false;
             } catch (ConvertError e) {
+
                 print ("%s: ConvertError: %s\n", stream_name, e.message);
+                this.std_error ("ConvertError: " + e.message + "\n");
+
                 return false;
             }
 
