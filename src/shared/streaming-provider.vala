@@ -140,6 +140,23 @@ namespace StreamlinkGtk.Interfaces {
                 return false;
             }
 
+            try {
+
+                string line;
+                channel.read_line (out line, null, null);
+                debug (running_player.title + " | " + line);
+                this.std_out (line, running_player);
+
+            } catch (IOChannelError e) {
+
+                this.std_error ("IOChannelError: " + e.message, running_player);
+                return false;
+            } catch (ConvertError e) {
+
+                this.std_error ("ConvertError: " + e.message, running_player);
+                return false;
+            }
+
             return true;
         }
     }
