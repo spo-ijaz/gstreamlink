@@ -100,19 +100,19 @@ namespace StreamlinkGtk.StreamingProviders {
             return "%02d:%02d:%02d".printf (hours, minutes, seconds);
         }
 
-        protected override bool process_line (IOChannel channel, IOCondition condition, string stream_name, Models.RunningPlayer running_player) {
+        protected bool process_line (IOChannel channel, IOCondition condition, string stream_name, Models.RunningPlayer running_player) {
 
             if (base.process_line (channel, condition, stream_name, running_player)) {
 
                 try {
 
-                    string line;
-                    channel.read_line (out line, null, null);
+                    //  string line;
+                    //  channel.read_line (out line, null, null);
+                    //  debug (running_player.title + " | " + line);
+                    //  if (line != null && (line.contains ("Resuming stream output") || line.contains ("Will skip ad segments"))) {
 
-                    if (line != null && (line.contains ("Resuming stream output") || line.contains ("Will skip ad segments"))) {
-
-                        this.stream_started (running_player);
-                    }
+                    //      this.stream_started (running_player);
+                    //  }
                 } catch (IOChannelError e) {
 
                     this.std_error ("IOChannelError: " + e.message, running_player);
