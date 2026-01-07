@@ -36,14 +36,18 @@ namespace StreamlinkGtk.Interfaces.StreamingProviders {
 
         public signal void player_started (RunningPlayer running_player);
         public signal void player_stopped (RunningPlayer running_player);
-        public signal void std_out(string std_out, RunningPlayer running_player);
-        public signal void std_error(string std_error, RunningPlayer running_player);
+        // Trying to distinguish between stream started and process started, after ads are skipped & co.
+        public signal void stream_started (RunningPlayer running_player);
+        public signal void std_out (string std_out, RunningPlayer running_player);
+        public signal void std_error (string std_error, RunningPlayer running_player);
 
-        //  public abstract Models.RunningPlayer running_player { get; set; }
+        // public abstract Models.RunningPlayer running_player { get; set; }
 
         public abstract async void init (IProviderPlugin provider_plugin, IPlayerPlugin player_plugin);
 
         public abstract async void play (Models.Resource resource);
+
+        protected abstract bool process_line (IOChannel channel, IOCondition condition, string stream_name, Models.RunningPlayer running_player);
 
         /**
          * Plugin.

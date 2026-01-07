@@ -33,7 +33,7 @@ namespace StreamlinkGtk.Interfaces {
         public IProviderPlugin provider_plugin { get; private set; }
         public IPlayerPlugin player_plugin { get; private set; }
         // public abstract IPlayerProvider player { get; set; }
-        //  public override Models.RunningPlayer running_player { get; set; }
+        // public override Models.RunningPlayer running_player { get; set; }
         public override StreamingProviderPluginLoader streaming_provider_plugin_loader { get; set; }
 
         /**
@@ -96,12 +96,12 @@ namespace StreamlinkGtk.Interfaces {
 
                 IOChannel output = new IOChannel.unix_new (standard_output);
                 output.add_watch (IOCondition.IN | IOCondition.HUP, (channel, condition) => {
-                    return process_line (channel, condition, "stdout", current_running_player);
+                    return this.process_line (channel, condition, "stdout", current_running_player);
                 });
 
                 IOChannel error = new IOChannel.unix_new (standard_error);
                 error.add_watch (IOCondition.IN | IOCondition.HUP, (channel, condition) => {
-                    return process_line (channel, condition, "stderr", current_running_player);
+                    return this.process_line (channel, condition, "stderr", current_running_player);
                 });
 
 
@@ -132,26 +132,11 @@ namespace StreamlinkGtk.Interfaces {
 
         public Services.StreamingProviderPluginLoader provider_plugin_loader { get; set; }
 
-        private bool process_line (IOChannel channel, IOCondition condition, string stream_name, Models.RunningPlayer running_player) {
-
+        protected virtual bool process_line (IOChannel channel, IOCondition condition, string stream_name, Models.RunningPlayer running_player) 
+        {
             if (condition == IOCondition.HUP) {
 
                 this.std_out ("The fd has been closed.", running_player);
-                return false;
-            }
-
-            try {
-
-                string line;
-                channel.read_line (out line, null, null);
-                this.std_out (line, running_player);
-            } catch (IOChannelError e) {
-
-                this.std_error ("IOChannelError: " + e.message, running_player);
-                return false;
-            } catch (ConvertError e) {
-
-                this.std_error ("ConvertError: " + e.message, running_player);
                 return false;
             }
 

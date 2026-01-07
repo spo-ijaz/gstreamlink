@@ -15,7 +15,8 @@
                 <property name="end-child">
                   <object class="AdwTabOverview" id="log_tab_overview">
                     <property name="enable-new-tab">True</property>
-                    <property name="open">True</property>
+                    <property name="enable-search">False</property>
+                    <property name="visible">False</property>
                     <child>
                       <object class="GtkBox">
                         <property name="baseline-position">top</property>

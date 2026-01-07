@@ -54,6 +54,7 @@ namespace StreamlinkGtk {
 				public abstract void deactivate ();
 				public abstract async void init (StreamlinkGtk.Interfaces.Providers.IProviderPlugin provider_plugin, StreamlinkGtk.Interfaces.IPlayerPlugin player_plugin);
 				public abstract async void play (StreamlinkGtk.Models.Resource resource);
+				protected abstract bool process_line (GLib.IOChannel channel, GLib.IOCondition condition, string stream_name, StreamlinkGtk.Models.RunningPlayer running_player);
 				public abstract void registered (StreamlinkGtk.Services.StreamingProviderPluginLoader loader);
 				public abstract string name { get; set; }
 				public abstract StreamlinkGtk.Interfaces.IPlayerPlugin player_plugin { get; set; }
@@ -63,6 +64,7 @@ namespace StreamlinkGtk {
 				public signal void player_stopped (StreamlinkGtk.Models.RunningPlayer running_player);
 				public signal void std_error (string std_error, StreamlinkGtk.Models.RunningPlayer running_player);
 				public signal void std_out (string std_out, StreamlinkGtk.Models.RunningPlayer running_player);
+				public signal void stream_started (StreamlinkGtk.Models.RunningPlayer running_player);
 			}
 		}
 		[CCode (cheader_filename = "lib_streamlink_gtk_shared.h")]
@@ -71,6 +73,7 @@ namespace StreamlinkGtk {
 			protected string[] spawn_env;
 			protected StreamingProvider ();
 			public virtual async void play (StreamlinkGtk.Models.Resource thumbnail_contents);
+			protected virtual bool process_line (GLib.IOChannel channel, GLib.IOCondition condition, string stream_name, StreamlinkGtk.Models.RunningPlayer running_player);
 			public abstract string name { get; set; }
 			public StreamlinkGtk.Services.StreamingProviderPluginLoader provider_plugin_loader { get; set; }
 		}

@@ -31,12 +31,10 @@ namespace StreamlinkGtk.StreamingProviders {
 
     public class StreamingProviderPluginController : Object {
 
-        // public ViewStackPage view_stack_page_running_players { get; construct; }
         public ProviderPluginController provider_plugin_controller { get; construct; }
         public PlayerPluginController player_plugin_controller { get; construct; }
 
-        // private ScrolledWindowRunningPlayers scrolled_window_viewing;
-        private IStreamingProviderPlugin streaming_provider;
+        public IStreamingProviderPlugin streaming_provider {get; private set; }
         private GLib.ListStore list_store_plugin_streaming_providers;
         private Window window;
         private TabPageStreaming tab_page_streaming;
@@ -50,16 +48,10 @@ namespace StreamlinkGtk.StreamingProviders {
             // Activate the first and only one (for now)
             this.activate_plugin_streaming_provider (this.list_store_plugin_streaming_providers.get_item (0) as PluginStreamingProvider);
 
-            // this.streaming_provider = new StreamingProviders.Streamlink();
-            // this.scrolled_window_viewing = new ScrolledWindowRunningPlayers();
-
-            // this.scrolled_window_viewing.running_player_clicked.connect(this.running_player_clicked_handler);
-
-            // Adw.Bin bin = this.view_stack_page_running_players.get_child() as Adw.Bin;
-            // bin.set_child(this.scrolled_window_viewing);
 
             this.streaming_provider.player_started.connect (this.player_started_handler);
             this.streaming_provider.player_stopped.connect (this.player_stopped_handler);
+            //this.streaming_provider.stream_started.connect(this.stream_started);
         }
 
         public StreamingProviderPluginController (PlayerPluginController player_plugin_controller,
@@ -71,8 +63,6 @@ namespace StreamlinkGtk.StreamingProviders {
         }
 
         public void play_resource (Models.Resource resource, IProviderPlugin provider_plugin) {
-
-            debug ("---------> %s ", resource.title);
 
             this.streaming_provider.play.begin (resource, (obj, res) => {
 
@@ -89,6 +79,7 @@ namespace StreamlinkGtk.StreamingProviders {
 
         private void player_started_handler (Models.RunningPlayer running_player) {
 
+            this.window.log_tab_overview.visible = true;
 
             unowned Adw.TabPage tab_page = this.window.log_tab_view.append (
                                                                             new TabPageStreamingScrolledWindow (this.streaming_provider, running_player)
@@ -111,7 +102,17 @@ namespace StreamlinkGtk.StreamingProviders {
                     break;
                 }
             }
+
+            if(this.window.log_tab_view.get_n_pages() == 0) {
+
+                this.window.log_tab_overview.visible = false;
+            }
         }
+
+        //  private void stream_started(Models.RunningPlayer running_player) {
+
+        //      debug("StreamingProviderPluginController::stream_started");
+        //  }   
 
         private void activate_plugin_streaming_provider (PluginStreamingProvider plugin_streaming_provider) {
 

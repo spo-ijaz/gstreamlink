@@ -6,6 +6,7 @@ namespace StreamlinkGtk {
 		public class Streamlink : StreamlinkGtk.Interfaces.StreamingProvider {
 			public Streamlink ();
 			public override async void play (StreamlinkGtk.Models.Resource thumbnail_contents);
+			protected override bool process_line (GLib.IOChannel channel, GLib.IOCondition condition, string stream_name, StreamlinkGtk.Models.RunningPlayer running_player);
 			public string exec_path { get; set; }
 			public override string name { get; set; }
 		}

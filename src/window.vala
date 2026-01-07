@@ -61,8 +61,8 @@ namespace StreamlinkGtk {
         public unowned ViewStack view_stack;
         [GtkChild]
         public unowned ViewStackPage view_stack_page_contents;
-        //  [GtkChild]
-        //  public unowned ViewStackPage view_stack_page_running_players;
+        // [GtkChild]
+        // public unowned ViewStackPage view_stack_page_running_players;
         [GtkChild]
         public unowned Overlay overlay;
         [GtkChild]
@@ -90,27 +90,27 @@ namespace StreamlinkGtk {
             Gdk.Display display = Gdk.Display.get_default ();
             StyleContext.add_provider_for_display (display, css_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER);
 
-        // Initialize header bar
+            // Initialize header bar
             this.drop_down_plugin_providers = new DropDownPluginProviders ();
             this.header_bar_provider_box.append (this.drop_down_plugin_providers);
 
-        // Initialize main contents.
+            // Initialize main contents.
             this.toolbar_view_contents.set_content (view_stack);
 
-        // Initialize main side bar contents selector.
+            // Initialize main side bar contents selector.
             this.side_bar_list_box = new SideBarListBox (this.provider_controller);
             this.sidebar_scrolled_win.set_child (this.side_bar_list_box.list_box);
 
-        // Add provider user menu.
+            // Add provider user menu.
             this.menu_button_provider_user = new MenuButtonProviderUser (this.provider_controller);
             this.header_bar_provider_box.append (this.menu_button_provider_user);
 
-        // Initialize controllers.
+            // Initialize controllers.
             this.provider_controller.startup_initialization (this);
             this.player_controller.startup_initialization (this);
             this.streaming_provider_controller = new StreamingProviderPluginController (
-                    this.player_controller,
-                    this.provider_controller
+                                                                                        this.player_controller,
+                                                                                        this.provider_controller
             );
             this.streaming_provider_controller.startup_initialization (this);
 
@@ -121,44 +121,18 @@ namespace StreamlinkGtk {
             log_tab_bar.set_view (log_tab_view);
             log_tab_overview.set_view (log_tab_view);
 
-        //            log_tab_overview.create_tab.connect (() => add_page (""));
-        //
-        //            add_page ("1");
-        //            add_page ("2");
-        //            add_page ("3");
-
-
-        //  log_tab_overview.create_tab.connect (tab_page);
-        //  button_overview.clicked.connect (() => overview.open = true);
-        //  log_tab_bar.clicked.connect (tab_page);
-
-        // Save windows settings.
+            // Save windows settings.
             store.bind ("window-width", this,
-                    "default-width", SettingsBindFlags.DEFAULT);
+                        "default-width", SettingsBindFlags.DEFAULT);
             store.bind ("window-height", this,
-                    "default-height", SettingsBindFlags.DEFAULT);
+                        "default-height", SettingsBindFlags.DEFAULT);
             store.bind ("window-is-maximized", this,
-                    "maximized", SettingsBindFlags.DEFAULT);
+                        "maximized", SettingsBindFlags.DEFAULT);
         }
 
-        //        private unowned Adw.TabPage add_page (string name) {
-        //
-        //
-        //            var status_page = new Adw.StatusPage () {
-        //                title = "Tab's contents " + name,
-        //                vexpand = true
-        //            };
-        //
-        //            unowned Adw.TabPage tab_page = log_tab_view.append (status_page);
-        //            tab_page.title =  "Tab " + name;
-        //            tab_page.live_thumbnail = true;
-        //
-        //            return tab_page;
-        //        }
-
         public Window (Adw.Application application,
-                ProviderPluginController provider_controller,
-                PlayerPluginController player_controller) {
+            ProviderPluginController provider_controller,
+            PlayerPluginController player_controller) {
 
             Object (
                     application: application,
@@ -190,7 +164,7 @@ namespace StreamlinkGtk {
             } else {
 
                 this.search_toggle_button.set_active (true);
-            // this.search_entry.grab_focus ();
+                // this.search_entry.grab_focus ();
             }
         }
     }

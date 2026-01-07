@@ -49,11 +49,11 @@ namespace StreamlinkGtk.StreamingProviders {
             this.spawn_args.add ("--player");
             this.spawn_args.add (this.player_plugin.exec_name);
 
-            //  string player_plugin_extra_args = this.player_plugin.get_extra_args_for_streaming_provider (this);
-            //  if (player_plugin_extra_args != "") {
+            // string player_plugin_extra_args = this.player_plugin.get_extra_args_for_streaming_provider (this);
+            // if (player_plugin_extra_args != "") {
 
-            //      this.spawn_args.add ("--player-args=" + player_plugin_extra_args);
-            //  }
+            // this.spawn_args.add ("--player-args=" + player_plugin_extra_args);
+            // }
 
             // Video provider args
             string provider_plugin_extra_args = this.provider_plugin.get_extra_args_for_streaming_provider (this);
@@ -98,6 +98,33 @@ namespace StreamlinkGtk.StreamingProviders {
             int minutes = (total_seconds % 3600) / 60;
             int seconds = total_seconds % 60;
             return "%02d:%02d:%02d".printf (hours, minutes, seconds);
+        }
+
+        protected override bool process_line (IOChannel channel, IOCondition condition, string stream_name, Models.RunningPlayer running_player) {
+
+            if (base.process_line (channel, condition, stream_name, running_player)) {
+
+                try {
+
+                    string line;
+                    channel.read_line (out line, null, null);
+
+                    if (line != null && (line.contains ("Resuming stream output") || line.contains ("Will skip ad segments"))) {
+
+                        this.stream_started (running_player);
+                    }
+                } catch (IOChannelError e) {
+
+                    this.std_error ("IOChannelError: " + e.message, running_player);
+                    return false;
+                } catch (ConvertError e) {
+
+                    this.std_error ("ConvertError: " + e.message, running_player);
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 

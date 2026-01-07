@@ -2,5 +2,5 @@
 <!DOCTYPE cambalache-project SYSTEM "cambalache-project.dtd">
 <!-- Created with Cambalache 0.96.3 -->
 <cambalache-project version="0.96.0" target_tk="gtk-4.0">
-  <ui template-class="StreamlinkGtkWindow" filename="window.cmb.ui" sha256="7af370d29550999365a73724357909f6a381e98a0a95bc4881d5778b4b241973"/>
+  <ui template-class="StreamlinkGtkWindow" filename="window.cmb.ui" sha256="ce7013356490c655bd420ffc93f0284f8d403fa968cf96065c0dd807083e7f6c"/>
 </cambalache-project>
