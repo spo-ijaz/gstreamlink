@@ -132,6 +132,8 @@ namespace StreamlinkGtk.Interfaces {
 
         public Services.StreamingProviderPluginLoader provider_plugin_loader { get; set; }
 
+        //  protected abstract bool process_line (GLib.IOChannel channel, GLib.IOCondition condition, string stream_name, Models.RunningPlayer running_player);
+
         protected virtual bool process_line (IOChannel channel, IOCondition condition, string stream_name, Models.RunningPlayer running_player) 
         {
             if (condition == IOCondition.HUP) {
