@@ -34,65 +34,63 @@ namespace StreamlinkGtk.Widgets {
         public TabPage tab_page { get; construct; }
 
         private Window window;
-        private IStreamingProviderPlugin streaming_provider;
-        private TextView output_text_view;
+        private Models.RunningPlayer running_player;
 
         construct {
-
-
         }
 
-        public void startup_initialization (Window window)
-        {
+        public void startup_initialization (Window window) {
             this.window = window;
         }
 
-        public TabPageStreaming() {
+        public TabPageStreaming () {
 
             Object ();
         }
 
         public void add_tab (Models.Resource resource, IProviderPlugin provider_plugin, IStreamingProviderPlugin streaming_provider) {
 
-        //var status_page = new Adw.StatusPage () {
-        //    vexpand = false
-        //};
+            // Create ScrolledWindow to contain the TextView
+            // TextView text_view = new TextView () {
+            // editable = false,
+            // cursor_visible = false,
+            // wrap_mode = Gtk.WrapMode.WORD_CHAR,
+            // monospace = true
+            // };
 
+            // TextBuffer text_buffer = text_view.get_buffer ();
 
-        // Create ScrolledWindow to contain the TextView
-            var text_view = new TextView () {
-                editable = false,
-                cursor_visible = false,
-                wrap_mode = Gtk.WrapMode.WORD_CHAR,
-                monospace = true
-            };
+            // streaming_provider.std_out.connect ((line, from_running_player) => {
 
-            var text_buffer = text_view.get_buffer ();
+            // if (running_player == null || from_running_player.pid ==  this.running_player.pid) {
 
-            streaming_provider.std_out.connect ((line) => {
-                Gtk.TextIter end_iter;
-                text_buffer.get_end_iter (out end_iter);
-                text_buffer.insert (ref end_iter, line, -1);
-            });
+            // this.running_player = from_running_player;
+            // Gtk.TextIter end_iter;
+            // text_buffer.get_end_iter (out end_iter);
+            // text_buffer.insert (ref end_iter, line, -1);
+            // }
+            // });
 
-            streaming_provider.std_error.connect ((line) => {
-                Gtk.TextIter end_iter;
-                text_buffer.get_end_iter (out end_iter);
-                text_buffer.insert (ref end_iter, line, -1);
-            });
+            // streaming_provider.std_error.connect ((line, from_running_player) => {
 
-            var scrolled_window = new ScrolledWindow () {
-                child = text_view,
-//                vexpand = true,
-//                hexpand = true,
-//                valign = Gtk.Align.FILL,
-//                halign = Gtk.Align.FILL
-            };
+            // if (running_player == null || from_running_player.pid ==  this.running_player.pid) {
 
-            unowned Adw.TabPage tab_page = this.window.log_tab_view.append (scrolled_window);
-            tab_page.title = resource.title ;
-            tab_page.live_thumbnail = true;
+            // this.running_player = from_running_player;
+            // Gtk.TextIter end_iter;
+            // text_buffer.get_end_iter (out end_iter);
+            // text_buffer.insert (ref end_iter, line, -1);
+            // }
+            // });
 
+            // ScrolledWindow scrolled_window = new ScrolledWindow () {
+            // child = text_view,
+            // };
+
+            //  unowned Adw.TabPage tab_page = this.window.log_tab_view.append (
+            //                                                                  new TabPageStreamingScrolledWindow (streaming_provider)
+            //  );
+            //  tab_page.title = resource.title;
+            //  tab_page.live_thumbnail = false;
         }
     }
 }

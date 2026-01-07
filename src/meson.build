@@ -18,7 +18,8 @@ streamlink_gtk_sources += [
     'widgets/drop-down-plugin-providers.vala',
     'widgets/menu-button-provider-user.vala',
     'widgets/sidebar-list-box.vala',
-    'widgets/tab-page-streaming.vala'
+    'widgets/tab-page-streaming.vala',
+    'widgets/tab-page-streaming-scrolled-window.vala'
 ]
 
 streamlink_gtk_deps = [

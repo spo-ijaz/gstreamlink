@@ -36,10 +36,10 @@ namespace StreamlinkGtk.Interfaces.StreamingProviders {
 
         public signal void player_started (RunningPlayer running_player);
         public signal void player_stopped (RunningPlayer running_player);
-        public signal void std_out(string std_out);
-        public signal void std_error(string std_error);
+        public signal void std_out(string std_out, RunningPlayer running_player);
+        public signal void std_error(string std_error, RunningPlayer running_player);
 
-        public abstract Models.RunningPlayer running_player { get; set; }
+        //  public abstract Models.RunningPlayer running_player { get; set; }
 
         public abstract async void init (IProviderPlugin provider_plugin, IPlayerPlugin player_plugin);
 
