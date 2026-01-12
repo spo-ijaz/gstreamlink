@@ -65,5 +65,11 @@ namespace StreamlinkGtk.Widgets.Providers.Default {
             this.label_viewers_count.label = "  " + resource_vod.viewers_count.to_string ();
             this.grid_options.attach (new ResourceVodPlayAtTime(resource_vod), 0, 2, 3, 1);
         }
+
+        public new void stream_just_started () {
+
+            //  this.box_play.visible = false;
+            //  this.box_stop.visible = true;
+        }
     }
 }

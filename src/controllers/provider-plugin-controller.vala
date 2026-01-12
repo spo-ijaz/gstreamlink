@@ -224,6 +224,7 @@ namespace StreamlinkGtk.Controllers {
             this.provider.scrolled_window_contents.resource_clicked.connect (this.resource_clicked_handler);
             this.provider.scrolled_window_contents.scrolled_window.edge_reached.connect (this.scrolled_window_edge_reached_handler);
             this.provider.scrolled_window_contents.resource_play_button_clicked.connect (this.resource_play_button_clicked_handler);
+            this.provider.scrolled_window_contents.resource_stop_button_clicked.connect (this.resource_stop_button_clicked_handler);
         }
 
         // Get user information from current provider.
@@ -294,9 +295,14 @@ namespace StreamlinkGtk.Controllers {
             }
         }
 
-        private void resource_play_button_clicked_handler (Models.Resource resource) {
+        private void resource_play_button_clicked_handler (Models.Resource resource, Widgets.Providers.Default.Resource resource_widget) {
 
-            this.window.streaming_provider_controller.play_resource (resource, this.provider);
+            this.window.streaming_provider_controller.play_resource (resource, this.provider, resource_widget);
+        }
+
+        private void resource_stop_button_clicked_handler (Models.Resource resource, Widgets.Providers.Default.Resource resource_widget) {
+
+            this.window.streaming_provider_controller.stop_resource (resource, this.provider, resource_widget);
         }
 
         private void debug_log (string message) {

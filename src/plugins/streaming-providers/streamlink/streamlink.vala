@@ -35,7 +35,7 @@ namespace StreamlinkGtk.StreamingProviders {
             // this.exec_path = "streamlink";
             // this.player = new Vlc ();
         }
-        public override async void play (Models.Resource thumbnail_contents) {
+        public override async void play (Models.Resource thumbnail_contents, Widgets.Providers.Default.Resource resource_widget) {
 
             // streamlink --player vlc --player-args="--qt-minimal-view --video-on-top" --twitch-api-header=Authorization=OAuth yc2u3ow5qe912yo9vbz1cnsieuizcx --hls-start-offset=00:16:45 https://www.twitch.tv/videos/2515177815 best
             // streamlink --player vlc --player-args=--qt-minimal-view --video-on-top --twitch-api-header=Authorization=OAuth yc2u3ow5qe912yo9vbz1cnsieuizcx https://www.twitch.tv/akwartz best
@@ -77,7 +77,7 @@ namespace StreamlinkGtk.StreamingProviders {
             // };
 
             // this.spawn_args = { "streamlink", thumbnail_contents.content_url, "best"};
-            yield base.play (thumbnail_contents);
+            yield base.play (thumbnail_contents, resource_widget);
         }
 
         private void get_extra_arg_vod_start_at (Models.Resource resource) {
@@ -100,19 +100,19 @@ namespace StreamlinkGtk.StreamingProviders {
             return "%02d:%02d:%02d".printf (hours, minutes, seconds);
         }
 
-        protected bool process_line (IOChannel channel, IOCondition condition, string stream_name, Models.RunningPlayer running_player) {
+        protected new bool process_line (IOChannel channel, IOCondition condition, string stream_name, Models.RunningPlayer running_player, Widgets.Providers.Default.Resource resource_widget) {
 
-            if (base.process_line (channel, condition, stream_name, running_player)) {
+            if (base.process_line (channel, condition, stream_name, running_player, resource_widget) == false) {
 
                 try {
 
-                    //  string line;
-                    //  channel.read_line (out line, null, null);
-                    //  debug (running_player.title + " | " + line);
-                    //  if (line != null && (line.contains ("Resuming stream output") || line.contains ("Will skip ad segments"))) {
+                    string line;
+                    channel.read_line (out line, null, null);
+                    
+                    if (line != null && (line.contains ("Resuming stream output") || line.contains ("Will skip ad segments"))) {
 
-                    //      this.stream_started (running_player);
-                    //  }
+                        this.stream_just_started (running_player);
+                    }
                 } catch (IOChannelError e) {
 
                     this.std_error ("IOChannelError: " + e.message, running_player);

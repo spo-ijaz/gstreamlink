@@ -26,7 +26,7 @@ namespace StreamlinkGtk.Widgets.Providers.Default {
 
     [GtkTemplate (ui = "/org/gnome/gitlab/spoijaz/streamlinkgtk/shared/widgets/providers/default/resource.ui")]
 
-        public class Resource : Bin {
+    public class Resource : Bin {
 
         [GtkChild]
         public unowned Grid grid;
@@ -44,8 +44,9 @@ namespace StreamlinkGtk.Widgets.Providers.Default {
         public unowned Adw.Spinner spinner;
 
         public signal void play_button_clicked (Models.Resource resource);
+        public signal void stop_button_clicked (Models.Resource resource);
 
-        protected Models.Resource resource;
+        public Models.Resource resource { get; private set; }
 
         private Cache cache;
 
@@ -88,6 +89,12 @@ namespace StreamlinkGtk.Widgets.Providers.Default {
                     this.picture.set_filename (resource.thumbnail.path);
                 }
             });
+        }
+
+        public void stream_just_started () {}
+
+        public void stream_stopped () {
+            debug ("Resource::stream_stopped - par la");
         }
     }
 }

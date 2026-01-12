@@ -5,6 +5,7 @@ streamlink_gtk_shared_deps = [
     dependency('gtk4'),
     dependency('libadwaita-1', version: '>= 1.6'),
     dependency('libsoup-3.0'),
+    meson.get_compiler('vala').find_library('posix'),
 ]
 
 lib_streamlink_gtk_shared_sources = shared_library(

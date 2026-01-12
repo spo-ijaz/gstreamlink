@@ -81,14 +81,18 @@ namespace StreamlinkGtk.Widgets.Providers.Default {
             case Models.Resource.type.STREAM: {
 
                 Models.ResourceStream resource_stream_model = list_item.item as Models.ResourceStream;
-                ResourceStream resource_stream = new ResourceStream ();
+                ResourceStream resource_widget = new ResourceStream ();
                 resource_stream_model.initialized = true;
-                resource_stream.initialize_from_stream (resource_stream_model);
-                resource_stream.play_button_clicked.connect ((resource_to_play) => {
+                resource_widget.initialize_from_stream (resource_stream_model);
+                resource_widget.play_button_clicked.connect ((resource_to_play) => {
                     
-                    this.resource_play_button_clicked (resource_to_play);
+                    this.resource_play_button_clicked (resource_to_play, resource_widget);
                 });
-                list_item.child = resource_stream;
+                resource_widget.stop_button_clicked.connect ((resource_to_play) => {
+                    
+                    this.resource_stop_button_clicked (resource_to_play, resource_widget);
+                });
+                list_item.child = resource_widget;
 
                 break;
             }
@@ -106,14 +110,18 @@ namespace StreamlinkGtk.Widgets.Providers.Default {
             case Models.Resource.type.VOD: {
 
                 Models.ResourceVod resource_vod_model = list_item.item as Models.ResourceVod;
-                ResourceVod resource_stream = new ResourceVod ();
+                ResourceVod resource_widget = new ResourceVod ();
                 resource_vod_model.initialized = true;
-                resource_stream.initialize_from_vod (resource_vod_model);
-                resource_stream.play_button_clicked.connect ((resource_to_play) => {
+                resource_widget.initialize_from_vod (resource_vod_model);
+                resource_widget.play_button_clicked.connect ((resource_to_play) => {
                     
-                    this.resource_play_button_clicked (resource_to_play);
+                    this.resource_play_button_clicked (resource_to_play, resource_widget);
                 });
-                list_item.child = resource_stream;
+                resource_widget.stop_button_clicked.connect ((resource_to_play) => {
+                    
+                    this.resource_stop_button_clicked (resource_to_play, resource_widget);
+                });
+                list_item.child = resource_widget;
                 break;
             }
 

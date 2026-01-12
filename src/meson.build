@@ -29,7 +29,6 @@ streamlink_gtk_deps = [
     dependency('gmodule-2.0'),
     dependency('json-glib-1.0'),
     dependency('libadwaita-1', version: '>= 1.6'),
-    #dependency('vte-2.91'),
     # https://mesonbuild.com/Vala.html#libraries-without-pkgconfig-files
     meson.get_compiler('vala').find_library('posix'),
 ]

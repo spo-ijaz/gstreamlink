@@ -62,12 +62,38 @@ namespace StreamlinkGtk.StreamingProviders {
             );
         }
 
-        public void play_resource (Models.Resource resource, IProviderPlugin provider_plugin) {
+        public void play_resource (Models.Resource resource, IProviderPlugin provider_plugin, Widgets.Providers.Default.Resource resource_widget) {
 
-            this.streaming_provider.play.begin (resource, (obj, res) => {
+            this.streaming_provider.play.begin (resource, resource_widget, (obj, res) => {
 
+                if(resource_widget == null) {
+
+                    return;
+                }
+
+                switch (resource.contents_type) {
+                    case Models.Resource.type.STREAM: {
+
+                        (resource_widget as Widgets.Providers.Default.ResourceStream).stream_just_started ();
+                        break;
+                    }
+                    case Models.Resource.type.VOD: {
+
+                        (resource_widget as Widgets.Providers.Default.ResourceVod).stream_just_started ();
+                        break;
+                    }
+                    default: {
+
+                        break;
+                    }
+                }
+               
                 this.streaming_provider.play.end (res);
             });
+        }
+
+        public void stop_resource (Models.Resource resource, IProviderPlugin provider_plugin, Widgets.Providers.Default.Resource resource_widget) {
+      
         }
 
         public void startup_initialization (Window window) {
@@ -88,7 +114,24 @@ namespace StreamlinkGtk.StreamingProviders {
             tab_page.live_thumbnail = false;
         }
 
-        private void player_stopped_handler (Models.RunningPlayer running_player) {
+        private void player_stopped_handler (Models.RunningPlayer running_player, Widgets.Providers.Default.Resource resource_widget) {
+
+            switch (resource_widget.resource.contents_type) {
+                    case Models.Resource.type.STREAM: {
+
+                        (resource_widget as Widgets.Providers.Default.ResourceStream).stream_stopped ();
+                        break;
+                    }
+                    case Models.Resource.type.VOD: {
+
+                        (resource_widget as Widgets.Providers.Default.ResourceVod).stream_stopped ();
+                        break;
+                    }
+                    default: {
+
+                        break;
+                    }
+                }
 
             for (int i = 0; i < this.window.log_tab_view.get_n_pages (); i++) {
 
@@ -107,6 +150,7 @@ namespace StreamlinkGtk.StreamingProviders {
 
                 this.window.log_tab_overview.visible = false;
             }
+            
         }
 
         //  private void stream_started(Models.RunningPlayer running_player) {

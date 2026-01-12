@@ -34,7 +34,16 @@
     <child>
       <object class="AdwSplitButton" id="split_button_play">
         <property name="icon-name">media-playback-start-symbolic</property>
-        <property name="label">play</property>
+      </object>
+    </child>
+  </object>
+  <object class="GtkBox" id="box_stop">
+    <property name="halign">center</property>
+    <property name="margin-top">3</property>
+    <property name="visible">False</property>
+    <child>
+      <object class="GtkButton" id="button_stop">
+        <property name="icon-name">media-playback-stop-symbolic</property>
       </object>
     </child>
   </object>

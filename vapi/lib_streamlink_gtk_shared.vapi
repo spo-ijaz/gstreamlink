@@ -39,7 +39,8 @@ namespace StreamlinkGtk {
 				public abstract GLib.ListStore list_store { get; }
 				public abstract Gtk.ScrolledWindow scrolled_window { get; }
 				public signal void resource_clicked (StreamlinkGtk.Models.Resource resource);
-				public signal void resource_play_button_clicked (StreamlinkGtk.Models.Resource resource);
+				public signal void resource_play_button_clicked (StreamlinkGtk.Models.Resource resource, StreamlinkGtk.Widgets.Providers.Default.Resource resource_widget);
+				public signal void resource_stop_button_clicked (StreamlinkGtk.Models.Resource resource, StreamlinkGtk.Widgets.Providers.Default.Resource resource_widget);
 			}
 			[CCode (cheader_filename = "lib_streamlink_gtk_shared.h")]
 			public interface ISideBarListBoxRow : Gtk.ListBoxRow {
@@ -53,17 +54,18 @@ namespace StreamlinkGtk {
 				public abstract void activate ();
 				public abstract void deactivate ();
 				public abstract async void init (StreamlinkGtk.Interfaces.Providers.IProviderPlugin provider_plugin, StreamlinkGtk.Interfaces.IPlayerPlugin player_plugin);
-				public abstract async void play (StreamlinkGtk.Models.Resource resource);
-				protected abstract bool process_line (GLib.IOChannel channel, GLib.IOCondition condition, string stream_name, StreamlinkGtk.Models.RunningPlayer running_player);
+				public abstract async void play (StreamlinkGtk.Models.Resource resource, StreamlinkGtk.Widgets.Providers.Default.Resource resource_widget);
+				protected abstract bool process_line (GLib.IOChannel channel, GLib.IOCondition condition, string stream_name, StreamlinkGtk.Models.RunningPlayer running_player, StreamlinkGtk.Widgets.Providers.Default.Resource resource_widget);
 				public abstract void registered (StreamlinkGtk.Services.StreamingProviderPluginLoader loader);
 				public abstract string name { get; set; }
 				public abstract StreamlinkGtk.Interfaces.IPlayerPlugin player_plugin { get; set; }
 				public abstract StreamlinkGtk.Interfaces.Providers.IProviderPlugin provider_plugin { get; set; }
 				public abstract StreamlinkGtk.Services.StreamingProviderPluginLoader streaming_provider_plugin_loader { get; set; }
 				public signal void player_started (StreamlinkGtk.Models.RunningPlayer running_player);
-				public signal void player_stopped (StreamlinkGtk.Models.RunningPlayer running_player);
+				public signal void player_stopped (StreamlinkGtk.Models.RunningPlayer running_player, StreamlinkGtk.Widgets.Providers.Default.Resource resource_widget);
 				public signal void std_error (string std_error, StreamlinkGtk.Models.RunningPlayer running_player);
 				public signal void std_out (string std_out, StreamlinkGtk.Models.RunningPlayer running_player);
+				public signal void stream_just_started (StreamlinkGtk.Models.RunningPlayer running_player);
 				public signal void stream_started (StreamlinkGtk.Models.RunningPlayer running_player);
 			}
 		}
@@ -72,8 +74,8 @@ namespace StreamlinkGtk {
 			protected Gee.ArrayList<string> spawn_args;
 			protected string[] spawn_env;
 			protected StreamingProvider ();
-			public virtual async void play (StreamlinkGtk.Models.Resource thumbnail_contents);
-			protected virtual bool process_line (GLib.IOChannel channel, GLib.IOCondition condition, string stream_name, StreamlinkGtk.Models.RunningPlayer running_player);
+			public virtual async void play (StreamlinkGtk.Models.Resource thumbnail_contents, StreamlinkGtk.Widgets.Providers.Default.Resource resource_widget);
+			protected virtual bool process_line (GLib.IOChannel channel, GLib.IOCondition condition, string stream_name, StreamlinkGtk.Models.RunningPlayer running_player, StreamlinkGtk.Widgets.Providers.Default.Resource resource_widget);
 			public abstract string name { get; set; }
 			public StreamlinkGtk.Services.StreamingProviderPluginLoader provider_plugin_loader { get; set; }
 		}
@@ -314,22 +316,28 @@ namespace StreamlinkGtk {
 					public weak Gtk.Label label_title;
 					[GtkChild]
 					public weak Gtk.Picture picture;
-					protected StreamlinkGtk.Models.Resource resource;
 					[GtkChild]
 					public weak Adw.Spinner spinner;
 					public Resource ();
 					public void initialize (StreamlinkGtk.Models.Resource resource);
+					public void stream_just_started ();
+					public void stream_stopped ();
+					public StreamlinkGtk.Models.Resource resource { get; private set; }
 					public signal void play_button_clicked (StreamlinkGtk.Models.Resource resource);
+					public signal void stop_button_clicked (StreamlinkGtk.Models.Resource resource);
 				}
 				[CCode (cheader_filename = "lib_streamlink_gtk_shared.h")]
 				public class ResourceStream : StreamlinkGtk.Widgets.Providers.Default.Resource {
 					public ResourceStream ();
 					public void initialize_from_stream (StreamlinkGtk.Models.ResourceStream resource_stream);
+					public new void stream_just_started ();
+					public new void stream_stopped ();
 				}
 				[CCode (cheader_filename = "lib_streamlink_gtk_shared.h")]
 				public class ResourceVod : StreamlinkGtk.Widgets.Providers.Default.Resource {
 					public ResourceVod ();
 					public void initialize_from_vod (StreamlinkGtk.Models.ResourceVod resource_vod);
+					public new void stream_just_started ();
 				}
 				[CCode (cheader_filename = "lib_streamlink_gtk_shared.h")]
 				public class ResourceVodPlayAtTime : Adw.Bin {

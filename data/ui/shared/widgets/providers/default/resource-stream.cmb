@@ -1,29 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <!DOCTYPE cambalache-project SYSTEM "cambalache-project.dtd">
-<cambalache-project version="0.17.3" target_tk="gtk-4.0">
-  <ui>
-	(1,None,"thumbnail-contents-stream.ui","resource-stream.ui",None,None,None,None,"org.gnome.gitlab.spoijaz.streamlinkgtk",None,None)
-  </ui>
-  <object>
-	(1,15,"GtkBox","box_started_at",None,None,None,None,None,None,None),
-	(1,16,"GtkImage","image_started_at",15,None,None,None,None,None,None),
-	(1,17,"GtkLabel","label_started_at",15,None,None,None,1,None,None),
-	(1,18,"GtkBox","box_viewers_count",None,None,None,None,None,None,None),
-	(1,19,"GtkImage","image_viewers_count",18,None,None,None,None,None,None),
-	(1,20,"GtkLabel","label_viewers_count",18,None,None,None,1,None,None),
-	(1,21,"GtkBox","box_play",None,None,None,None,-1,None,None),
-	(1,22,"AdwSplitButton","split_button_play",21,None,None,None,-1,None,None)
-  </object>
-  <object_property>
-	(1,15,"GtkWidget","halign","end",None,None,None,None,None,None,None,None,None),
-	(1,15,"GtkWidget","margin-top","3",None,None,None,None,None,None,None,None,None),
-	(1,16,"GtkImage","icon-name","document-open-recent-symbolic",None,None,None,None,None,None,None,None,None),
-	(1,18,"GtkWidget","halign","start",None,None,None,None,None,None,None,None,None),
-	(1,18,"GtkWidget","margin-top","3",None,None,None,None,None,None,None,None,None),
-	(1,19,"GtkImage","icon-name","face-smile-symbolic",None,None,None,None,None,None,None,None,None),
-	(1,21,"GtkWidget","halign","center",None,None,None,None,None,None,None,None,None),
-	(1,21,"GtkWidget","margin-top","3",None,None,None,None,None,None,None,None,None),
-	(1,22,"AdwSplitButton","icon-name","media-playback-start-symbolic",None,None,None,None,None,None,None,None,None),
-	(1,22,"AdwSplitButton","label","play",None,None,None,None,None,None,None,None,None)
-  </object_property>
+<!-- Created with Cambalache 0.96.3 -->
+<cambalache-project version="0.96.0" target_tk="gtk-4.0">
+  <ui filename="resource-stream.ui" sha256="cd16ea1f553be19c104edb91aaacd74fbd0eb4148e3c082fdd5cee66ac5b7884"/>
 </cambalache-project>

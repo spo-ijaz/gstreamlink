@@ -19,6 +19,7 @@
  */
 
 using Gee;
+using Posix;
 using StreamlinkGtk.Interfaces;
 using StreamlinkGtk.Interfaces.Providers;
 using StreamlinkGtk.Interfaces.StreamingProviders;
@@ -56,7 +57,11 @@ namespace StreamlinkGtk.Interfaces {
             this.player_plugin = player_plugin;
         }
 
-        public virtual async void play (Models.Resource thumbnail_contents) {
+        private void child_setup_func () {
+
+            Posix.setpgid (0, 0);
+        }
+        public virtual async void play (Models.Resource thumbnail_contents, Widgets.Providers.Default.Resource resource_widget) {
 
             try {
 
@@ -79,7 +84,7 @@ namespace StreamlinkGtk.Interfaces {
                                                 this.spawn_args.to_array (),
                                                 this.spawn_env,
                                                 SpawnFlags.SEARCH_PATH | SpawnFlags.DO_NOT_REAP_CHILD,
-                                                null,
+                                                child_setup_func,
                                                 out child_pid,
                                                 out standard_input,
                                                 out standard_output,
@@ -96,20 +101,28 @@ namespace StreamlinkGtk.Interfaces {
 
                 IOChannel output = new IOChannel.unix_new (standard_output);
                 output.add_watch (IOCondition.IN | IOCondition.HUP, (channel, condition) => {
-                    return this.process_line (channel, condition, "stdout", current_running_player);
+                    return this.process_line (channel, condition, "stdout", current_running_player, resource_widget);
                 });
 
                 IOChannel error = new IOChannel.unix_new (standard_error);
                 error.add_watch (IOCondition.IN | IOCondition.HUP, (channel, condition) => {
-                    return this.process_line (channel, condition, "stderr", current_running_player);
+                    return this.process_line (channel, condition, "stderr", current_running_player, resource_widget);
                 });
 
 
                 this.player_started (current_running_player);
 
+
+                resource_widget.stop_button_clicked.connect ((resource_to_play) => {
+
+                    debug (" Stopping process with PID %d", child_pid);
+                    Posix.kill (-(Posix.pid_t) child_pid, Posix.Signal.KILL);
+                    Process.close_pid (child_pid);
+                });
+
                 ChildWatch.add (child_pid, (pid, status) => {
 
-                    this.player_stopped (current_running_player);
+                    this.player_stopped (current_running_player, resource_widget);
                     Process.close_pid (pid);
                 });
             } catch (SpawnError e) {
@@ -132,13 +145,13 @@ namespace StreamlinkGtk.Interfaces {
 
         public Services.StreamingProviderPluginLoader provider_plugin_loader { get; set; }
 
-        //  protected abstract bool process_line (GLib.IOChannel channel, GLib.IOCondition condition, string stream_name, Models.RunningPlayer running_player);
+        // protected abstract bool process_line (GLib.IOChannel channel, GLib.IOCondition condition, string stream_name, Models.RunningPlayer running_player);
 
-        protected virtual bool process_line (IOChannel channel, IOCondition condition, string stream_name, Models.RunningPlayer running_player) 
-        {
+        protected virtual bool process_line (IOChannel channel, IOCondition condition, string stream_name, Models.RunningPlayer running_player, Widgets.Providers.Default.Resource resource_widget) {
             if (condition == IOCondition.HUP) {
 
                 this.std_out ("The fd has been closed.", running_player);
+                this.player_stopped (running_player, resource_widget);
                 return false;
             }
 
@@ -148,7 +161,6 @@ namespace StreamlinkGtk.Interfaces {
                 channel.read_line (out line, null, null);
                 debug (running_player.title + " | " + line);
                 this.std_out (line, running_player);
-
             } catch (IOChannelError e) {
 
                 this.std_error ("IOChannelError: " + e.message, running_player);

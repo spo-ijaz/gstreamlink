@@ -27,7 +27,8 @@ namespace StreamlinkGtk.Interfaces.Providers {
     public interface IScrolledWindowContents : Bin {
 
         public signal void resource_clicked (Models.Resource resource);
-        public signal void resource_play_button_clicked (Models.Resource resource);
+        public signal void resource_play_button_clicked (Models.Resource resource, Widgets.Providers.Default.Resource resource_widget);
+        public signal void resource_stop_button_clicked (Models.Resource resource, Widgets.Providers.Default.Resource resource_widget);
 
         public abstract ScrolledWindow scrolled_window { get; }
         public abstract GLib.ListStore list_store { get; }

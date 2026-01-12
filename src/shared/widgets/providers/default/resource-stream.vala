@@ -28,7 +28,11 @@ namespace StreamlinkGtk.Widgets.Providers.Default {
 
         private Label label_started_at;
         private Label label_viewers_count;
-
+        private SplitButton split_button_play;
+        private Box box_play;
+        private Box box_stop;
+        
+        
         construct {
 
             Builder builder = new Builder.from_resource ("/org/gnome/gitlab/spoijaz/streamlinkgtk/shared/widgets/providers/default/resource-stream.ui");
@@ -36,18 +40,31 @@ namespace StreamlinkGtk.Widgets.Providers.Default {
             this.label_viewers_count = builder.get_object ("label_viewers_count") as Label;
 
             Box box_started_at = builder.get_object ("box_started_at") as Box;
-            Box box_play = builder.get_object ("box_play") as Box;
-            SplitButton split_button_play = builder.get_object ("split_button_play") as SplitButton;
+            
+            this.box_play = builder.get_object ("box_play") as Box;
+            this.split_button_play = builder.get_object ("split_button_play") as SplitButton;
+            
+            this.box_stop = builder.get_object ("box_stop") as Box;
+            Button button_stop = builder.get_object ("button_stop") as Button;
+            
             Box box_viewers_count = builder.get_object ("box_viewers_count") as Box;
 
             this.grid_options.attach (box_viewers_count, 0, 0, 1, 1);
-            this.grid_options.attach (box_play, 1, 0, 1, 1);
+            
+            this.grid_options.attach (this.box_play, 1, 0, 1, 1);
+            this.grid_options.attach (this.box_stop, 1, 0, 1, 1);
+
             this.grid_options.attach (box_started_at, 2, 0, 1, 1);
 
 
             split_button_play.clicked.connect (() => {
 
                 this.play_button_clicked (this.resource);
+            });
+
+            button_stop.clicked.connect (() => {
+
+                this.stop_button_clicked (this.resource);
             });
         }
 
@@ -61,6 +78,18 @@ namespace StreamlinkGtk.Widgets.Providers.Default {
 
             this.label_started_at.label = "  " + resource_stream.elapsed_time;
             this.label_viewers_count.label = "  " + resource_stream.viewers_count.to_string ();
+        }
+
+        public new void stream_just_started () {
+
+            this.box_play.visible = false;
+            this.box_stop.visible = true;
+        }
+
+        public new void stream_stopped () {
+
+            this.box_play.visible = true;
+            this.box_stop.visible = false;
         }
     }
 }
