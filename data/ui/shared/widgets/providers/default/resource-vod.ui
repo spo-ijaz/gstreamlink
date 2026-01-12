@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- Created with Cambalache 0.96.1 -->
+<!-- Created with Cambalache 0.96.3 -->
 <interface domain="org.gnome.gitlab.spoijaz.streamlinkgtk">
   <!-- interface-name thumbnail-contents-stream.ui -->
   <requires lib="gtk" version="4.18"/>
@@ -49,16 +49,22 @@
     <property name="halign">center</property>
     <property name="margin-top">3</property>
     <child>
-      <object class="AdwSplitButton" id="split_button_play">
+      <object class="GtkButton" id="button_play">
         <property name="icon-name">media-playback-start-symbolic</property>
-        <property name="label">play</property>
-        <property name="popover">
-          <object class="GtkPopover"/>
-        </property>
       </object>
     </child>
   </object>
   <object class="GtkBox" id="box_play_at_time">
     <property name="halign">start</property>
+  </object>
+  <object class="GtkBox" id="box_stop">
+    <property name="halign">center</property>
+    <property name="margin-top">3</property>
+    <property name="visible">False</property>
+    <child>
+      <object class="GtkButton" id="buton_stop">
+        <property name="icon-name">media-playback-stop-symbolic</property>
+      </object>
+    </child>
   </object>
 </interface>

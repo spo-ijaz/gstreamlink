@@ -28,7 +28,7 @@ namespace StreamlinkGtk.Widgets.Providers.Default {
 
         private Label label_started_at;
         private Label label_viewers_count;
-        private SplitButton split_button_play;
+        private Button button_play;
         private Box box_play;
         private Box box_stop;
         
@@ -42,7 +42,7 @@ namespace StreamlinkGtk.Widgets.Providers.Default {
             Box box_started_at = builder.get_object ("box_started_at") as Box;
             
             this.box_play = builder.get_object ("box_play") as Box;
-            this.split_button_play = builder.get_object ("split_button_play") as SplitButton;
+            this.button_play = builder.get_object ("button_play") as Button;
             
             this.box_stop = builder.get_object ("box_stop") as Box;
             Button button_stop = builder.get_object ("button_stop") as Button;
@@ -57,7 +57,7 @@ namespace StreamlinkGtk.Widgets.Providers.Default {
             this.grid_options.attach (box_started_at, 2, 0, 1, 1);
 
 
-            split_button_play.clicked.connect (() => {
+            button_play.clicked.connect (() => {
 
                 this.play_button_clicked (this.resource);
             });

@@ -178,8 +178,8 @@ namespace StreamlinkGtk.Providers.Twitch {
             SideBarListBoxRow list_box_row_browse = new SideBarListBoxRow ("Browse", false, new ContentsSelector (0, null));
             list_box_rows.append_val (list_box_row_browse);
 
-            SideBarListBoxRow list_box_row_games = new SideBarListBoxRow ("Games", true, new ContentsSelector (ContentsId.GAMES, null));
-            list_box_rows.append_val (list_box_row_games);
+            //  SideBarListBoxRow list_box_row_games = new SideBarListBoxRow ("Games", true, new ContentsSelector (ContentsId.GAMES, null));
+            //  list_box_rows.append_val (list_box_row_games);
 
             SideBarListBoxRow list_box_row_streams = new SideBarListBoxRow ("Streams", true, new ContentsSelector (ContentsId.STREAMS, null));
             list_box_rows.append_val (list_box_row_streams);

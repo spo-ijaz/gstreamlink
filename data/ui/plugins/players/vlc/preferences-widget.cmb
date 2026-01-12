@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <!DOCTYPE cambalache-project SYSTEM "cambalache-project.dtd">
-<!-- Created with Cambalache 0.96.1 -->
+<!-- Created with Cambalache 0.96.3 -->
 <cambalache-project version="0.96.0" target_tk="gtk-4.0">
-  <ui template-class="StreamlinkGtkWidgetsPlayersVlcPreferencesGroup" filename="preferences-widget.ui" sha256="2011f82af16036106a11bdffc9ebed880c6ff83e9c9c01e32ad177f5c97a134e"/>
+  <ui template-class="StreamlinkGtkWidgetsPlayersVlcPreferencesGroup" filename="preferences-widget.ui" sha256="a48896c0193ce80e7536d50aa876231d784e5d422c69926131f02706a6657b82"/>
 </cambalache-project>

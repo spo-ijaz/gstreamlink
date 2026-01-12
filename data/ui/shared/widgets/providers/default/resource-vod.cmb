@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <!DOCTYPE cambalache-project SYSTEM "cambalache-project.dtd">
-<!-- Created with Cambalache 0.96.1 -->
+<!-- Created with Cambalache 0.96.3 -->
 <cambalache-project version="0.96.0" target_tk="gtk-4.0">
-  <ui filename="resource-vod.ui" sha256="90ac30133a18f79b88e4aded5ede12e3e020cd251760d69a65cd0cabf65df200"/>
+  <ui filename="resource-vod.ui" sha256="7019a9abd767e51b5bac4122d1be8bef7a2c07db1d35f786041c5f09c7e9ce49"/>
 </cambalache-project>

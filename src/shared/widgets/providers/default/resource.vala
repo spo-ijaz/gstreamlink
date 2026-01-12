@@ -93,8 +93,6 @@ namespace StreamlinkGtk.Widgets.Providers.Default {
 
         public void stream_just_started () {}
 
-        public void stream_stopped () {
-            debug ("Resource::stream_stopped - par la");
-        }
+        public void stream_stopped () { }
     }
 }

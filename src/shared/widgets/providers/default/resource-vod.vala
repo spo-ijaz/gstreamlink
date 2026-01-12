@@ -29,6 +29,8 @@ namespace StreamlinkGtk.Widgets.Providers.Default {
         private Label label_published_at;
         private Label label_duration;
         private Label label_viewers_count;
+        private Box box_play;
+        private Box box_stop;
 
         construct {
 
@@ -39,16 +41,28 @@ namespace StreamlinkGtk.Widgets.Providers.Default {
 
             Box box_viewers_count = builder.get_object ("box_viewers_count") as Box;
             Box box_published_info = builder.get_object ("box_published_info") as Box;
-            Box box_play = builder.get_object ("box_play") as Box;
-            SplitButton split_button_play = builder.get_object ("split_button_play") as SplitButton;
+           
+            box_play = builder.get_object ("box_play") as Box;
+            Button button_play = builder.get_object ("button_play") as Button;
+
+            box_stop = builder.get_object ("box_stop") as Box;
+            Button button_stop = builder.get_object ("button_stop") as Button;
 
             this.grid_options.attach (box_viewers_count, 0, 0, 1, 1);
+
             this.grid_options.attach (box_play, 1, 0, 1, 1);
+            this.grid_options.attach (box_stop, 1, 0, 1, 1);
+
             this.grid_options.attach (box_published_info, 2, 0, 1, 1);
 
-            split_button_play.clicked.connect (() => {
+            button_play.clicked.connect (() => {
 
                 this.play_button_clicked (this.resource);
+            });
+
+            button_stop.clicked.connect (() => {
+
+                this.stop_button_clicked (this.resource);
             });
         }
 
@@ -68,8 +82,14 @@ namespace StreamlinkGtk.Widgets.Providers.Default {
 
         public new void stream_just_started () {
 
-            //  this.box_play.visible = false;
-            //  this.box_stop.visible = true;
+            this.box_play.visible = false;
+            this.box_stop.visible = true;
+        }
+
+        public new void stream_stopped () {
+
+            this.box_play.visible = true;
+            this.box_stop.visible = false;
         }
     }
 }

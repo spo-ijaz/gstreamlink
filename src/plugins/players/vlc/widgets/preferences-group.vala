@@ -37,7 +37,7 @@ namespace StreamlinkGtk.Widgets.Players.Vlc {
 
             this.store = VlcSettings.get_default ();
             this.store.changed.connect (on_store_changed);
-            this.store.bind ("minimal-player-layout", this.switch_enable_minimal_ui, "active", SettingsBindFlags.DEFAULT);
+            this.switch_enable_minimal_ui.set_sensitive (false);
 
             //  this.switch_enable_notifications_icon = new Gtk.Image.from_icon_name (this.store.get_boolean ("minimal-player-layout") ? "preferences-system-notifications-symbolic" : "notifications-disabled-symbolic");
             //  this.switch_enable_notifications.add_prefix (this.switch_enable_notifications_icon);
