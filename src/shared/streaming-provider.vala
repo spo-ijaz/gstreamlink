@@ -85,10 +85,12 @@ namespace StreamlinkGtk.Interfaces {
 
                 string[] args = new string[this.spawn_args.size + 1];
                 for (int i = 0; i < this.spawn_args.size; i++) {
+                    
                     args[i] = this.spawn_args[i];
                 }
                 args[this.spawn_args.size] = null;
 
+                // string[] argv
                 Process.spawn_async_with_pipes ("/",
                                                 args,
                                                 this.spawn_env,

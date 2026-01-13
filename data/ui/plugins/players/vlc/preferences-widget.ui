@@ -11,7 +11,7 @@
       <object class="GtkListBox">
         <child>
           <object class="AdwSwitchRow" id="switch_enable_minimal_ui">
-            <property name="sensitive">False</property>
+            <property name="active">True</property>
             <property name="subtitle">If activated, will hide VLC controls.</property>
             <property name="title">Minimal layout</property>
           </object>

@@ -36,25 +36,11 @@ namespace StreamlinkGtk.Widgets.Players.Vlc {
         construct {
 
             this.store = VlcSettings.get_default ();
-            this.store.changed.connect (on_store_changed);
-            this.switch_enable_minimal_ui.set_sensitive (false);
-
-            //  this.switch_enable_notifications_icon = new Gtk.Image.from_icon_name (this.store.get_boolean ("minimal-player-layout") ? "preferences-system-notifications-symbolic" : "notifications-disabled-symbolic");
-            //  this.switch_enable_notifications.add_prefix (this.switch_enable_notifications_icon);
+            this.store.bind ("minimal-player-layout", this.switch_enable_minimal_ui, "active", SettingsBindFlags.DEFAULT);
         }
 
         public PreferencesGroup () {
             Object ();
-        }
-
-        private void on_store_changed (string key) {
-
-
-            //  if (key == "minimal-player-layout") {
-
-            //      this.switch_enable_notifications_icon.set_from_icon_name (this.store.get_boolean ("minimal-player-layout") ? "preferences-system-notifications-symbolic" : "notifications-disabled-symbolic");
-            //      this.spin_auto_refresh_interval.set_sensitive (this.store.get_boolean ("minimal-player-layout"));
-            //  }
         }
     }
 }

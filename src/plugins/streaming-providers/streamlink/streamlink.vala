@@ -49,11 +49,11 @@ namespace StreamlinkGtk.StreamingProviders {
             this.spawn_args.add ("--player");
             this.spawn_args.add (this.player_plugin.exec_name);
 
-            // string player_plugin_extra_args = this.player_plugin.get_extra_args_for_streaming_provider (this);
-            // if (player_plugin_extra_args != "") {
+            string player_plugin_extra_args = this.player_plugin.get_extra_args_for_streaming_provider (this);
+            if (player_plugin_extra_args != "") {
 
-            // this.spawn_args.add ("--player-args=" + player_plugin_extra_args);
-            // }
+                this.spawn_args.add ("--player-args=" + player_plugin_extra_args);
+            }
 
             // Video provider args
             string provider_plugin_extra_args = this.provider_plugin.get_extra_args_for_streaming_provider (this);
@@ -108,7 +108,7 @@ namespace StreamlinkGtk.StreamingProviders {
 
                     string line;
                     channel.read_line (out line, null, null);
-                    
+
                     if (line != null && (line.contains ("Resuming stream output") || line.contains ("Will skip ad segments"))) {
 
                         this.stream_just_started (running_player);

@@ -2,5 +2,5 @@
 <!DOCTYPE cambalache-project SYSTEM "cambalache-project.dtd">
 <!-- Created with Cambalache 0.96.3 -->
 <cambalache-project version="0.96.0" target_tk="gtk-4.0">
-  <ui template-class="StreamlinkGtkWidgetsPlayersVlcPreferencesGroup" filename="preferences-widget.ui" sha256="a48896c0193ce80e7536d50aa876231d784e5d422c69926131f02706a6657b82"/>
+  <ui template-class="StreamlinkGtkWidgetsPlayersVlcPreferencesGroup" filename="preferences-widget.ui" sha256="20be6f7ce9d4d965527e2575ff96aa1f05e4c32060432313caf4713202f17cf7"/>
 </cambalache-project>
