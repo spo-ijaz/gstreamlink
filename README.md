@@ -67,6 +67,7 @@ export LD_LIBRARY_PATH=builddir/src/plugins
 meson setup builddir -Dprofile=dev --wipe
 
 clear &&  ninja -C builddir/ && glib-compile-schemas ./data/ && ./builddir/src/org.gnome.gitlab.spoijaz.streamlink-gtk
+
 ```
 
 # Production

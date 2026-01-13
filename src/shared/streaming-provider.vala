@@ -57,7 +57,7 @@ namespace StreamlinkGtk.Interfaces {
             this.player_plugin = player_plugin;
         }
 
-        private void child_setup_func () {
+        private static void child_setup_func () {
 
             Posix.setpgid (0, 0);
         }
@@ -83,8 +83,14 @@ namespace StreamlinkGtk.Interfaces {
                 }
                 print ("\n");
 
+                string[] args = new string[this.spawn_args.size + 1];
+                for (int i = 0; i < this.spawn_args.size; i++) {
+                    args[i] = this.spawn_args[i];
+                }
+                args[this.spawn_args.size] = null;
+
                 Process.spawn_async_with_pipes ("/",
-                                                this.spawn_args.to_array (),
+                                                args,
                                                 this.spawn_env,
                                                 SpawnFlags.SEARCH_PATH | SpawnFlags.DO_NOT_REAP_CHILD,
                                                 child_setup_func,
