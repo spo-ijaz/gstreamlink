@@ -35,7 +35,7 @@ namespace StreamlinkGtk.StreamingProviders {
             // this.exec_path = "streamlink";
             // this.player = new Vlc ();
         }
-        public override async void play (Models.Resource thumbnail_contents, Widgets.Providers.Default.Resource resource_widget) {
+        public override async void play (Models.Resource resource, Widgets.Providers.Default.Resource resource_widget) {
 
             // streamlink --player vlc --player-args="--qt-minimal-view --video-on-top" --twitch-api-header=Authorization=OAuth yc2u3ow5qe912yo9vbz1cnsieuizcx --hls-start-offset=00:16:45 https://www.twitch.tv/videos/2515177815 best
             // streamlink --player vlc --player-args=--qt-minimal-view --video-on-top --twitch-api-header=Authorization=OAuth yc2u3ow5qe912yo9vbz1cnsieuizcx https://www.twitch.tv/akwartz best
@@ -44,6 +44,10 @@ namespace StreamlinkGtk.StreamingProviders {
 
             this.spawn_args.clear ();
             this.spawn_args.add ("streamlink");
+            
+            // Generic args.
+            this.spawn_args.add ("--title");
+            this.spawn_args.add (resource.title);
 
             // Player args.
             this.spawn_args.add ("--player");
@@ -62,9 +66,9 @@ namespace StreamlinkGtk.StreamingProviders {
                 this.spawn_args.add (provider_plugin_extra_args);
             }
 
-            this.get_extra_arg_vod_start_at (thumbnail_contents);
+            this.get_extra_arg_vod_start_at (resource);
 
-            this.spawn_args.add (thumbnail_contents.content_url);
+            this.spawn_args.add (resource.content_url);
             this.spawn_args.add ("best");
 
 
@@ -77,7 +81,7 @@ namespace StreamlinkGtk.StreamingProviders {
             // };
 
             // this.spawn_args = { "streamlink", thumbnail_contents.content_url, "best"};
-            yield base.play (thumbnail_contents, resource_widget);
+            yield base.play (resource, resource_widget);
         }
 
         private void get_extra_arg_vod_start_at (Models.Resource resource) {
@@ -100,28 +104,32 @@ namespace StreamlinkGtk.StreamingProviders {
             return "%02d:%02d:%02d".printf (hours, minutes, seconds);
         }
 
-        protected new bool process_line (IOChannel channel, IOCondition condition, string stream_name, Models.RunningPlayer running_player, Widgets.Providers.Default.Resource resource_widget) {
+        protected override bool process_line (IOChannel channel, IOCondition condition, string stream_name, Models.RunningPlayer running_player, Widgets.Providers.Default.Resource resource_widget) {
 
-            if (base.process_line (channel, condition, stream_name, running_player, resource_widget) == false) {
+            try {
+                if (condition == IOCondition.HUP) {
 
-                try {
-
-                    string line;
-                    channel.read_line (out line, null, null);
-
-                    if (line != null && (line.contains ("Resuming stream output") || line.contains ("Will skip ad segments"))) {
-
-                        this.stream_just_started (running_player);
-                    }
-                } catch (IOChannelError e) {
-
-                    this.std_error ("IOChannelError: " + e.message, running_player);
-                    return false;
-                } catch (ConvertError e) {
-
-                    this.std_error ("ConvertError: " + e.message, running_player);
+                    this.std_out ("The fd has been closed.", running_player);
+                    this.player_stopped (running_player, resource_widget);
                     return false;
                 }
+
+                string line;
+                channel.read_line (out line, null, null);
+                this.std_out (line, running_player);
+
+                if (line != null && (line.contains ("Resuming stream output") || line.contains ("Will skip ad segments"))) {
+
+                    this.stream_just_started (running_player);
+                }
+            } catch (IOChannelError e) {
+
+                this.std_error ("IOChannelError: " + e.message, running_player);
+                return false;
+            } catch (ConvertError e) {
+
+                this.std_error ("ConvertError: " + e.message, running_player);
+                return false;
             }
 
             return true;

@@ -17,9 +17,8 @@ Currently it supports only :
 - [ ] implement search option.
 - [ ] new user guidance.
 - [ ] help for twitch provider, to get twitch session id from a web browser.
-- [ ] cleanup UI.
-- [ ] inform user that streamkink process is started when we click play button.
-- [ ] tab for stdout/stderr.
+- [x] inform user that streamkink process is started when we click play button.
+- [x] tab for stdout/stderr.
 
 ## Twitch
 
@@ -34,11 +33,11 @@ Currently it supports only :
 ## VLC
 
 - [ ] option on play button - start without sound.
-- [ ] preference to start in minimal mode.
-- [ ] preferences to set VLC window:  always-on-top, on all worskspace.
+- [x] preference to start in minimal mode.
+- [x] preferences to set VLC window:  always-on-top, on all worskspace.
 
 ## General
-- [ ] make sure there is at least on video player.
+- [ ] make sure VLS is available
 - [ ] streamlink is available.
 
 

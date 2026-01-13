@@ -30,6 +30,7 @@ namespace StreamlinkGtk.Interfaces {
 
         public abstract Widget get_preferences();
         public abstract string name { get; }
+        // Used with `wmctrl` to make it displayed on all workspaces.
         public abstract string exec_name { get; }
 
         /**

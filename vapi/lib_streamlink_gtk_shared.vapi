@@ -75,7 +75,7 @@ namespace StreamlinkGtk {
 			protected string[] spawn_env;
 			protected StreamingProvider ();
 			public virtual async void play (StreamlinkGtk.Models.Resource resource, StreamlinkGtk.Widgets.Providers.Default.Resource resource_widget);
-			protected virtual bool process_line (GLib.IOChannel channel, GLib.IOCondition condition, string stream_name, StreamlinkGtk.Models.RunningPlayer running_player, StreamlinkGtk.Widgets.Providers.Default.Resource resource_widget);
+			protected abstract bool process_line (GLib.IOChannel channel, GLib.IOCondition condition, string stream_name, StreamlinkGtk.Models.RunningPlayer running_player, StreamlinkGtk.Widgets.Providers.Default.Resource resource_widget);
 			public abstract string name { get; set; }
 			public StreamlinkGtk.Services.StreamingProviderPluginLoader provider_plugin_loader { get; set; }
 		}

@@ -66,17 +66,12 @@ namespace StreamlinkGtk.Interfaces {
 
             try {
 
-
-
                 Pid child_pid;
 
                 int standard_input;
                 int standard_output;
                 int standard_error;
-
-                // foreach (var item in spawn_args) {
-                // print ("\n> %s\n", item);
-                // }
+                
                 print ("\nSpawning process with args:\n");
                 foreach (var item in spawn_args) {
                     print ("%s ", item);
@@ -85,7 +80,7 @@ namespace StreamlinkGtk.Interfaces {
 
                 string[] args = new string[this.spawn_args.size + 1];
                 for (int i = 0; i < this.spawn_args.size; i++) {
-                    
+
                     args[i] = this.spawn_args[i];
                 }
                 args[this.spawn_args.size] = null;
@@ -152,6 +147,23 @@ namespace StreamlinkGtk.Interfaces {
 
                 this.player_started (current_running_player);
 
+                
+
+                this.stream_just_started.connect ((running_player) => {
+
+                    Timeout.add (1000, () => {
+
+                        try {
+                            debug("wmctrl -r " + resource.title + " -b add,sticky");
+                            Process.spawn_command_line_async ("wmctrl -r " + resource.title + " -b add,sticky");
+                        } catch (SpawnError e) {
+
+                            warning ("Failed to execute wmctrl: %s", e.message);
+                        }
+                        return false;
+                    });
+                });
+
 
                 resource_widget.stop_button_clicked.connect ((resource_to_play) => {
 
@@ -185,33 +197,6 @@ namespace StreamlinkGtk.Interfaces {
 
         public Services.StreamingProviderPluginLoader provider_plugin_loader { get; set; }
 
-        // protected abstract bool process_line (GLib.IOChannel channel, GLib.IOCondition condition, string stream_name, Models.RunningPlayer running_player);
-
-        protected virtual bool process_line (IOChannel channel, IOCondition condition, string stream_name, Models.RunningPlayer running_player, Widgets.Providers.Default.Resource resource_widget) {
-            if (condition == IOCondition.HUP) {
-
-                this.std_out ("The fd has been closed.", running_player);
-                this.player_stopped (running_player, resource_widget);
-                return false;
-            }
-
-            try {
-
-                string line;
-                channel.read_line (out line, null, null);
-                debug (running_player.title + " | " + line);
-                this.std_out (line, running_player);
-            } catch (IOChannelError e) {
-
-                this.std_error ("IOChannelError: " + e.message, running_player);
-                return false;
-            } catch (ConvertError e) {
-
-                this.std_error ("ConvertError: " + e.message, running_player);
-                return false;
-            }
-
-            return true;
-        }
+        protected abstract bool process_line (IOChannel channel, IOCondition condition, string stream_name, Models.RunningPlayer running_player, Widgets.Providers.Default.Resource resource_widget);
     }
 }
