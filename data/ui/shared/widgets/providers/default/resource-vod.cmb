@@ -2,5 +2,5 @@
 <!DOCTYPE cambalache-project SYSTEM "cambalache-project.dtd">
 <!-- Created with Cambalache 0.96.3 -->
 <cambalache-project version="0.96.0" target_tk="gtk-4.0">
-  <ui filename="resource-vod.ui" sha256="7019a9abd767e51b5bac4122d1be8bef7a2c07db1d35f786041c5f09c7e9ce49"/>
+  <ui filename="resource-vod.ui" sha256="795fefb0004cf0ce6839239cb4a927e34b5d3ef85a233cb9b2b11e29fc0d3ee5"/>
 </cambalache-project>

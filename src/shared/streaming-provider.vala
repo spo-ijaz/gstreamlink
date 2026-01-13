@@ -61,11 +61,12 @@ namespace StreamlinkGtk.Interfaces {
 
             Posix.setpgid (0, 0);
         }
-        public virtual async void play (Models.Resource thumbnail_contents, Widgets.Providers.Default.Resource resource_widget) {
+
+        public virtual async void play (Models.Resource resource, Widgets.Providers.Default.Resource resource_widget) {
 
             try {
 
-                Models.ResourceStream thumbnail_contents_stream = thumbnail_contents as Models.ResourceStream;
+
 
                 Pid child_pid;
 
@@ -76,9 +77,11 @@ namespace StreamlinkGtk.Interfaces {
                 // foreach (var item in spawn_args) {
                 // print ("\n> %s\n", item);
                 // }
+                print ("\nSpawning process with args:\n");
                 foreach (var item in spawn_args) {
                     print ("%s ", item);
                 }
+                print ("\n");
 
                 Process.spawn_async_with_pipes ("/",
                                                 this.spawn_args.to_array (),
@@ -90,14 +93,43 @@ namespace StreamlinkGtk.Interfaces {
                                                 out standard_output,
                                                 out standard_error);
 
-                Models.RunningPlayer current_running_player = new Models.RunningPlayer (
-                                                                                        child_pid,
-                                                                                        thumbnail_contents_stream.title,
-                                                                                        thumbnail_contents_stream.thumbnail,
-                                                                                        thumbnail_contents_stream.content_url,
-                                                                                        thumbnail_contents_stream.started_at,
-                                                                                        thumbnail_contents_stream.viewers_count
-                );
+                Models.RunningPlayer current_running_player = null;
+
+                switch (resource.contents_type) {
+
+                case Models.Resource.type.STREAM: {
+
+                    Models.ResourceStream thumbnail_contents_stream = resource as Models.ResourceStream;
+                    current_running_player = new Models.RunningPlayer (
+                                                                       child_pid,
+                                                                       thumbnail_contents_stream.title,
+                                                                       thumbnail_contents_stream.thumbnail,
+                                                                       thumbnail_contents_stream.content_url,
+                                                                       thumbnail_contents_stream.started_at,
+                                                                       thumbnail_contents_stream.viewers_count
+                    );
+                    break;
+                }
+                case Models.Resource.type.VOD: {
+
+                    Models.ResourceVod thumbnail_contents_vod = resource as Models.ResourceVod;
+                    current_running_player = new Models.RunningPlayer (
+                                                                       child_pid,
+                                                                       thumbnail_contents_vod.title,
+                                                                       thumbnail_contents_vod.thumbnail,
+                                                                       thumbnail_contents_vod.content_url,
+                                                                       new GLib.DateTime.now (),
+                                                                       thumbnail_contents_vod.viewers_count
+                    );
+                    break;
+                }
+                }
+
+                if (current_running_player == null) {
+
+                    warning ("StreamingProvicer::play Unable to create RunningPlayer instance");
+                    return;
+                }
 
                 IOChannel output = new IOChannel.unix_new (standard_output);
                 output.add_watch (IOCondition.IN | IOCondition.HUP, (channel, condition) => {

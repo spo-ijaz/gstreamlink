@@ -62,7 +62,7 @@
     <property name="margin-top">3</property>
     <property name="visible">False</property>
     <child>
-      <object class="GtkButton" id="buton_stop">
+      <object class="GtkButton" id="button_stop">
         <property name="icon-name">media-playback-stop-symbolic</property>
       </object>
     </child>

@@ -250,7 +250,7 @@ namespace StreamlinkGtk.Controllers {
          */
         private void get_contents_handler (ContentsSelector contents_selector) {
 
-            debug("par la %u", contents_selector.contents_id);
+            debug("get_contents_handler() : %u", contents_selector.contents_id);
             // this.window.sidebar_scrolled_win.sensitive = false;
             this.hide_overlay_more_results ();
 
