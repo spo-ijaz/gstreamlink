@@ -36,6 +36,8 @@ namespace StreamlinkGtk {
         public PlayerPluginController player_controller { get; construct; }
         public SideBarListBox side_bar_list_box { get; construct; }
         public MenuButtonProviderUser menu_button_provider_user { get; construct; }
+        public DropDownPluginProviders drop_down_plugin_providers;
+        public GLib.ListStore running_players { get; construct; }
 
         [GtkChild]
         public unowned NavigationSplitView split_view_navigation;
@@ -82,8 +84,6 @@ namespace StreamlinkGtk {
         [GtkChild]
         public unowned Adw.TabView log_tab_view;
 
-        public DropDownPluginProviders drop_down_plugin_providers;
-
         construct {
             css_provider.load_from_resource ("/org/gnome/gitlab/spoijaz/streamlinkgtk/styles.css");
 
@@ -110,7 +110,8 @@ namespace StreamlinkGtk {
             this.player_controller.startup_initialization (this);
             this.streaming_provider_controller = new StreamingProviderPluginController (
                                                                                         this.player_controller,
-                                                                                        this.provider_controller
+                                                                                        this.provider_controller,
+                                                                                        this.running_players
             );
             this.streaming_provider_controller.startup_initialization (this);
 
@@ -132,12 +133,14 @@ namespace StreamlinkGtk {
 
         public Window (Adw.Application application,
             ProviderPluginController provider_controller,
-            PlayerPluginController player_controller) {
+            PlayerPluginController player_controller,
+            GLib.ListStore running_players) {
 
             Object (
                     application: application,
                     provider_controller: provider_controller,
-                    player_controller: player_controller
+                    player_controller: player_controller,
+                    running_players: running_players
             );
 
             SimpleAction action = new SimpleAction ("focus_search_bar", null);

@@ -34,9 +34,11 @@ namespace StreamlinkGtk {
 			}
 			[CCode (cheader_filename = "lib_streamlink_gtk_shared.h")]
 			public interface IScrolledWindowContents : Adw.Bin {
+				public abstract void init (GLib.ListStore running_players);
 				public abstract void provider_got_contents_handler (StreamlinkGtk.Models.Contents contents);
 				public abstract StreamlinkGtk.Models.Contents contents { get; set; }
 				public abstract GLib.ListStore list_store { get; }
+				public abstract GLib.ListStore running_players { get; set; }
 				public abstract Gtk.ScrolledWindow scrolled_window { get; }
 				public signal void resource_clicked (StreamlinkGtk.Models.Resource resource);
 				public signal void resource_play_button_clicked (StreamlinkGtk.Models.Resource resource, StreamlinkGtk.Widgets.Providers.Default.Resource resource_widget);
@@ -53,13 +55,14 @@ namespace StreamlinkGtk {
 			public interface IStreamingProviderPlugin : GLib.Object {
 				public abstract void activate ();
 				public abstract void deactivate ();
-				public abstract async void init (StreamlinkGtk.Interfaces.Providers.IProviderPlugin provider_plugin, StreamlinkGtk.Interfaces.IPlayerPlugin player_plugin);
+				public abstract async void init (StreamlinkGtk.Interfaces.Providers.IProviderPlugin provider_plugin, StreamlinkGtk.Interfaces.IPlayerPlugin player_plugin, GLib.ListStore running_players);
 				public abstract async void play (StreamlinkGtk.Models.Resource resource, StreamlinkGtk.Widgets.Providers.Default.Resource resource_widget);
 				protected abstract bool process_line (GLib.IOChannel channel, GLib.IOCondition condition, string stream_name, StreamlinkGtk.Models.RunningPlayer running_player, StreamlinkGtk.Widgets.Providers.Default.Resource resource_widget);
 				public abstract void registered (StreamlinkGtk.Services.StreamingProviderPluginLoader loader);
 				public abstract string name { get; set; }
 				public abstract StreamlinkGtk.Interfaces.IPlayerPlugin player_plugin { get; set; }
 				public abstract StreamlinkGtk.Interfaces.Providers.IProviderPlugin provider_plugin { get; set; }
+				public abstract GLib.ListStore running_players { get; set; }
 				public abstract StreamlinkGtk.Services.StreamingProviderPluginLoader streaming_provider_plugin_loader { get; set; }
 				public signal void player_started (StreamlinkGtk.Models.RunningPlayer running_player);
 				public signal void player_stopped (StreamlinkGtk.Models.RunningPlayer running_player, StreamlinkGtk.Widgets.Providers.Default.Resource resource_widget);
@@ -165,6 +168,7 @@ namespace StreamlinkGtk {
 			public string id { get; construct; }
 			public bool initialized { get; set; }
 			public bool is_contents_selector { get; set; }
+			public StreamlinkGtk.Models.RunningPlayer? running_player { get; set; }
 			public string subtitle { get; set; }
 			public StreamlinkGtk.Models.Thumbnail thumbnail { get; construct; }
 			public string title { get; construct; }
@@ -195,6 +199,7 @@ namespace StreamlinkGtk {
 		[CCode (cheader_filename = "lib_streamlink_gtk_shared.h")]
 		public class RunningPlayer : StreamlinkGtk.Models.ResourceStream {
 			public RunningPlayer (GLib.Pid pid, string title, StreamlinkGtk.Models.Thumbnail thumbnail, string content_url, GLib.DateTime started_at, int viewers_count);
+			public void stop ();
 			public GLib.Pid pid { get; construct; }
 		}
 		[CCode (cheader_filename = "lib_streamlink_gtk_shared.h")]

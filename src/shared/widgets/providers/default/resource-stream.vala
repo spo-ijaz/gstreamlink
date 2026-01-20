@@ -65,6 +65,7 @@ namespace StreamlinkGtk.Widgets.Providers.Default {
             button_stop.clicked.connect (() => {
 
                 this.stop_button_clicked (this.resource);
+                this.stream_stopped ();
             });
         }
 

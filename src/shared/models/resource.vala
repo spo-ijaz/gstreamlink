@@ -51,5 +51,7 @@ namespace StreamlinkGtk.Models {
         public string content_url { get; construct; }
 
         public ContentsSelector? contents_selector { get; set; default = null; }
+
+        public RunningPlayer? running_player {  get; set; default = null; }
     }
 }

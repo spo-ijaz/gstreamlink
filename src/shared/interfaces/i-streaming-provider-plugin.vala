@@ -33,6 +33,7 @@ namespace StreamlinkGtk.Interfaces.StreamingProviders {
 
         public abstract IProviderPlugin provider_plugin { get; set; }
         public abstract IPlayerPlugin player_plugin { get; set; }
+        public abstract GLib.ListStore running_players { get; set; }
 
         public signal void player_started (RunningPlayer running_player);
         public signal void player_stopped (RunningPlayer running_player, Widgets.Providers.Default.Resource resource_widget);
@@ -46,7 +47,7 @@ namespace StreamlinkGtk.Interfaces.StreamingProviders {
 
         // public abstract Models.RunningPlayer running_player { get; set; }
 
-        public abstract async void init (IProviderPlugin provider_plugin, IPlayerPlugin player_plugin);
+        public abstract async void init (IProviderPlugin provider_plugin, IPlayerPlugin player_plugin, GLib.ListStore running_players);
 
         public abstract async void play (Models.Resource resource, Widgets.Providers.Default.Resource resource_widget);
 

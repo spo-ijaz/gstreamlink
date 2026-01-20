@@ -33,8 +33,8 @@ namespace StreamlinkGtk.Interfaces {
 
         public IProviderPlugin provider_plugin { get; private set; }
         public IPlayerPlugin player_plugin { get; private set; }
-        // public abstract IPlayerProvider player { get; set; }
-        // public override Models.RunningPlayer running_player { get; set; }
+        public GLib.ListStore running_players { get; private set; }
+
         public override StreamingProviderPluginLoader streaming_provider_plugin_loader { get; set; }
 
         /**
@@ -52,9 +52,11 @@ namespace StreamlinkGtk.Interfaces {
             this.spawn_args = new ArrayList<string> ();
         }
 
-        public async void init (IProviderPlugin provider_plugin, IPlayerPlugin player_plugin) {
+        public async void init (IProviderPlugin provider_plugin, IPlayerPlugin player_plugin, GLib.ListStore running_players) {
+
             this.provider_plugin = provider_plugin;
             this.player_plugin = player_plugin;
+            this.running_players = running_players;
         }
 
         private static void child_setup_func () {
@@ -71,7 +73,7 @@ namespace StreamlinkGtk.Interfaces {
                 int standard_input;
                 int standard_output;
                 int standard_error;
-                
+
                 print ("\nSpawning process with args:\n");
                 foreach (var item in spawn_args) {
                     print ("%s ", item);
@@ -85,7 +87,6 @@ namespace StreamlinkGtk.Interfaces {
                 }
                 args[this.spawn_args.size] = null;
 
-                // string[] argv
                 Process.spawn_async_with_pipes ("/",
                                                 args,
                                                 this.spawn_env,
@@ -95,6 +96,8 @@ namespace StreamlinkGtk.Interfaces {
                                                 out standard_input,
                                                 out standard_output,
                                                 out standard_error);
+
+
 
                 Models.RunningPlayer current_running_player = null;
 
@@ -134,6 +137,10 @@ namespace StreamlinkGtk.Interfaces {
                     return;
                 }
 
+                this.running_players.append (current_running_player);
+                uint running_players_position = this.running_players.get_n_items () - 1;
+                resource.running_player = current_running_player;
+
                 IOChannel output = new IOChannel.unix_new (standard_output);
                 output.add_watch (IOCondition.IN | IOCondition.HUP, (channel, condition) => {
                     return this.process_line (channel, condition, "stdout", current_running_player, resource_widget);
@@ -144,17 +151,16 @@ namespace StreamlinkGtk.Interfaces {
                     return this.process_line (channel, condition, "stderr", current_running_player, resource_widget);
                 });
 
-
                 this.player_started (current_running_player);
-
-                
 
                 this.stream_just_started.connect ((running_player) => {
 
+                    // On all workspace.
+                    // @todo only if option enabled in settings.
                     Timeout.add (1000, () => {
 
                         try {
-                            debug("wmctrl -r " + resource.title + " -b add,sticky");
+                            debug ("wmctrl -r " + resource.title + " -b add,sticky");
                             Process.spawn_command_line_async ("wmctrl -r " + resource.title + " -b add,sticky");
                         } catch (SpawnError e) {
 
@@ -164,18 +170,18 @@ namespace StreamlinkGtk.Interfaces {
                     });
                 });
 
-
-                resource_widget.stop_button_clicked.connect ((resource_to_play) => {
+                resource_widget.stop_button_clicked.connect ((resource_from_widget) => {
 
                     debug (" Stopping process with PID %d", child_pid);
-                    Posix.kill (-(Posix.pid_t) child_pid, Posix.Signal.KILL);
-                    Process.close_pid (child_pid);
+                    current_running_player.stop();
+                    this.removedRunningPlayer (resource_from_widget);
                 });
 
                 ChildWatch.add (child_pid, (pid, status) => {
 
+                    debug (" Stopping process with PID %d", pid);
                     this.player_stopped (current_running_player, resource_widget);
-                    Process.close_pid (pid);
+                    this.removedRunningPlayer (resource);
                 });
             } catch (SpawnError e) {
 
@@ -198,5 +204,21 @@ namespace StreamlinkGtk.Interfaces {
         public Services.StreamingProviderPluginLoader provider_plugin_loader { get; set; }
 
         protected abstract bool process_line (IOChannel channel, IOCondition condition, string stream_name, Models.RunningPlayer running_player, Widgets.Providers.Default.Resource resource_widget);
+
+
+        private void removedRunningPlayer(Models.Resource resource)
+        {
+            uint n_items = this.running_players.get_n_items ();
+            for (uint i = 0; i < n_items; i++) {
+
+                Models.RunningPlayer? running_player = (Models.RunningPlayer) this.running_players.get_item (i);
+                if (running_player.content_url == resource.content_url) {
+
+                    this.running_players.remove (i);
+                }
+            }
+
+            debug ("RunningPlayer instance not found :  %s", resource.content_url);
+        }
     }
 }

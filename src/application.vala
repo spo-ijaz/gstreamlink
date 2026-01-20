@@ -27,14 +27,15 @@ namespace StreamlinkGtk {
 
         public ProviderPluginController provider_plugin_controller { get; construct; }
         public PlayerPluginController player_plugin_controller { get; construct; }
-       
+        public GLib.ListStore running_players { get; construct; }
+
         public Application () {
 
             Object (application_id: AppConfig.APP_ID, flags: ApplicationFlags.DEFAULT_FLAGS);
         }
 
         construct {
-            
+
             ActionEntry[] action_entries = {
                 { "about", this.on_about_action },
                 { "preferences", this.on_preferences_action },
@@ -46,7 +47,8 @@ namespace StreamlinkGtk {
             this.set_accels_for_action ("app.preferences", { "<primary>p" });
             this.set_accels_for_action ("app.quit", { "<primary>q" });
 
-            this.provider_plugin_controller = new ProviderPluginController (this);
+            this.running_players = new GLib.ListStore (typeof (Models.RunningPlayer));
+            this.provider_plugin_controller = new ProviderPluginController (this, this.running_players);
             this.player_plugin_controller = new PlayerPluginController (this);
         }
 
@@ -60,7 +62,8 @@ namespace StreamlinkGtk {
                 win = new StreamlinkGtk.Window (
                                                 this,
                                                 this.provider_plugin_controller,
-                                                this.player_plugin_controller
+                                                this.player_plugin_controller,
+                                                this.running_players
                 );
             }
 

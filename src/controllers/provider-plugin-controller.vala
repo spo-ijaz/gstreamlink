@@ -37,6 +37,8 @@ namespace StreamlinkGtk.Controllers {
         public Gtk.Application application { get; construct; }
         public GLib.ListStore list_store_plugin_providers { private set; public get; }
         public IProviderPlugin provider { private set; public get; }
+        public GLib.ListStore running_players { get; construct; }
+
 
         private AppSettings store;
         private Window window;
@@ -49,8 +51,11 @@ namespace StreamlinkGtk.Controllers {
             this.store = AppSettings.get_default ();
         }
 
-        public ProviderPluginController (Gtk.Application application) {
-            Object (application: application);
+        public ProviderPluginController (Gtk.Application application, GLib.ListStore running_players) {
+            Object (
+                application:  application,
+                running_players: running_players
+            );
         }
 
         public void startup_initialization (Window window) {
@@ -219,6 +224,7 @@ namespace StreamlinkGtk.Controllers {
             this.provider_setup_done (this.provider);
 
             Adw.Bin bin = this.window.view_stack_page_contents.get_child () as Adw.Bin;
+            this.provider.scrolled_window_contents.init(this.running_players);
             bin.set_child (this.provider.scrolled_window_contents);
 
             this.provider.scrolled_window_contents.resource_clicked.connect (this.resource_clicked_handler);
@@ -302,6 +308,7 @@ namespace StreamlinkGtk.Controllers {
 
         private void resource_stop_button_clicked_handler (Models.Resource resource, Widgets.Providers.Default.Resource resource_widget) {
 
+            debug ("---------------------------------------- 2");
             this.window.streaming_provider_controller.stop_resource (resource, this.provider, resource_widget);
         }
 

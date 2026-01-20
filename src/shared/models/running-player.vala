@@ -30,7 +30,8 @@ namespace StreamlinkGtk.Models {
         construct {
         }
 
-        public RunningPlayer (Pid pid,
+        public RunningPlayer (
+            Pid pid,
             string title,
             Thumbnail thumbnail,
             string content_url,
@@ -44,6 +45,12 @@ namespace StreamlinkGtk.Models {
                     started_at: started_at,
                     viewers_count: viewers_count
             );
+        }
+
+        public void stop () {
+            
+            Posix.kill (-(Posix.pid_t) this.pid, Posix.Signal.KILL);
+            Process.close_pid (this.pid);
         }
     }
 }

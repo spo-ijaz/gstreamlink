@@ -84,12 +84,13 @@ namespace StreamlinkGtk.Providers.Twitch {
 
             this.store = TwitchSettings.get_default ();
             this.cache = Cache.get_default ();
+            // Default scrolled window contents.
             this.scrolled_window_contents = new ScrolledWindowContents ();
             this.preferences_page = new StreamlinkGtk.Widgets.Providers.Twitch.PreferencesPage ();
         }
 
-        public Twitch (IScrolledWindowContents scrolled_window_contents) {
-            Object (scrolled_window_contents : scrolled_window_contents);
+        public Twitch () {
+            Object ();
         }
 
         public void registered (ProviderPluginLoader provider_plugin_loader) {

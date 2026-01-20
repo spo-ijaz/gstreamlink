@@ -33,8 +33,9 @@ namespace StreamlinkGtk.StreamingProviders {
 
         public ProviderPluginController provider_plugin_controller { get; construct; }
         public PlayerPluginController player_plugin_controller { get; construct; }
+        public GLib.ListStore running_players { get; construct; }
 
-        public IStreamingProviderPlugin streaming_provider {get; private set; }
+        public IStreamingProviderPlugin streaming_provider { get; private set; }
         private GLib.ListStore list_store_plugin_streaming_providers;
         private Window window;
         private TabPageStreaming tab_page_streaming;
@@ -48,17 +49,18 @@ namespace StreamlinkGtk.StreamingProviders {
             // Activate the first and only one (for now)
             this.activate_plugin_streaming_provider (this.list_store_plugin_streaming_providers.get_item (0) as PluginStreamingProvider);
 
-
             this.streaming_provider.player_started.connect (this.player_started_handler);
             this.streaming_provider.player_stopped.connect (this.player_stopped_handler);
-            //this.streaming_provider.stream_started.connect(this.stream_started);
+            // this.streaming_provider.stream_started.connect(this.stream_started);
         }
 
         public StreamingProviderPluginController (PlayerPluginController player_plugin_controller,
-            ProviderPluginController provider_plugin_controller) {
+            ProviderPluginController provider_plugin_controller,
+            GLib.ListStore running_players) {
             Object (
                     player_plugin_controller: player_plugin_controller,
-                    provider_plugin_controller: provider_plugin_controller
+                    provider_plugin_controller: provider_plugin_controller,
+                    running_players: running_players
             );
         }
 
@@ -66,7 +68,7 @@ namespace StreamlinkGtk.StreamingProviders {
 
             this.streaming_provider.play.begin (resource, resource_widget, (obj, res) => {
 
-                if(resource_widget == null) {
+                if (resource_widget == null) {
 
                     return;
                 }
@@ -87,13 +89,12 @@ namespace StreamlinkGtk.StreamingProviders {
                         break;
                     }
                 }
-               
+
                 this.streaming_provider.play.end (res);
             });
         }
 
         public void stop_resource (Models.Resource resource, IProviderPlugin provider_plugin, Widgets.Providers.Default.Resource resource_widget) {
-      
         }
 
         public void startup_initialization (Window window) {
@@ -116,22 +117,23 @@ namespace StreamlinkGtk.StreamingProviders {
 
         private void player_stopped_handler (Models.RunningPlayer running_player, Widgets.Providers.Default.Resource resource_widget) {
 
+            debug ("---------------------------------------- 4");
             switch (resource_widget.resource.contents_type) {
-                    case Models.Resource.type.STREAM: {
+            case Models.Resource.type.STREAM: {
 
-                        (resource_widget as Widgets.Providers.Default.ResourceStream).stream_stopped ();
-                        break;
-                    }
-                    case Models.Resource.type.VOD: {
+                (resource_widget as Widgets.Providers.Default.ResourceStream).stream_stopped ();
+                break;
+            }
+            case Models.Resource.type.VOD: {
 
-                        (resource_widget as Widgets.Providers.Default.ResourceVod).stream_stopped ();
-                        break;
-                    }
-                    default: {
+                (resource_widget as Widgets.Providers.Default.ResourceVod).stream_stopped ();
+                break;
+            }
+            default: {
 
-                        break;
-                    }
-                }
+                break;
+            }
+            }
 
             for (int i = 0; i < this.window.log_tab_view.get_n_pages (); i++) {
 
@@ -146,17 +148,15 @@ namespace StreamlinkGtk.StreamingProviders {
                 }
             }
 
-            if(this.window.log_tab_view.get_n_pages() == 0) {
+            if (this.window.log_tab_view.get_n_pages () == 0) {
 
                 this.window.log_tab_overview.visible = false;
             }
-            
         }
 
-        //  private void stream_started(Models.RunningPlayer running_player) {
-
-        //      debug("StreamingProviderPluginController::stream_started");
-        //  }   
+        // private void stream_started(Models.RunningPlayer running_player) {
+        // debug("StreamingProviderPluginController::stream_started");
+        // }
 
         private void activate_plugin_streaming_provider (PluginStreamingProvider plugin_streaming_provider) {
 
@@ -166,7 +166,7 @@ namespace StreamlinkGtk.StreamingProviders {
                 StreamingProviderPluginLoader loader = new StreamingProviderPluginLoader ();
                 this.streaming_provider = loader.load (plugin_streaming_provider.library_name, plugin_streaming_provider.register_plugin_function_name);
                 this.streaming_provider.activate ();
-                this.streaming_provider.init.begin (this.provider_plugin_controller.provider, this.player_plugin_controller.player);
+                this.streaming_provider.init.begin (this.provider_plugin_controller.provider, this.player_plugin_controller.player, this.running_players);
             } catch (PluginLoaderError e) {
 
                 print ("Error: %s\n", e.message);
