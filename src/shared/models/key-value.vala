@@ -20,12 +20,12 @@
 
 namespace StreamlinkGtk.Models {
 
-    public class RequestHeader : Object {
+    public class KeyValue : Object {
 
         public string name { get; construct; }
         public string value { get; construct; }
 
-        public RequestHeader (string name, string value) {
+        public KeyValue (string name, string value) {
             Object (
                     name: name,
                     value: value

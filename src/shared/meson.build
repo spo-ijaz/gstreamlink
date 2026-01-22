@@ -30,7 +30,7 @@ lib_streamlink_gtk_shared_sources = shared_library(
         'models/provider-user.vala',
         'models/providers/contents-selector.vala',
         'models/providers/pagination-cursor.vala',
-        'models/request-header.vala',
+        'models/key-value.vala',
         'models/resource.vala',
         'models/resource-channel.vala',
         'models/resource-stream.vala',

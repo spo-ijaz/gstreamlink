@@ -126,7 +126,7 @@ namespace StreamlinkGtk.Controllers {
 
             if (provider_user_logged_out_successfully) {
 
-                this.store.provider_user = new Models.ProviderUser (0, "", "", "", false);
+                //  this.store.provider_user = new Models.ProviderUser (0, "", "", "", false);
                 this.window.side_bar_list_box.list_box.remove_all ();
                 this.provider.scrolled_window_contents.list_store.remove_all ();
                 this.reset_banner_login_contents ();

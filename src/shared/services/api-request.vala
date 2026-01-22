@@ -31,14 +31,14 @@ namespace StreamlinkGtk.Services {
 
         public signal void got_error (int error_code, string error_message);
 
-        public SList<RequestHeader> default_request_headers;
+        public SList<KeyValue> default_request_headers;
         public string api_base_url { private get; construct; }
 
         private Session session;
 
         construct {
             this.session = new Session ();
-            this.default_request_headers = new SList<Models.RequestHeader> ();
+            this.default_request_headers = new SList<Models.KeyValue> ();
         }
 
         public ApiRequest (string api_base_url) {
@@ -47,12 +47,28 @@ namespace StreamlinkGtk.Services {
             );
         }
 
-       public async string ? post_request_async (string uri, bool log_response = false) {
+        public async string ? post_request_async (string uri, SList<KeyValue>? post_data = null, bool log_response = false) {
 
             try {
 
                 Message message = new Message ("POST", this.api_base_url + uri);
                 this.set_default_request_headers (message);
+
+                if (post_data != null) {
+
+                    StringBuilder body_builder = new StringBuilder ();
+                    post_data.foreach ((request_header) => {
+                        if (body_builder.len > 0) {
+                            body_builder.append ("&");
+                        }
+
+                        body_builder.append (Uri.escape_string (request_header.name, null, true));
+                        body_builder.append ("=");
+                        body_builder.append (Uri.escape_string (request_header.value, null, true));
+                    });
+
+                    message.set_request_body_from_bytes ("application/x-www-form-urlencoded", new Bytes (body_builder.str.data));
+                }
 
                 Bytes message_bytes = yield this.session.send_and_read_async (message, Priority.DEFAULT, null);
 

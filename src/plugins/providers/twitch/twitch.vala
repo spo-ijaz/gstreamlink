@@ -134,13 +134,17 @@ namespace StreamlinkGtk.Providers.Twitch {
 
             debug ("Provider plugin - Twitch - logging out...");
             ApiRequest logout_api_request = new ApiRequest ("https://id.twitch.tv");
-            logout_api_request.default_request_headers.append (new RequestHeader ("Content-Type", "application/x-www-form-urlencoded"));
+            logout_api_request.default_request_headers.append (new KeyValue ("Content-Type", "application/x-www-form-urlencoded"));
             logout_api_request.got_error.connect ((error_code, error_message) => {
 
                 warning ("Provider plugin - Twitch - could not revoke access token : %s", this.provider_user.bearer_token);
             });
 
-            string response = yield logout_api_request.post_request_async ("/oauth2/revoke?client_id=" + this.app_client_id + "&token=" + this.provider_user.bearer_token, true);
+            SList<KeyValue> post_data = new SList<KeyValue> ();
+            post_data.append (new KeyValue ("client_id", this.app_client_id)); 
+            post_data.append (new KeyValue ("token", this.provider_user.bearer_token));
+            
+            string response = yield logout_api_request.post_request_async ("/oauth2/revoke", post_data);
 
             if (response == null) {
 
@@ -153,8 +157,8 @@ namespace StreamlinkGtk.Providers.Twitch {
         public void initialize_api_request () {
 
             this.api_request = new ApiRequest (this.api_base_url);
-            this.api_request.default_request_headers.append (new RequestHeader ("Authorization", "Bearer " + this.provider_user.bearer_token));
-            this.api_request.default_request_headers.append (new RequestHeader ("Client-Id", this.app_client_id));
+            this.api_request.default_request_headers.append (new KeyValue ("Authorization", "Bearer " + this.provider_user.bearer_token));
+            this.api_request.default_request_headers.append (new KeyValue ("Client-Id", this.app_client_id));
 
             this.api_request.got_error.connect ((error_code, error_message) => {
 
