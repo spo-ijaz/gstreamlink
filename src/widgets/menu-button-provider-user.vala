@@ -39,7 +39,7 @@ namespace StreamlinkGtk.Widgets {
         construct {
 
             this.item_status_login = new MenuItem ("Not connected", null);
-            this.item_login_logout = new MenuItem ("_Login", null);
+            this.item_login_logout = new MenuItem ("_Login", "app.provider-login-logout");
             this.item_preferences = new MenuItem ("_Preferences", "app.provider-preferences");
 
             this.menu_model = new Menu ();
@@ -72,14 +72,6 @@ namespace StreamlinkGtk.Widgets {
                 this.menu_model.append_item (this.item_status_login);
                 this.menu_model.append_item (this.item_login_logout);
             }
-        }
-
-
-        private void on_provider_action () {
-
-            debug("par la");
-            //  Dialog dialog_preferences = new Dialog (this.provider_controller);
-            //  dialog_preferences.present (this.active_window);
         }
     }
 }

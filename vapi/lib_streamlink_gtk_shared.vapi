@@ -15,6 +15,7 @@ namespace StreamlinkGtk {
 				public abstract async void perform_async_tasks (out bool post_async_action, out StreamlinkGtk.Models.Providers.ContentsSelector contents_selector);
 				public abstract void registered (StreamlinkGtk.Services.ProviderPluginLoader loader);
 				public abstract async bool update_provider_user_info_async (StreamlinkGtk.Models.ProviderUser provider_user);
+				public abstract async bool user_logout ();
 				public abstract string authorize_url { get; set; }
 				public abstract uint auto_refresh_interval { get; }
 				public abstract bool enable_notifications { get; }
@@ -225,6 +226,7 @@ namespace StreamlinkGtk {
 			public GLib.SList<StreamlinkGtk.Models.RequestHeader> default_request_headers;
 			public ApiRequest (string api_base_url);
 			public async string? get_request_async (string uri, bool log_response = false);
+			public async string? post_request_async (string uri, bool log_response = false);
 			public string api_base_url { private get; construct; }
 			public signal void got_error (int error_code, string error_message);
 		}

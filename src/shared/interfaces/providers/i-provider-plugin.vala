@@ -56,6 +56,8 @@ namespace StreamlinkGtk.Interfaces.Providers {
         public abstract void activate ();
         public abstract void deactivate ();
 
+        public abstract async bool user_logout ();
+
         /**
          * This method is called when OAuth is completed, with provider user info.
          * So you can initialize, if you want, a class that you will have to use to perform requests on the provider API.

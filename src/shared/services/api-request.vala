@@ -47,6 +47,38 @@ namespace StreamlinkGtk.Services {
             );
         }
 
+       public async string ? post_request_async (string uri, bool log_response = false) {
+
+            try {
+
+                Message message = new Message ("POST", this.api_base_url + uri);
+                this.set_default_request_headers (message);
+
+                Bytes message_bytes = yield this.session.send_and_read_async (message, Priority.DEFAULT, null);
+
+                if (message.get_status () != Soup.Status.OK) {
+
+                    throw new ApiRequestError.FAILED_REQUEST (@"Failed Request. HTTP Status: $(message.get_status())");
+                }
+
+                unowned uint8[] data = message_bytes.get_data ();
+                if (log_response) {
+
+                    print ("\n\n-------------------------------------------------\n");
+                    print ((string) data);
+                    print ("\n-------------------------------------------------\n\n");
+                }
+
+                return (string) data;
+            } catch (Error error) {
+
+                warning ("error: %s", error.message);
+                this.got_error (error.code, error.message);
+            }
+
+            return null;
+        }
+
         public async string ? get_request_async (string uri, bool log_response = false) {
 
             try {

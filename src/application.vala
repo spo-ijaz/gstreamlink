@@ -40,6 +40,7 @@ namespace StreamlinkGtk {
                 { "about", this.on_about_action },
                 { "preferences", this.on_preferences_action },
                 { "provider-preferences", this.on_provider_preferences_action },
+                { "provider-login-logout", this.on_provider_login_logout },
                 { "quit", this.quit }
             };
 
@@ -100,6 +101,11 @@ namespace StreamlinkGtk {
 
             ProviderPreferences dialog_preferences = new ProviderPreferences (this.provider_plugin_controller);
             dialog_preferences.present (this.active_window);
+        }
+
+        private void on_provider_login_logout () {
+
+            this.provider_plugin_controller.provider_user_logout ();
         }
     }
 }

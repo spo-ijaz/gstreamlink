@@ -53,8 +53,8 @@ namespace StreamlinkGtk.Controllers {
 
         public ProviderPluginController (Gtk.Application application, GLib.ListStore running_players) {
             Object (
-                application:  application,
-                running_players: running_players
+                    application:  application,
+                    running_players: running_players
             );
         }
 
@@ -111,12 +111,27 @@ namespace StreamlinkGtk.Controllers {
 
             // Start thread handling async providers tasks.
             ProviderAsyncTasks provider_async_tasks = new ProviderAsyncTasks (
-                "Provider Async Tasks Thread", 
-                this.list_store_plugin_providers, 
-                this.application
+                                                                              "Provider Async Tasks Thread",
+                                                                              this.list_store_plugin_providers,
+                                                                              this.application
             );
             new Thread<void> ("Provider Async Tasks Thread", provider_async_tasks.run);
             provider_async_tasks.get_contents.connect (this.get_contents_handler);
+        }
+
+        public async void provider_user_logout () {
+
+            debug ("Logging out from provider: %s", this.provider.name);
+            bool provider_user_logged_out_successfully = yield this.provider.user_logout ();
+
+            if (provider_user_logged_out_successfully) {
+
+                this.store.provider_user = new Models.ProviderUser (0, "", "", "", false);
+                this.window.side_bar_list_box.list_box.remove_all ();
+                this.provider.scrolled_window_contents.list_store.remove_all ();
+                this.reset_banner_login_contents ();
+                this.window.banner_login.revealed = true;
+            }
         }
 
         private void activate_plugin_provider (PluginProvider plugin_provider) {
@@ -128,9 +143,9 @@ namespace StreamlinkGtk.Controllers {
                 this.provider = loader.load (plugin_provider.library_name, plugin_provider.register_plugin_function_name);
                 this.provider.activate ();
 
-                //  // this.window.drop_down_providers.drop_down.selected = (startup_provider_id - 1);
-                //  this.store.current_provider_id = plugin_provider.id;
-                //  this.store.set_uint ("startup-provider-id", plugin_provider.id);
+                //// this.window.drop_down_providers.drop_down.selected = (startup_provider_id - 1);
+                // this.store.current_provider_id = plugin_provider.id;
+                // this.store.set_uint ("startup-provider-id", plugin_provider.id);
             } catch (PluginLoaderError e) {
 
                 print ("Error: %s\n", e.message);
@@ -224,7 +239,7 @@ namespace StreamlinkGtk.Controllers {
             this.provider_setup_done (this.provider);
 
             Adw.Bin bin = this.window.view_stack_page_contents.get_child () as Adw.Bin;
-            this.provider.scrolled_window_contents.init(this.running_players);
+            this.provider.scrolled_window_contents.init (this.running_players);
             bin.set_child (this.provider.scrolled_window_contents);
 
             this.provider.scrolled_window_contents.resource_clicked.connect (this.resource_clicked_handler);
@@ -256,7 +271,7 @@ namespace StreamlinkGtk.Controllers {
          */
         private void get_contents_handler (ContentsSelector contents_selector) {
 
-            debug("get_contents_handler() : %u", contents_selector.contents_id);
+            debug ("get_contents_handler() : %u", contents_selector.contents_id);
             // this.window.sidebar_scrolled_win.sensitive = false;
             this.hide_overlay_more_results ();
 
@@ -308,7 +323,6 @@ namespace StreamlinkGtk.Controllers {
 
         private void resource_stop_button_clicked_handler (Models.Resource resource, Widgets.Providers.Default.Resource resource_widget) {
 
-            debug ("---------------------------------------- 2");
             this.window.streaming_provider_controller.stop_resource (resource, this.provider, resource_widget);
         }
 

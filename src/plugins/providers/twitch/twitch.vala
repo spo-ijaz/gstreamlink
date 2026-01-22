@@ -60,6 +60,7 @@ namespace StreamlinkGtk.Providers.Twitch {
         private Json.Parser json_parser;
         private string base_url = "https://www.twitch.tv";
         private string api_base_url = "https://api.twitch.tv/helix";
+        public string revoke_access_token_url;
         // Used for OAuth authentication.
         private string app_client_id = "nphupig00csx42och5rum6s1gang4z";
 
@@ -113,7 +114,7 @@ namespace StreamlinkGtk.Providers.Twitch {
 
             switch (streaming_provider.name) {
 
-            case "Streamlink":
+            case "Streamlink" :
 
                 if (website_oauth != "") {
                     extra_args += "--twitch-api-header=Authorization=OAuth " + website_oauth;
@@ -127,6 +128,26 @@ namespace StreamlinkGtk.Providers.Twitch {
             }
 
             return extra_args;
+        }
+
+        public async bool user_logout () {
+
+            debug ("Provider plugin - Twitch - logging out...");
+            ApiRequest logout_api_request = new ApiRequest ("https://id.twitch.tv");
+            logout_api_request.default_request_headers.append (new RequestHeader ("Content-Type", "application/x-www-form-urlencoded"));
+            logout_api_request.got_error.connect ((error_code, error_message) => {
+
+                warning ("Provider plugin - Twitch - could not revoke access token : %s", this.provider_user.bearer_token);
+            });
+
+            string response = yield logout_api_request.post_request_async ("/oauth2/revoke?client_id=" + this.app_client_id + "&token=" + this.provider_user.bearer_token, true);
+
+            if (response == null) {
+
+                return true;
+            }
+
+            return false;
         }
 
         public void initialize_api_request () {
@@ -179,8 +200,8 @@ namespace StreamlinkGtk.Providers.Twitch {
             SideBarListBoxRow list_box_row_browse = new SideBarListBoxRow ("Browse", false, new ContentsSelector (0, null));
             list_box_rows.append_val (list_box_row_browse);
 
-            //  SideBarListBoxRow list_box_row_games = new SideBarListBoxRow ("Games", true, new ContentsSelector (ContentsId.GAMES, null));
-            //  list_box_rows.append_val (list_box_row_games);
+            // SideBarListBoxRow list_box_row_games = new SideBarListBoxRow ("Games", true, new ContentsSelector (ContentsId.GAMES, null));
+            // list_box_rows.append_val (list_box_row_games);
 
             SideBarListBoxRow list_box_row_streams = new SideBarListBoxRow ("Streams", true, new ContentsSelector (ContentsId.STREAMS, null));
             list_box_rows.append_val (list_box_row_streams);
@@ -257,7 +278,7 @@ namespace StreamlinkGtk.Providers.Twitch {
         }
 
         /**
-         * For now, it's just to display a notification when a new streame is online.
+         * For now, it's just to display a notification when a new streamer is online.
          */
         public async void perform_async_tasks (out bool post_async_action, out ContentsSelector contents_selector) {
 
@@ -269,7 +290,7 @@ namespace StreamlinkGtk.Providers.Twitch {
             int64 difference_microseconds = current_time.difference (previous_run);
             int64 difference_minutes = difference_microseconds / 60000000;
 
-            if (difference_minutes < this.store.get_uint  ("refresh-interval")) {
+            if (difference_minutes < this.store.get_uint ("refresh-interval")) {
 
                 return;
             }
