@@ -43,6 +43,7 @@ namespace StreamlinkGtk.Controllers {
         private AppSettings store;
         private Window window;
         private bool overlay_displayed;
+        private OAuthTokenReceiver? oauth_token_receive;
 
         construct {
 
@@ -83,7 +84,7 @@ namespace StreamlinkGtk.Controllers {
             uint startup_provider_id = this.store.get_uint ("startup-provider-id") > 0 ? this.store.get_uint ("startup-provider-id") : 1;
             bool startup_provider_found = false;
 
-            // Twitch as default.
+            // Twitch as default provider.
             PluginProvider startup_plugin_provider = this.list_store_plugin_providers.get_item (0) as PluginProvider;
 
             for (uint position = 0; position <= this.list_store_plugin_providers.get_n_items (); position++) {
@@ -100,7 +101,7 @@ namespace StreamlinkGtk.Controllers {
 
             if (startup_provider_found == false) {
 
-                debug ("Using Twtich as default startup provider.");
+                debug ("Using Twitch as default startup provider.");
                 this.window.drop_down_plugin_providers.drop_down.set_selected (0);
             }
 
@@ -126,11 +127,13 @@ namespace StreamlinkGtk.Controllers {
 
             if (provider_user_logged_out_successfully) {
 
-                //  this.store.provider_user = new Models.ProviderUser (0, "", "", "", false);
+                this.provider.provider_user.is_logged = false;
+                // this.store.provider_user = new Models.ProviderUser (0, "", "", "", false);
                 this.window.side_bar_list_box.list_box.remove_all ();
                 this.provider.scrolled_window_contents.list_store.remove_all ();
-                this.reset_banner_login_contents ();
-                this.window.banner_login.revealed = true;
+                this.provider_changed_handler (this.list_store_plugin_providers.get_item (0) as PluginProvider);
+                //  this.reset_banner_login_contents ();
+                //  this.window.banner_login.revealed = true;
             }
         }
 
@@ -142,10 +145,6 @@ namespace StreamlinkGtk.Controllers {
                 ProviderPluginLoader loader = new ProviderPluginLoader ();
                 this.provider = loader.load (plugin_provider.library_name, plugin_provider.register_plugin_function_name);
                 this.provider.activate ();
-
-                //// this.window.drop_down_providers.drop_down.selected = (startup_provider_id - 1);
-                // this.store.current_provider_id = plugin_provider.id;
-                // this.store.set_uint ("startup-provider-id", plugin_provider.id);
             } catch (PluginLoaderError e) {
 
                 print ("Error: %s\n", e.message);
@@ -181,7 +180,14 @@ namespace StreamlinkGtk.Controllers {
                 if (provider_user.is_logged == false) {
 
                     this.debug_log ("we need to login.");
-                    this.window.banner_login.revealed = true;
+                    // Display provider welcome window screen.
+                    Adw.Bin bin = this.window.view_stack_page_contents.get_child () as Adw.Bin;
+                    bin.set_child (this.provider.welcome_window_contents);
+
+                    this.provider.welcome_window_contents.login_button_clicked.connect (() => {
+
+                        this.oauth_login_handler ();
+                    });
                 } else {
 
 
@@ -204,10 +210,11 @@ namespace StreamlinkGtk.Controllers {
         // Perform an OAuth2 flow to get an access token.
         private void oauth_login_handler () {
 
+            this.window.banner_login.revealed = true;
             this.window.banner_login.button_label = null;
             this.window.banner_login.title = "Check the opened page in your web-browser.";
-
-            OAuthTokenReceiver oauth_token_receive = new OAuthTokenReceiver ("Http Server Thread", this.provider);
+            
+            this.oauth_token_receive = new OAuthTokenReceiver ("Http Server Thread", this.provider);
             new Thread<void> ("Http Server Thread", oauth_token_receive.run);
 
             oauth_token_receive.got_access_token.connect ((access_token) => {
@@ -235,6 +242,7 @@ namespace StreamlinkGtk.Controllers {
 
         private void provider_ui_reset () {
 
+            this.oauth_token_receive = null;
             this.provider_user_updated (this.provider.provider_user);
             this.provider_setup_done (this.provider);
 
@@ -261,6 +269,8 @@ namespace StreamlinkGtk.Controllers {
 
         private void reset_banner_login_contents () {
 
+
+            this.oauth_token_receive = null;
             this.window.banner_login.button_label = "Login";
             this.window.banner_login.title = "You need to login.";
         }

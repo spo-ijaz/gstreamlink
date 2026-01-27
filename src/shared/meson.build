@@ -19,6 +19,7 @@ lib_streamlink_gtk_shared_sources = shared_library(
         'interfaces/providers/i-scrolled-window-contents.vala',
         'interfaces/providers/i-provider-plugin.vala',
         'interfaces/providers/i-sidebar-list-bow-row.vala',
+        'interfaces/providers/i-welcome-window-contents.vala',
 
         # 'models/channel.vala',
         'models/contents.vala',

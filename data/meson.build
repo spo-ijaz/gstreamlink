@@ -41,9 +41,7 @@ install_data(
     install_dir: get_option('datadir') / 'glib-2.0' / 'schemas',
 )
 
-install_data(
-    'python/streamlink_gtk_twitch_oauth_receive.py',
-)
+
 
 compile_schemas = find_program('glib-compile-schemas', required: false, disabler: true)
 test(

@@ -43,6 +43,7 @@ namespace StreamlinkGtk.Interfaces.Providers {
         public abstract string authorize_url { get; set; }
         public abstract string redirect_uri { get; }
         public abstract IScrolledWindowContents scrolled_window_contents { get; set; }
+        public abstract IWelcomeWindowContents welcome_window_contents { get; set; }
         // Configuration
         public abstract PreferencesPage preferences_page { get; set; }
         public abstract bool enable_notifications { get; }

@@ -47,6 +47,7 @@ namespace StreamlinkGtk.Providers.Twitch {
         public string authorize_url { get;   set; }
         public string redirect_uri { get;   default = "http://localhost:3000"; }
         public IScrolledWindowContents scrolled_window_contents { get; set; }
+        public IWelcomeWindowContents welcome_window_contents { get; set; }
         public Adw.PreferencesPage preferences_page { get; set; }
         public uint auto_refresh_interval { get; }
         public bool enable_notifications { get; }
@@ -87,6 +88,7 @@ namespace StreamlinkGtk.Providers.Twitch {
             this.cache = Cache.get_default ();
             // Default scrolled window contents.
             this.scrolled_window_contents = new ScrolledWindowContents ();
+            this.welcome_window_contents = new WelcomeWindowContents ();
             this.preferences_page = new StreamlinkGtk.Widgets.Providers.Twitch.PreferencesPage ();
         }
 

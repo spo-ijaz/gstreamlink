@@ -34,6 +34,7 @@ lib_streamlink_gtk_plugin_provider_twitch = shared_library(
         'providers/twitch/twitch-settings.vala',
         'providers/twitch/widgets/preferences-page.vala',
         'providers/twitch/widgets/sidebar-list-box-row.vala',
+        'providers/twitch/widgets/welcome-window-contents.vala',
     ],
     vala_header: 'lib_streamlink_gtk_plugin_provider_twitch.h',
     vala_vapi: vapi_dir / 'lib_streamlink_gtk_plugin_provider_twitch.vapi',
