@@ -62,13 +62,13 @@ namespace StreamlinkGtk.Widgets.Providers.Default {
         public void initialize (Models.Resource resource) {
 
             this.resource = resource;
-            this.label_title.label = resource.title;
+            this.label_title.label = GLib.Markup.escape_text (resource.title);
             if (resource.title_css_classes != null) {
 
                 this.label_title.set_css_classes (resource.title_css_classes.data);
             }
 
-            this.label_subtitle.label = resource.subtitle;
+            this.label_subtitle.label = GLib.Markup.escape_text (resource.subtitle);
             if (resource.subtitle != "") {
 
                 this.has_tooltip = true;
@@ -93,6 +93,6 @@ namespace StreamlinkGtk.Widgets.Providers.Default {
 
         public void stream_just_started () {}
 
-        public void stream_stopped () { }
+        public void stream_stopped () {}
     }
 }

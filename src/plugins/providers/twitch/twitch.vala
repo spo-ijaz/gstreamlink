@@ -143,9 +143,9 @@ namespace StreamlinkGtk.Providers.Twitch {
             });
 
             SList<KeyValue> post_data = new SList<KeyValue> ();
-            post_data.append (new KeyValue ("client_id", this.app_client_id)); 
+            post_data.append (new KeyValue ("client_id", this.app_client_id));
             post_data.append (new KeyValue ("token", this.provider_user.bearer_token));
-            
+
             string response = yield logout_api_request.post_request_async ("/oauth2/revoke", post_data);
 
             if (response == null) {
@@ -291,15 +291,25 @@ namespace StreamlinkGtk.Providers.Twitch {
             post_async_action = false;
             contents_selector = new ContentsSelector (ContentsId.STREAMS_FOLLOWED, null);
             DateTime current_time = new DateTime.now ();
-            DateTime previous_run = new DateTime.from_iso8601 (this.store.get_string ("last-async-execution-time"), new GLib.TimeZone.local ());
+            string last_exec_time = this.store.get_string ("last-async-execution-time");
+            DateTime? previous_run = null;
 
-            int64 difference_microseconds = current_time.difference (previous_run);
-            int64 difference_minutes = difference_microseconds / 60000000;
-
-            if (difference_minutes < this.store.get_uint ("refresh-interval")) {
-
-                return;
+            if (last_exec_time != "") {
+                previous_run = new DateTime.from_iso8601 (last_exec_time, new GLib.TimeZone.local ());
             }
+
+            if (previous_run != null) {
+
+                int64 difference_microseconds = current_time.difference (previous_run);
+                int64 difference_minutes = difference_microseconds / 60000000;
+
+                if (difference_minutes < this.store.get_uint ("refresh-interval")) {
+
+                    return;
+                }
+            }
+
+
 
             post_async_action = true;
 
