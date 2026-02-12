@@ -46,12 +46,16 @@ namespace StreamlinkGtk.Models {
 
         public string subtitle { get; set; }
 
+        public Category category { get; set; }
+
+        public Array<Tag>? tags { get; set; }
+
         public Thumbnail thumbnail { get; construct; }
 
         public string content_url { get; construct; }
 
         public ContentsSelector? contents_selector { get; set; default = null; }
 
-        public RunningPlayer? running_player {  get; set; default = null; }
+        public RunningPlayer? running_player { get; set; default = null; }
     }
 }

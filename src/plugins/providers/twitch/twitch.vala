@@ -520,6 +520,32 @@ namespace StreamlinkGtk.Providers.Twitch {
                                                                                                   content_url,
                                                                                                   started_at,
                                                                                                   num_viewers);
+
+                resource.category = new Category (
+                                                  stream_data.get_object ().get_member ("game_id").get_string (),
+                                                  stream_data.get_object ().get_member ("game_name").get_string ()
+                );
+
+                Array<Tag> tags = new Array<Tag> ();
+
+                Json.Node tags_node = stream_data.get_object ().get_member ("tags");
+                if (tags_node.get_node_type () == Json.NodeType.ARRAY) {
+
+                    unowned Json.Array? tags_array = tags_node.get_array ();
+
+                    if (tags_array != null) {
+
+                        GLib.List<weak Json.Node>? tags_elements = tags_array.get_elements ();
+
+                        foreach (unowned Json.Node tag_node in tags_elements) {
+
+                            tags.append_val (new Tag (tag_node.get_string (), tag_node.get_string ()));
+                        }
+                    }
+                }
+
+                resource.tags = tags;
+
                 Array<string> css_classes = new Array<string> ();
                 css_classes.append_val ("title-3");
 

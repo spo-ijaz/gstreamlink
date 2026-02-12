@@ -21,6 +21,7 @@
 using Adw;
 using Gtk;
 using StreamlinkGtk.Services;
+using StreamlinkGtk.Widgets;
 
 namespace StreamlinkGtk.Widgets.Providers.Default {
 
@@ -36,6 +37,10 @@ namespace StreamlinkGtk.Widgets.Providers.Default {
         public unowned Label label_title;
         [GtkChild]
         public unowned Label label_subtitle;
+        [GtkChild]
+        public unowned Box box_category;
+        [GtkChild]
+        public unowned Box box_tags;
         [GtkChild]
         public unowned Box box_options;
         [GtkChild]
@@ -74,6 +79,18 @@ namespace StreamlinkGtk.Widgets.Providers.Default {
                 this.has_tooltip = true;
                 this.tooltip_text = resource.subtitle;
                 this.label_subtitle.margin_bottom = 10;
+            }
+
+            if (resource.category != null) {
+
+                CategoryWrapBox category_wrap_box = new CategoryWrapBox (resource.category);
+                this.box_category.append (category_wrap_box);
+            }
+
+            if (resource.tags != null) {
+
+                TagsWrapBox tag_wrap_box = new TagsWrapBox (resource.tags);
+                this.box_tags.append (tag_wrap_box);
             }
 
             this.cache.get_file_from_uri_async.begin (resource.thumbnail.url, resource.thumbnail.path, resource.thumbnail.cache_ttl, (obj, res) => {

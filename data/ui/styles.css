@@ -1,3 +1,17 @@
 .thumbnail {
     border-radius: 10px;
 }
+
+button.tiny-category {
+    padding: 0px 8px;
+}
+
+
+button.tiny-tag {
+    padding: 0px 8px;
+    margin: 5px 5px;
+    min-height: 20px;
+    font-size: 0.9rem;
+    font-weight: normal;
+    background-color: gainsboro;
+}

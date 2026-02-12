@@ -22,6 +22,7 @@ lib_streamlink_gtk_shared_sources = shared_library(
         'interfaces/providers/i-welcome-window-contents.vala',
 
         # 'models/channel.vala',
+        'models/category.vala',
         'models/contents.vala',
         'models/plugin.vala',
         'models/plugin-loader-error.vala',
@@ -36,6 +37,7 @@ lib_streamlink_gtk_shared_sources = shared_library(
         'models/resource-channel.vala',
         'models/resource-stream.vala',
         'models/resource-vod.vala',
+        'models/tag.vala',
         'models/running-player.vala',
         # 'models/stream.vala',
         'models/thumbnail.vala',
@@ -55,6 +57,9 @@ lib_streamlink_gtk_shared_sources = shared_library(
         'settings/preferences-providers-settings.vala',
 
         'streaming-provider.vala',
+
+        'widgets/category-wrap-box.vala',
+        'widgets/tags-wrap-box.vala',
 
         'widgets/providers/default/resource.vala',
         'widgets/providers/default/resource-stream.vala',
