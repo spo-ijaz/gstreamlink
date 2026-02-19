@@ -43,12 +43,44 @@ namespace StreamlinkGtk.Widgets.Providers.Twitch {
 
                 Adw.PreferencesGroup preference_group = new Adw.PreferencesGroup ();
                 preference_group.set_title (this.title);
+                preference_group.add_css_class ("title-1");
+
+                if (this.title == "Follows") {
+
+                    Image icon = new Image.from_icon_name ("application-rss+xml-symbolic");
+                    icon.set_icon_size (IconSize.LARGE);
+                    preference_group.set_header_suffix (icon);
+                }
+
+
+                preference_group.set_margin_start (12);
+                preference_group.set_margin_end (12);
                 this.child = preference_group;
                 this.sensitive = false;
             } else {
 
                 Grid grid = new Grid ();
-                grid.attach (new Label (this.title), 1, 1, 4, 1);
+                grid.set_margin_start (20);
+
+                Box box = new Box (Orientation.HORIZONTAL, 12);
+
+                string icon_name = "tv-symbolic";
+                if (this.title == "Channels") {
+
+                    icon_name = "media-tape-symbolic";
+                }
+
+                Image icon = new Image.from_icon_name (icon_name);
+                icon.set_icon_size (IconSize.LARGE);
+
+                Label label = new Label (this.title);
+                label.add_css_class ("title-4");
+
+                box.append (icon);
+                box.append (label);
+
+                grid.attach (box, 1, 1, 4, 1);
+
                 this.child = grid;
             }
         }

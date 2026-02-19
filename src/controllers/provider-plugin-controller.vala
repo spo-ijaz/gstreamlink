@@ -132,7 +132,6 @@ namespace StreamlinkGtk.Controllers {
                 this.window.side_bar_list_box.list_box.remove_all ();
                 this.provider.scrolled_window_contents.list_store.remove_all ();
                 this.provider_changed_handler (this.list_store_plugin_providers.get_item (0) as PluginProvider);
-                //  this.window.banner_login.revealed = true;
             }
         }
 

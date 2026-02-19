@@ -125,8 +125,7 @@
             <property name="title"> </property>
           </object>
         </property>
-        <property name="max-sidebar-width">310.0</property>
-        <property name="min-sidebar-width">230.0</property>
+        <property name="max-sidebar-width">290.0</property>
         <property name="show-content">True</property>
         <property name="sidebar">
           <object class="AdwNavigationPage">
@@ -156,6 +155,7 @@
             <property name="title"> </property>
           </object>
         </property>
+        <property name="sidebar-width-fraction">0.15</property>
         <property name="sidebar-width-unit">px</property>
       </object>
     </property>

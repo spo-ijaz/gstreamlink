@@ -73,19 +73,22 @@ namespace StreamlinkGtk.Widgets.Providers.Default {
                 this.label_title.set_css_classes (resource.title_css_classes.data);
             }
 
-            this.label_subtitle.label = GLib.Markup.escape_text (resource.subtitle);
-            if (resource.subtitle != "") {
+            if (resource.subtitle != null && resource.subtitle != "") {
 
-                this.has_tooltip = true;
-                this.tooltip_text = resource.subtitle;
-                this.label_subtitle.margin_bottom = 10;
+                this.label_subtitle.label = GLib.Markup.escape_text (resource.subtitle);
+                if (resource.subtitle != "") {
+
+                    this.has_tooltip = true;
+                    this.tooltip_text = resource.subtitle;
+                    this.label_subtitle.margin_bottom = 10;
+                }
             }
 
-            if (resource.category != null) {
+                if (resource.category != null) {
 
-                CategoryWrapBox category_wrap_box = new CategoryWrapBox (resource.category);
-                this.box_category.append (category_wrap_box);
-            }
+                    CategoryWrapBox category_wrap_box = new CategoryWrapBox (resource.category);
+                    this.box_category.append (category_wrap_box);
+                }
 
             if (resource.tags != null) {
 
