@@ -5,6 +5,16 @@ A minimalist client for multiple streaming / vod providers, targeting Gnome desk
 Currently it supports only :
 * streaming / vod providers : [twitch.tv](https://www.twitch.tv)
 * video players : [vlc](https://www.videolan.org)
+
+
+![image](https://gitlab.gnome.org/spo-ijaz/streamlink-gtk/-/raw/main/screenshots/twitch_start.png?ref_type=heads)
+
+# Get the Twitch session id
+
+Open the web-browser console (`F12`) and copy-past this command :
+```javascript
+document.cookie.split('; ').find(row => row.startsWith('auth-token=')).split('=')[1]
+```
  
 
 # Building from sources
@@ -41,16 +51,4 @@ clear &&  ninja -C builddir/ && glib-compile-schemas ./data/ && ./builddir/src/o
 meson setup builddir_prod -Dprofile=prod --prefix=/usr --wipe
 ninja -C builddir_prod
 sudo ninja -C builddir_prod install
-```
-
-
-# Screenshots
-## Twitch - followed stream
-
-![image](https://gitlab.gnome.org/spo-ijaz/gstreamlink/-/raw/main/screenshots/twitch_start.png?ref_type=heads)
-
-## Twitch session id
-
-```javascript
-document.cookie.split('; ').find(row => row.startsWith('auth-token=')).split('=')[1]
 ```
