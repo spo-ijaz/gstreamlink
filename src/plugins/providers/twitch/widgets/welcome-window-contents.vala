@@ -32,7 +32,7 @@ namespace StreamlinkGtk.Widgets.Providers.Twitch {
             box.halign = Gtk.Align.CENTER;
             box.valign = Gtk.Align.CENTER;
 
-            var picture = new Gtk.Picture.for_resource ("/org/gnome/gitlab/spoijaz/streamlinkgtk/plugins/providers/twitch/logo.png");
+            var picture = new Gtk.Picture.for_resource ("/org/gnome/gstreamlink/plugins/providers/twitch/logo.png");
             picture.set_size_request (154, 250); 
             
             // "COVER" will zoom the image to cover the area without distortion

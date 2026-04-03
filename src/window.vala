@@ -27,7 +27,7 @@ using StreamlinkGtk.Widgets;
 
 namespace StreamlinkGtk {
 
-    [GtkTemplate (ui = "/org/gnome/gitlab/spoijaz/streamlinkgtk/window.cmb.ui")]
+    [GtkTemplate (ui = "/org/gnome/gstreamlink/window.cmb.ui")]
 
     public class Window : Adw.ApplicationWindow {
 
@@ -85,7 +85,7 @@ namespace StreamlinkGtk {
         public unowned Adw.TabView log_tab_view;
 
         construct {
-            css_provider.load_from_resource ("/org/gnome/gitlab/spoijaz/streamlinkgtk/styles.css");
+            css_provider.load_from_resource ("/org/gnome/gstreamlink/styles.css");
 
             Gdk.Display display = Gdk.Display.get_default ();
             StyleContext.add_provider_for_display (display, css_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER);

@@ -25,7 +25,7 @@ using StreamlinkGtk.Widgets;
 
 namespace StreamlinkGtk.Widgets.Providers.Default {
 
-    [GtkTemplate (ui = "/org/gnome/gitlab/spoijaz/streamlinkgtk/shared/widgets/providers/default/resource.ui")]
+    [GtkTemplate (ui = "/org/gnome/gstreamlink/shared/widgets/providers/default/resource.ui")]
 
     public class Resource : Bin {
 

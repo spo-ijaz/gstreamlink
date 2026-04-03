@@ -2,7 +2,7 @@
 <!DOCTYPE cambalache-project SYSTEM "cambalache-project.dtd">
 <cambalache-project version="0.17.3" target_tk="gtk-4.0">
   <ui>
-	(1,1,"drop-down-providers.ui","drop-down-plugin-providers.ui",None,None,None,None,"org.gnome.gitlab.spoijaz.streamlinkgtk",None,None)
+	(1,1,"drop-down-providers.ui","drop-down-plugin-providers.ui",None,None,None,None,"org.gnome.gstreamlink",None,None)
   </ui>
   <object>
 	(1,1,"AdwBin","StreamlinkGtkWidgetsDropDownPluginProviders",None,None,None,None,-1,None,None),

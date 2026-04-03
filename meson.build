@@ -1,5 +1,5 @@
 project(
-    'org.gnome.gitlab.spoijaz.streamlink-gtk',
+    'org.gnome.gstreamlink',
     ['c', 'vala'],
     version: '0.0.1',
     meson_version: '>= 0.62.0',
@@ -10,7 +10,7 @@ project(
 )
 
 # Application ID
-streamlink_gtk_app_id = 'org.gnome.gitlab.spoijaz.streamlinkgtk'
+streamlink_gtk_app_id = 'org.gnome.gstreamlink'
 
 # Main dependencies
 i18n = import('i18n')

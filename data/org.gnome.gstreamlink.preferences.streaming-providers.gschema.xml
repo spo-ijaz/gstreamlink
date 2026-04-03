@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="gstreamlink">
+  <schema id="org.gnome.gstreamlink.preferences.streaming-providers"
+    path="/org/gnome/gstreamlink/preferences/streaming-providers/">
+    <key name="default-streaming-provider" type="i">
+      <default>1</default>
+    </key>
+  </schema>
+</schemalist>

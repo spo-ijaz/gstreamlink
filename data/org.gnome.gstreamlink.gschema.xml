@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schemalist gettext-domain="streamlink-gtk">
-  <schema id="org.gnome.gitlab.spoijaz.streamlinkgtk"
-    path="/org/gnome/gitlab/spoijaz/streamlinkgtk/">
+<schemalist gettext-domain="gstreamlink">
+  <schema id="org.gnome.gstreamlink"
+    path="/org/gnome/gstreamlink/">
     <key name="provider-user-configurations" type="a(usssb)">
       <default>[(0,"-", "-", "-", false)]</default>
       <summary>All provider user settings.</summary>

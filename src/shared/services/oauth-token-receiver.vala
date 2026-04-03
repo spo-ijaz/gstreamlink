@@ -45,7 +45,7 @@ namespace StreamlinkGtk.Services {
 <div class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
 
   <div class="card" style="width: 18rem;">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Twitch_logo.svg/320px-Twitch_logo.svg.png" class="card-img-top" alt="twitch logo">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Twitch.jpg/250px-Twitch.jpg" class="card-img-top" alt="twitch logo">
     <div class="card-body">
       <h3 class="card-title">Streamlink GTK</h3>
       <p class="card-text">
@@ -76,7 +76,7 @@ namespace StreamlinkGtk.Services {
 <div class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
 
   <div class="card" style="width: 18rem;">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Twitch_logo.svg/320px-Twitch_logo.svg.png" class="card-img-top" alt="twitch logo">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Twitch.jpg/250px-Twitch.jpg" class="card-img-top" alt="twitch logo">
     <div class="card-body">
       <h3 class="card-title">Streamlink GTK</h3>
       <p class="card-text">
@@ -118,7 +118,7 @@ namespace StreamlinkGtk.Services {
         }
 
         private void start_http_server () {
-            this.server = new Soup.Server ("server-header", "streamlink-gtk-oauth");
+            this.server = new Soup.Server ("server-header", "gstreamlink-oauth");
             this.server.add_handler ("/", this.http_handler);
 
             try {

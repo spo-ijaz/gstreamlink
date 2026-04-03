@@ -1,1 +1,1 @@
-i18n.gettext('streamlink-gtk', preset: 'glib')
+i18n.gettext('gstreamlink', preset: 'glib')

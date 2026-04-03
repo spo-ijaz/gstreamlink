@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schemalist gettext-domain="streamlink-gtk">
-  <schema id="org.gnome.gitlab.spoijaz.streamlinkgtk.preferences.general"
-    path="/org/gnome/gitlab/spoijaz/streamlinkgtk/preferences/general/">
+<schemalist gettext-domain="gstreamlink">
+  <schema id="org.gnome.gstreamlink.preferences.general"
+    path="/org/gnome/gstreamlink/preferences/general/">
     <key name="minimize-gui" type="b">
       <default>false</default>
     </key>

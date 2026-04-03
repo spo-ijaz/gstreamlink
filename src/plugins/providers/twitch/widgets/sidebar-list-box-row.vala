@@ -48,7 +48,7 @@ namespace StreamlinkGtk.Widgets.Providers.Twitch {
                 if (this.title == "Follows") {
 
                     Image icon = new Image.from_icon_name ("application-rss+xml-symbolic");
-                    icon.set_icon_size (IconSize.LARGE);
+                    icon.set_icon_size (IconSize.NORMAL);
                     preference_group.set_header_suffix (icon);
                 }
 

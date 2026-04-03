@@ -24,7 +24,7 @@ using StreamlinkGtk.Controllers;
 
 namespace StreamlinkGtk.Preferences {
 
-    [GtkTemplate (ui = "/org/gnome/gitlab/spoijaz/streamlinkgtk/widgets/preferences/preferences-window.ui")]
+    [GtkTemplate (ui = "/org/gnome/gstreamlink/widgets/preferences/preferences-window.ui")]
 
     public class PreferencesWindow : Adw.PreferencesDialog {
         

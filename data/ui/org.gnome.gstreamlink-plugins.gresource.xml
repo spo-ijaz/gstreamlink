@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="/org/gnome/gitlab/spoijaz/streamlinkgtk">
+  <gresource prefix="/org/gnome/gstreamlink">
     <file>styles.css</file>
     <file preprocess="xml-stripblanks">plugins/providers/twitch/preferences-page.ui</file>
     <file>plugins/providers/twitch/logo.png</file>
   </gresource>
-  <gresource prefix="/org/gnome/gitlab/spoijaz/streamlinkgtk">
+  <gresource prefix="/org/gnome/gstreamlink">
     <file preprocess="xml-stripblanks">plugins/players/vlc/preferences-widget.ui</file>
   </gresource>
 </gresources>

@@ -35,7 +35,7 @@ namespace StreamlinkGtk.Widgets.Providers.Default {
         
         construct {
 
-            Builder builder = new Builder.from_resource ("/org/gnome/gitlab/spoijaz/streamlinkgtk/shared/widgets/providers/default/resource-stream.ui");
+            Builder builder = new Builder.from_resource ("/org/gnome/gstreamlink/shared/widgets/providers/default/resource-stream.ui");
             this.label_started_at = builder.get_object ("label_started_at") as Label;
             this.label_viewers_count = builder.get_object ("label_viewers_count") as Label;
 

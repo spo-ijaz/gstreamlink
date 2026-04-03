@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Created with Cambalache 0.90.4 -->
-<interface domain="org.gnome.gitlab.spoijaz.streamlinkgtk">
+<interface domain="org.gnome.gstreamlink">
   <!-- interface-name viewing-scrolled-window.ui -->
   <requires lib="gio" version="2.44"/>
   <requires lib="gtk" version="4.12"/>

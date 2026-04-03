@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="/org/gnome/gitlab/spoijaz/streamlinkgtk">
+  <gresource prefix="/org/gnome/gstreamlink">
     <file>styles.css</file>
     <file preprocess="xml-stripblanks">shared/widgets/providers/default/scrolled-window-contents.ui</file>
     <file preprocess="xml-stripblanks">shared/widgets/providers/default/resource.ui</file>

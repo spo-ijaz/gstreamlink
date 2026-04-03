@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<schemalist gettext-domain="streamlink-gtk">
-  <schema id="org.gnome.gitlab.spoijaz.streamlinkgtk.preferences.providers"
-    path="/org/gnome/gitlab/spoijaz/streamlinkgtk/preferences/providers/">
-  </schema>
-</schemalist>

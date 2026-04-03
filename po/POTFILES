@@ -1,6 +1,6 @@
-data/org.gnome.gitlab.spoijaz.streamlinkgtk.desktop.in
-data/org.gnome.gitlab.spoijaz.streamlinkgtk.metainfo.xml.in
-data/org.gnome.gitlab.spoijaz.streamlinkgtk.gschema.xml
+data/org.gnome.gstreamlink.desktop.in
+data/org.gnome.gstreamlink.metainfo.xml.in
+data/org.gnome.gstreamlink.gschema.xml
 src/main.vala
 src/window.vala
 data/ui/window.ui

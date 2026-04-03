@@ -25,7 +25,7 @@ using StreamlinkGtk.Settings;
 
 namespace StreamlinkGtk.Widgets {
 
-    [GtkTemplate (ui = "/org/gnome/gitlab/spoijaz/streamlinkgtk/widgets/drop-down-plugin-providers.ui")]
+    [GtkTemplate (ui = "/org/gnome/gstreamlink/widgets/drop-down-plugin-providers.ui")]
 
     public class DropDownPluginProviders : Bin {
 

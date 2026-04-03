@@ -24,7 +24,7 @@ using StreamlinkGtk.Providers.Twitch;
 
 namespace StreamlinkGtk.Widgets.Providers.Twitch {
 
-    [GtkTemplate (ui = "/org/gnome/gitlab/spoijaz/streamlinkgtk/plugins/providers/twitch/preferences-page.ui")]
+    [GtkTemplate (ui = "/org/gnome/gstreamlink/plugins/providers/twitch/preferences-page.ui")]
 
     public class PreferencesPage : Adw.PreferencesPage {
 

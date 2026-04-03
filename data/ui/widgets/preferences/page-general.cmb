@@ -2,7 +2,7 @@
 <!DOCTYPE cambalache-project SYSTEM "cambalache-project.dtd">
 <cambalache-project version="0.94.0" target_tk="gtk-4.0">
   <ui>
-	(1,1,"preferences-interface.ui","page-general.ui",None,None,None,None,"org.gnome.gitlab.spoijaz.streamlinkgtk",None,None)
+	(1,1,"preferences-interface.ui","page-general.ui",None,None,None,None,"org.gnome.gstreamlink",None,None)
   </ui>
   <ui_library>
 	(1,"libadwaita","1.5",None)

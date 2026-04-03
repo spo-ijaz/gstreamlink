@@ -22,7 +22,7 @@ using StreamlinkGtk.Controllers;
 
 namespace StreamlinkGtk.Widgets {
 
-    [GtkTemplate (ui = "/org/gnome/gitlab/spoijaz/streamlinkgtk/widgets/menu-button-provider-user.ui")]
+    [GtkTemplate (ui = "/org/gnome/gstreamlink/widgets/menu-button-provider-user.ui")]
 
     public class MenuButtonProviderUser : Adw.Bin {
 

@@ -23,7 +23,7 @@ using StreamlinkGtk.Settings;
 
 namespace StreamlinkGtk.Preferences {
 
-    [GtkTemplate (ui = "/org/gnome/gitlab/spoijaz/streamlinkgtk/widgets/preferences/page-general.ui")]
+    [GtkTemplate (ui = "/org/gnome/gstreamlink/widgets/preferences/page-general.ui")]
 
     public class PageGeneral : PreferencesPage {
 

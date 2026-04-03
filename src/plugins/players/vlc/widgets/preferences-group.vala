@@ -24,7 +24,7 @@ using StreamlinkGtk.Players.Vlc;
 
 namespace StreamlinkGtk.Widgets.Players.Vlc {
 
-    [GtkTemplate (ui = "/org/gnome/gitlab/spoijaz/streamlinkgtk/plugins/players/vlc/preferences-widget.ui")]
+    [GtkTemplate (ui = "/org/gnome/gstreamlink/plugins/players/vlc/preferences-widget.ui")]
 
     public class PreferencesGroup : Adw.PreferencesGroup {
 

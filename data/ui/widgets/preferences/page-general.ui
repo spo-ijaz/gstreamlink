@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Created with Cambalache 0.94.1 -->
-<interface domain="org.gnome.gitlab.spoijaz.streamlinkgtk">
+<interface domain="org.gnome.gstreamlink">
   <!-- interface-name preferences-interface.ui -->
   <requires lib="libadwaita" version="1.5"/>
   <template class="StreamlinkGtkPreferencesPageGeneral" parent="AdwPreferencesPage">

@@ -24,7 +24,7 @@ using StreamlinkGtk.Interfaces.Providers;
 
 namespace StreamlinkGtk.Widgets.Providers.Default {
 
-    [GtkTemplate (ui = "/org/gnome/gitlab/spoijaz/streamlinkgtk/shared/widgets/providers/default/scrolled-window-contents.ui")]
+    [GtkTemplate (ui = "/org/gnome/gstreamlink/shared/widgets/providers/default/scrolled-window-contents.ui")]
 
     public class ScrolledWindowContents : IScrolledWindowContents, Bin {
 

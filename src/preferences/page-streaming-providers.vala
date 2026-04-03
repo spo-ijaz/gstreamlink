@@ -28,7 +28,7 @@ using StreamlinkGtk.Models;
 
 namespace StreamlinkGtk.Preferences {
 
-    [GtkTemplate (ui = "/org/gnome/gitlab/spoijaz/streamlinkgtk/widgets/preferences/page-streaming-providers.ui")]
+    [GtkTemplate (ui = "/org/gnome/gstreamlink/widgets/preferences/page-streaming-providers.ui")]
 
     public class PageStreamingProviders : PreferencesPage {
 

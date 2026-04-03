@@ -24,7 +24,7 @@ using StreamlinkGtk.Services;
 
 namespace StreamlinkGtk.Widgets {
 
-    [GtkTemplate(ui = "/org/gnome/gitlab/spoijaz/streamlinkgtk/widgets/running-player.ui")]
+    [GtkTemplate(ui = "/org/gnome/gstreamlink/widgets/running-player.ui")]
 
     public class RunningPlayer : Bin {
 

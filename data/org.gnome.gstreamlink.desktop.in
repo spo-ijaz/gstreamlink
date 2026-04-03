@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=GStreamlink
+Exec=org.gnome.gstreamlink
+Icon=org.gnome.gstreamlink
+Terminal=false
+Type=Application
+Categories=GTK;GNOME;Video
+StartupNotify=true
+X-GNOME-Gettext-Domain=org.gnome.gstreamlink
+X-GNOME-FullName=GStreamlink
+X-GNOME-UsesNotifications=true
