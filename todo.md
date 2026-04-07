@@ -22,3 +22,4 @@
 - [ ] make sure VLC is available
 - [ ] make sure streamlink is available.
 - [ ] remove provider menu, maybe just a button to login/logout is enough.
+- [ ] check if `wmctrl` is available. If not, deactivate the "on all workspace" option and add an info box.
