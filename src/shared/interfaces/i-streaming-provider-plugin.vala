@@ -31,9 +31,9 @@ namespace StreamlinkGtk.Interfaces.StreamingProviders {
 
     public interface IStreamingProviderPlugin : Object {
 
-        public abstract IProviderPlugin provider_plugin { get; set; }
-        public abstract IPlayerPlugin player_plugin { get; set; }
-        public abstract GLib.ListStore running_players { get; set; }
+        //  public abstract IProviderPlugin provider_plugin { get; set; }
+        //  public abstract IPlayerPlugin player_plugin { get; set; }
+        //  public abstract GLib.ListStore running_players { get; set; }
 
         public signal void player_started (RunningPlayer running_player);
         public signal void player_stopped (RunningPlayer running_player, Widgets.Providers.Default.Resource resource_widget);

@@ -34,7 +34,7 @@ namespace StreamlinkGtk.Interfaces.Providers {
         public abstract GLib.ListStore list_store { get; }
         public abstract void provider_got_contents_handler (Contents contents);
         public abstract void init (GLib.ListStore running_players);
-        public abstract GLib.ListStore running_players { get; set; }
+        //  public abstract GLib.ListStore running_players { get; set; }
         
         //  public abstract void provider_next_contents_handler ();
 
