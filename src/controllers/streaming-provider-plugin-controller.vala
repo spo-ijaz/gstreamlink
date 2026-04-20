@@ -106,7 +106,11 @@ namespace StreamlinkGtk.StreamingProviders {
 
         private void player_started_handler (Models.RunningPlayer running_player) {
 
-            this.window.log_tab_overview.visible = true;
+            this.window.toggle_log_contents_button.add_css_class ("highlight-log-button");
+            GLib.Timeout.add (2500, () => {
+                this.window.toggle_log_contents_button.remove_css_class ("highlight-log-button");
+                return GLib.Source.REMOVE;
+            });
 
             unowned Adw.TabPage tab_page = this.window.log_tab_view.append (
                                                                             new TabPageStreamingScrolledWindow (this.streaming_provider, running_player)
@@ -150,7 +154,7 @@ namespace StreamlinkGtk.StreamingProviders {
 
             if (this.window.log_tab_view.get_n_pages () == 0) {
 
-                this.window.log_tab_overview.visible = false;
+                this.window.toggle_log_contents_button.active = false;
             }
         }
 

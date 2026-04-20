@@ -15,3 +15,13 @@ button.tiny-tag {
     font-weight: normal;
     background-color: gainsboro;
 }
+
+@keyframes highlight-pulse {
+    0% { background-color: transparent; }
+    50% { background-color: @accent_color; }
+    100% { background-color: transparent; }
+}
+
+.highlight-log-button {
+    animation: highlight-pulse 1s infinite;
+}

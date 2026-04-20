@@ -82,6 +82,8 @@ namespace StreamlinkGtk {
         [GtkChild]
         public unowned Adw.TabBar log_tab_bar;
         [GtkChild]
+        public unowned Gtk.ToggleButton toggle_log_contents_button;
+        [GtkChild]
         public unowned Adw.TabView log_tab_view;
 
         construct {
@@ -169,6 +171,13 @@ namespace StreamlinkGtk {
                 this.search_toggle_button.set_active (true);
                 // this.search_entry.grab_focus ();
             }
+        }
+
+        [GtkCallback]
+        private void signal_toggle_log_contents_button_toggled () {
+
+            this.log_tab_overview.visible = this.toggle_log_contents_button.active;
+            this.toggle_log_contents_button.remove_css_class ("highlight-log-button");
         }
     }
 }

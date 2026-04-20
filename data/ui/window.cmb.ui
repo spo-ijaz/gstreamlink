@@ -24,6 +24,7 @@
                         <child>
                           <object class="AdwTabBar" id="log_tab_bar">
                             <property name="valign">start</property>
+                            <property name="autohide">False</property>
                           </object>
                         </child>
                         <child>
@@ -86,6 +87,15 @@
                                     </property>
                                     <property name="end-widget">
                                       <object class="GtkBox" id="header_bar_provider_box">
+                                        <child>
+                                          <object class="GtkToggleButton" id="toggle_log_contents_button">
+                                            <property name="can-shrink">True</property>
+                                            <property name="icon-name">format-justify-left-symbolic</property>
+                                            <property name="tooltip-text" translatable="yes">Toggle log</property>
+                                            <property name="active">False</property>
+                                            <signal name="toggled" handler="signal_toggle_log_contents_button_toggled"/>
+                                          </object>
+                                        </child>
                                         <child>
                                           <object class="GtkToggleButton" id="search_toggle_button">
                                             <property name="can-shrink">True</property>
