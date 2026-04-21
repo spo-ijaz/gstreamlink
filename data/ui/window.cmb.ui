@@ -90,10 +90,15 @@
                                         <child>
                                           <object class="GtkToggleButton" id="toggle_log_contents_button">
                                             <property name="can-shrink">True</property>
-                                            <property name="icon-name">format-justify-left-symbolic</property>
                                             <property name="tooltip-text" translatable="yes">Toggle log</property>
                                             <property name="active">False</property>
                                             <signal name="toggled" handler="signal_toggle_log_contents_button_toggled"/>
+                                            <child>
+                                              <object class="AdwButtonContent" id="toggle_log_contents_button_content">
+                                                <property name="icon-name">format-justify-left-symbolic</property>
+                                                <property name="label">0</property>
+                                              </object>
+                                            </child>
                                           </object>
                                         </child>
                                         <child>

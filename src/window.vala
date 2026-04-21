@@ -84,6 +84,8 @@ namespace StreamlinkGtk {
         [GtkChild]
         public unowned Gtk.ToggleButton toggle_log_contents_button;
         [GtkChild]
+        public unowned Adw.ButtonContent toggle_log_contents_button_content;
+        [GtkChild]
         public unowned Adw.TabView log_tab_view;
 
         construct {
@@ -123,6 +125,10 @@ namespace StreamlinkGtk {
 
             log_tab_bar.set_view (log_tab_view);
             log_tab_overview.set_view (log_tab_view);
+
+            log_tab_view.notify["n-pages"].connect (() => {
+                this.toggle_log_contents_button_content.label = this.log_tab_view.get_n_pages ().to_string ();
+            });
 
             // Save windows settings.
             store.bind ("window-width", this,
@@ -177,7 +183,6 @@ namespace StreamlinkGtk {
         private void signal_toggle_log_contents_button_toggled () {
 
             this.log_tab_overview.visible = this.toggle_log_contents_button.active;
-            this.toggle_log_contents_button.remove_css_class ("highlight-log-button");
         }
     }
 }
