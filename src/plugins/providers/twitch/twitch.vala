@@ -401,9 +401,20 @@ namespace StreamlinkGtk.Providers.Twitch {
                 return false;
             }
 
+            Gee.HashMap<string, string> channesl_followed_map = new Gee.HashMap<string, string> ();
             foreach (unowned Json.Node stream_data in response.data.get_elements ()) {
 
-                broadcaster_ids.append_val (stream_data.get_object ().get_member ("broadcaster_id").get_string ());
+                string broadcaster_id = stream_data.get_object ().get_member ("broadcaster_id").get_string ();
+                string broadcaster_name = stream_data.get_object ().get_member ("broadcaster_name").get_string ();
+                channesl_followed_map.set (broadcaster_name, broadcaster_id);
+            }
+
+            var channels_followed = new Gee.ArrayList<Gee.Map.Entry<string, string>> ();
+            channels_followed.add_all (channesl_followed_map.entries);
+            channels_followed.sort ((a, b) => a.key.collate (b.key));
+
+            foreach (var entry in channels_followed) {
+                broadcaster_ids.append_val (entry.value);
             }
 
             return true;
