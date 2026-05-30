@@ -711,6 +711,9 @@ namespace StreamlinkGtk.Providers.Twitch {
                 return false;
             }
 
+            Array<ResourceChannel> channels_list = new Array<ResourceChannel> ();
+            string streams_uri_params = "";
+
             foreach (unowned Json.Node stream_data in response.data.get_elements ()) {
 
                 string id = stream_data.get_object ().get_member ("id").get_string ();
@@ -723,7 +726,7 @@ namespace StreamlinkGtk.Providers.Twitch {
                 Thumbnail thumbnail = new Thumbnail (150, 150, thumbnail_url, thumbnail_path, 604800);
 
                 string content_url = this.base_url + "/" + broadcaster_login;
-                StreamlinkGtk.Models.Resource resource = new ResourceChannel (
+                StreamlinkGtk.Models.ResourceChannel resource = new ResourceChannel (
                                                                               display_name,
                                                                               thumbnail,
                                                                               content_url);
@@ -739,14 +742,38 @@ namespace StreamlinkGtk.Providers.Twitch {
                 parameters.set ("user_id", id);
 
                 resource.contents_selector = new ContentsSelector (ContentsId.VIDEOS, parameters);
-                contents.resources.append_val (resource);
+                channels_list.append_val (resource);
 
-                if (contents.pagination_cursor.valid == true) {
-                    this.scrolled_window_contents.list_store.append (resource);
+                bool is_live = stream_data.get_object ().get_member ("is_live").get_boolean ();
+                if (is_live) {
+                    streams_uri_params += "user_id=" + id + "&";
                 }
             }
 
-            contents.pagination_cursor = response.pagination_cursor;
+            PaginationCursor original_cursor = response.pagination_cursor;
+
+            if (streams_uri_params != "") {
+                streams_uri_params = streams_uri_params.substring (0, streams_uri_params.length - 1);
+                
+                Contents temp_contents = new Contents (ContentsId.STREAMS, "");
+                yield this.get_resource_streams_async (ApiEndPoint.STREAMS + "?" + streams_uri_params, temp_contents);
+                
+                foreach (StreamlinkGtk.Models.Resource r in temp_contents.resources) {
+                    contents.resources.append_val (r);
+                    if (contents.pagination_cursor.valid == true) {
+                        this.scrolled_window_contents.list_store.append (r);
+                    }
+                }
+            }
+
+            foreach (ResourceChannel r in channels_list) {
+                contents.resources.append_val (r);
+                if (contents.pagination_cursor.valid == true) {
+                    this.scrolled_window_contents.list_store.append (r);
+                }
+            }
+
+            contents.pagination_cursor = original_cursor;
 
             return true;
         }
