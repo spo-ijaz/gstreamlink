@@ -294,6 +294,20 @@ namespace StreamlinkGtk.Controllers {
             });
         }
 
+        public void perform_search (string query) {
+
+            this.hide_overlay_more_results ();
+
+            this.provider.search_async.begin (query, (obj, res) => {
+
+                Contents contents;
+
+                this.provider.search_async.end (res, out contents);
+                this.window.view_stack_page_contents.title = contents.title;
+                this.provider.scrolled_window_contents.provider_got_contents_handler (contents);
+            });
+        }
+
         private void scrolled_window_edge_reached_handler (PositionType position_type) {
 
             if (position_type == PositionType.BOTTOM && this.provider.scrolled_window_contents.contents.pagination_cursor.valid == true) {

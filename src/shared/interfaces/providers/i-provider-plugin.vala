@@ -90,5 +90,10 @@ namespace StreamlinkGtk.Interfaces.Providers {
          * Actions to perform on a regular basis like to check new live streams, new videos, etc.
          */
         public abstract async void perform_async_tasks (out bool post_async_action, out ContentsSelector contents_selector);
+
+        /**
+         * Perform search
+         */
+        public abstract async void search_async (string query, out Contents contents);
     }
 }

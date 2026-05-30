@@ -156,14 +156,36 @@ namespace StreamlinkGtk {
 
             application.add_action (action);
             application.set_accels_for_action ("app.focus_search_bar", { "<primary>f" });
+            this.search_entry.search_changed.connect (this.on_search_changed);
+        }
+
+
+        private uint search_timeout_id = 0;
+
+        private void on_search_changed () {
+            if (this.search_timeout_id != 0) {
+                Source.remove (this.search_timeout_id);
+            }
+            this.search_timeout_id = Timeout.add (700, this.execute_search);
+        }
+
+        private bool execute_search () {
+            this.search_timeout_id = 0;
+            string query = this.search_entry.get_text ();
+            if (query.length > 2) {
+                this.provider_controller.perform_search (query);
+            }
+            return false;
         }
 
         [GtkCallback]
         private void signal_search_toggle_button_toggled () {
 
             debug ("------------------- signal_search_toggle_button_toggled");
-            this.search_bar.visible = this.search_toggle_button.active;
-            this.view_stack_page_contents.visible = !this.search_toggle_button.active;
+            this.search_bar.set_search_mode(this.search_toggle_button.active);
+            if (this.search_toggle_button.active) {
+                this.search_entry.grab_focus ();
+            }
         }
 
         private void on_focus_search_bar () {

@@ -25,6 +25,7 @@ namespace StreamlinkGtk.Providers.Twitch.Models {
         CHANNELS_FOLLOWED,
         GAMES,
         STREAMS,
-        VIDEOS
+        VIDEOS,
+        SEARCH_CHANNELS
     }
 }

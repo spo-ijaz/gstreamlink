@@ -28,5 +28,6 @@ namespace StreamlinkGtk.Providers.Twitch.Models {
         public const string STREAM_FOLLOWED = "/streams/followed";
         public const string USERS = "/users";
         public const string VIDEOS = "/videos";
+        public const string SEARCH_CHANNELS = "/search/channels";
     }
 }

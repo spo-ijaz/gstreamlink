@@ -237,6 +237,10 @@ namespace StreamlinkGtk.Providers.Twitch {
 
 
 
+            case ContentsId.SEARCH_CHANNELS:
+                contents = yield this.get_contents_search_channels_async (contents_selector);
+                break;
+
             case ContentsId.VIDEOS:
 
                 contents = yield this.get_contents_videos_async (contents_selector);
@@ -269,6 +273,10 @@ namespace StreamlinkGtk.Providers.Twitch {
 
                 break;
 
+            case ContentsId.SEARCH_CHANNELS:
+                yield this.get_resource_search_channels_async (ApiEndPoint.SEARCH_CHANNELS, this.scrolled_window_contents.contents);
+                break;
+
             case ContentsId.VIDEOS:
 
                 yield this.get_resource_videos_async (ApiEndPoint.VIDEOS, this.scrolled_window_contents.contents);
@@ -281,6 +289,13 @@ namespace StreamlinkGtk.Providers.Twitch {
             }
 
             this.got_contents ();
+        }
+
+        public async void search_async (string query, out Contents contents) {
+            Gee.HashMap<string, string> parameters = new Gee.HashMap<string, string> ();
+            parameters.set ("query", query);
+            ContentsSelector contents_selector = new ContentsSelector (ContentsId.SEARCH_CHANNELS, parameters);
+            yield this.get_contents_async (contents_selector, out contents);
         }
 
         /**
@@ -667,6 +682,75 @@ namespace StreamlinkGtk.Providers.Twitch {
          * Common
          *
          */
+        
+        /*
+         *
+         * SEARCH
+         *
+         */
+        private async Contents get_contents_search_channels_async (ContentsSelector contents_selector) {
+
+            Contents contents = new Contents (ContentsId.SEARCH_CHANNELS, "Search results");
+
+            string uri = ApiEndPoint.SEARCH_CHANNELS;
+            if (contents_selector.parameters != null && contents_selector.parameters.has_key ("query")) {
+                uri += "?query=" + Uri.escape_string(contents_selector.parameters.get ("query"));
+            }
+
+            yield this.get_resource_search_channels_async (uri, contents);
+
+            contents.pagination_cursor.parameters = contents_selector.parameters;
+            return contents;
+        }
+
+        private async bool get_resource_search_channels_async (string uri, Contents? contents = null) {
+
+            Response response = yield this.get_response_async (uri, contents);
+
+            if (response == null || response.data == null) {
+                return false;
+            }
+
+            foreach (unowned Json.Node stream_data in response.data.get_elements ()) {
+
+                string id = stream_data.get_object ().get_member ("id").get_string ();
+                string display_name = stream_data.get_object ().get_member ("display_name").get_string ();
+                string broadcaster_login = stream_data.get_object ().get_member ("broadcaster_login").get_string ();
+                string thumbnail_url = stream_data.get_object ().get_member ("thumbnail_url").get_string ();
+
+                string thumbnail_path = this.cache.thumbnails_channels_cache_dir + "/twitch_" + display_name + ".jpg";
+
+                Thumbnail thumbnail = new Thumbnail (150, 150, thumbnail_url, thumbnail_path, 604800);
+
+                string content_url = this.base_url + "/" + broadcaster_login;
+                StreamlinkGtk.Models.Resource resource = new ResourceChannel (
+                                                                              display_name,
+                                                                              thumbnail,
+                                                                              content_url);
+
+                Array<string> css_classes = new Array<string> ();
+                css_classes.append_val ("title-3");
+
+                resource.title_css_classes = css_classes;
+                resource.subtitle = stream_data.get_object ().get_member ("title").get_string ();
+
+                resource.is_contents_selector = true;
+                Gee.HashMap<string, string> parameters = new Gee.HashMap<string, string> ();
+                parameters.set ("user_id", id);
+
+                resource.contents_selector = new ContentsSelector (ContentsId.VIDEOS, parameters);
+                contents.resources.append_val (resource);
+
+                if (contents.pagination_cursor.valid == true) {
+                    this.scrolled_window_contents.list_store.append (resource);
+                }
+            }
+
+            contents.pagination_cursor = response.pagination_cursor;
+
+            return true;
+        }
+
         private async Response ? get_response_async (string uri, Contents? contents = null) {
 
             try {

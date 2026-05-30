@@ -76,13 +76,7 @@
                                             </child>
                                           </object>
                                         </property>
-                                        <child>
-                                          <object class="GtkSearchBar" id="search_bar">
-                                            <child>
-                                              <object class="GtkSearchEntry" id="search_entry"/>
-                                            </child>
-                                          </object>
-                                        </child>
+
                                       </object>
                                     </property>
                                     <property name="end-widget">
@@ -120,6 +114,13 @@
                               <object class="AdwBanner" id="banner_login">
                                 <property name="button-label">Login</property>
                                 <property name="title">You need to login</property>
+                              </object>
+                            </child>
+                            <child type="top">
+                              <object class="GtkSearchBar" id="search_bar">
+                                <child>
+                                  <object class="GtkSearchEntry" id="search_entry"/>
+                                </child>
                               </object>
                             </child>
                             <child>
