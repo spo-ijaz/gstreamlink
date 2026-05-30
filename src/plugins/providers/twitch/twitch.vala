@@ -401,20 +401,19 @@ namespace StreamlinkGtk.Providers.Twitch {
                 return false;
             }
 
-            Gee.HashMap<string, string> channesl_followed_map = new Gee.HashMap<string, string> ();
+            var elements = new Gee.ArrayList<unowned Json.Node> ();
             foreach (unowned Json.Node stream_data in response.data.get_elements ()) {
-
-                string broadcaster_id = stream_data.get_object ().get_member ("broadcaster_id").get_string ();
-                string broadcaster_name = stream_data.get_object ().get_member ("broadcaster_name").get_string ();
-                channesl_followed_map.set (broadcaster_name, broadcaster_id);
+                elements.add (stream_data);
             }
 
-            var channels_followed = new Gee.ArrayList<Gee.Map.Entry<string, string>> ();
-            channels_followed.add_all (channesl_followed_map.entries);
-            channels_followed.sort ((a, b) => a.key.collate (b.key));
+            elements.sort ((a, b) => {
+                string name_a = a.get_object ().get_member ("broadcaster_name").get_string ();
+                string name_b = b.get_object ().get_member ("broadcaster_name").get_string ();
+                return name_a.casefold ().collate (name_b.casefold ());
+            });
 
-            foreach (var entry in channels_followed) {
-                broadcaster_ids.append_val (entry.value);
+            foreach (unowned Json.Node stream_data in elements) {
+                broadcaster_ids.append_val (stream_data.get_object ().get_member ("broadcaster_id").get_string ());
             }
 
             return true;
@@ -428,7 +427,18 @@ namespace StreamlinkGtk.Providers.Twitch {
                 return false;
             }
 
+            var elements = new Gee.ArrayList<unowned Json.Node> ();
             foreach (unowned Json.Node stream_data in response.data.get_elements ()) {
+                elements.add (stream_data);
+            }
+
+            elements.sort ((a, b) => {
+                string name_a = a.get_object ().get_member ("display_name").get_string ();
+                string name_b = b.get_object ().get_member ("display_name").get_string ();
+                return name_a.casefold ().collate (name_b.casefold ());
+            });
+
+            foreach (unowned Json.Node stream_data in elements) {
 
                 string user_id = stream_data.get_object ().get_member ("id").get_string ();
 

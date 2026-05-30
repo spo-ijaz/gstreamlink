@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BackendCodeEditorMiscSettings">
+    <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
+  </component>
+  <component name="CMakeProjectFlavorService">
+    <option name="flavorId" value="CMakePlainProjectFlavor" />
+  </component>
+  <component name="CMakeRunConfigurationManager">
+    <generated>
+      <config projectName="streamlink-gtk" targetName="streamlink-gtk-pot" />
+      <config projectName="streamlink-gtk" targetName="streamlink-gtk-gmo" />
+      <config projectName="streamlink-gtk" targetName="all" />
+      <config projectName="streamlink-gtk" targetName="org.gnome.gitlab.spoijaz.streamlink-gtk" />
+      <config projectName="streamlink-gtk" targetName="streamlink_gtk_plugin_provider_twitch" />
+      <config projectName="streamlink-gtk" targetName="streamlink_gtk_plugin_streaming_provider_streamlink" />
+      <config projectName="streamlink-gtk" targetName="streamlink-gtk-update-po" />
+      <config projectName="streamlink-gtk" targetName="streamlink_gtk_shared" />
+      <config projectName="streamlink-gtk" targetName="streamlink_gtk_plugin_player_vlc" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="40ad1c80-ce2d-4b7a-9bf8-2879bd7e2307" name="Changes" comment="wip - integrated debug tab by stream.">
+      <change beforePath="$PROJECT_DIR$/src/shared/streaming-provider.vala" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/streaming-provider.vala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/widgets/tab-page-streaming.vala" beforeDir="false" afterPath="$PROJECT_DIR$/src/widgets/tab-page-streaming.vala" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="610" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="4o2dviKy" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="MesonLocalSettings">
+    <option name="availableProjects">
+      <map>
+        <entry>
+          <key>
+            <ExternalProjectPojo>
+              <option name="name" value="streamlink-gtk" />
+              <option name="path" value="$PROJECT_DIR$" />
+            </ExternalProjectPojo>
+          </key>
+          <value>
+            <list>
+              <ExternalProjectPojo>
+                <option name="name" value="streamlink-gtk" />
+                <option name="path" value="$PROJECT_DIR$" />
+              </ExternalProjectPojo>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="projectSyncType">
+      <map>
+        <entry key="$PROJECT_DIR$" value="RE_IMPORT" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectApplicationVersion">
+    <option name="ide" value="CLion" />
+    <option name="majorVersion" value="2025" />
+    <option name="minorVersion" value="3" />
+    <option name="productBranch" value="Classic" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="371UaKdwYNGzaXkGEo3iNZnwmSM" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Native Application.org.gnome.gitlab.spoijaz.streamlink-gtk.executor": "Run",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.RadMigrateCodeStyle": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "/home/share/Developments/spo-ijaz/streamlink-gtk/src/widgets",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "org.rust.first.attach.projects": "true",
+    "settings.editor.selected.configurable": "settings.sync",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecapSpentCounter">
+    <option name="endsOfQuotaMs" value="1768377661565" />
+    <option name="spentUsd" value="0.02963275" />
+  </component>
+  <component name="RecapUselessUpdatesCounter">
+    <option name="suspendCountdown" value="8" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/widgets" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Native Application.org.gnome.gitlab.spoijaz.streamlink-gtk">
+    <configuration name="all" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="streamlink-gtk" TARGET_NAME="all" CONFIG_NAME="Default" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="org.gnome.gitlab.spoijaz.streamlink-gtk" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="streamlink-gtk" TARGET_NAME="org.gnome.gitlab.spoijaz.streamlink-gtk" CONFIG_NAME="Default" version="1" RUN_TARGET_PROJECT_NAME="streamlink-gtk" RUN_TARGET_NAME="org.gnome.gitlab.spoijaz.streamlink-gtk">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="streamlink-gtk-gmo" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="streamlink-gtk" TARGET_NAME="streamlink-gtk-gmo" CONFIG_NAME="Default" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="streamlink-gtk-pot" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="streamlink-gtk" TARGET_NAME="streamlink-gtk-pot" CONFIG_NAME="Default" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="streamlink-gtk-update-po" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="streamlink-gtk" TARGET_NAME="streamlink-gtk-update-po" CONFIG_NAME="Default" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="streamlink_gtk_plugin_player_vlc" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="streamlink-gtk" TARGET_NAME="streamlink_gtk_plugin_player_vlc" CONFIG_NAME="Default" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="streamlink_gtk_plugin_provider_twitch" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="streamlink-gtk" TARGET_NAME="streamlink_gtk_plugin_provider_twitch" CONFIG_NAME="Default" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="streamlink_gtk_plugin_streaming_provider_streamlink" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="streamlink-gtk" TARGET_NAME="streamlink_gtk_plugin_streaming_provider_streamlink" CONFIG_NAME="Default" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="streamlink_gtk_shared" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="streamlink-gtk" TARGET_NAME="streamlink_gtk_shared" CONFIG_NAME="Default" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Native Application.streamlink_gtk_shared" />
+      <item itemvalue="Native Application.streamlink_gtk_plugin_player_vlc" />
+      <item itemvalue="Native Application.streamlink_gtk_plugin_provider_twitch" />
+      <item itemvalue="Native Application.streamlink_gtk_plugin_streaming_provider_streamlink" />
+      <item itemvalue="Native Application.org.gnome.gitlab.spoijaz.streamlink-gtk" />
+      <item itemvalue="Native Application.streamlink-gtk-pot" />
+      <item itemvalue="Native Application.streamlink-gtk-gmo" />
+      <item itemvalue="Native Application.streamlink-gtk-update-po" />
+      <item itemvalue="Native Application.all" />
+    </list>
+  </component>
+  <component name="RustProjectSettings">
+    <option name="toolchainHomeDirectory" value="$USER_HOME$/.cargo/bin" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="40ad1c80-ce2d-4b7a-9bf8-2879bd7e2307" name="Changes" comment="" />
+      <created>1766070133293</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1766070133293</updated>
+      <workItem from="1766070135078" duration="66000" />
+      <workItem from="1766070218655" duration="571000" />
+      <workItem from="1766070799912" duration="1639000" />
+      <workItem from="1766073716328" duration="1365000" />
+      <workItem from="1767714100315" duration="7480000" />
+      <workItem from="1767721594212" duration="116000" />
+      <workItem from="1767808279135" duration="250000" />
+    </task>
+    <task id="LOCAL-00001" summary="wip - integrated debug tab by stream.">
+      <option name="closed" value="true" />
+      <created>1767721691705</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1767721691705</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="2f720b65-9a9e-4fd6-b95c-03aa341f74ab" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="2f720b65-9a9e-4fd6-b95c-03aa341f74ab">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+            </State>
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="wip - integrated debug tab by stream." />
+    <option name="LAST_COMMIT_MESSAGE" value="wip - integrated debug tab by stream." />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
