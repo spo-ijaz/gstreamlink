@@ -4,7 +4,7 @@
   <!-- interface-name preferences-interface.ui -->
   <requires lib="gtk" version="4.16"/>
   <requires lib="libadwaita" version="1.6"/>
-  <template class="StreamlinkGtkPreferencesPageProviders" parent="AdwPreferencesPage">
+  <template class="StreamlinkGtkPreferencesProviderPreferences" parent="AdwPreferencesPage">
     <property name="icon-name">preferences-system-network-proxy-symbolic</property>
     <property name="name">page_streaming_providers</property>
     <property name="title">Providers</property>
@@ -23,6 +23,13 @@
             <property name="subtitle" translatable="yes">Provider to use by default</property>
             <property name="title" translatable="yes">Provider</property>
           </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="AdwPreferencesGroup">
+        <child>
+          <object class="AdwBin" id="selected_provider_preferences"/>
         </child>
       </object>
     </child>

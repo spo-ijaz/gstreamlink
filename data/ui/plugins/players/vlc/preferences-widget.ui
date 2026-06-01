@@ -5,7 +5,7 @@
   <requires lib="gtk" version="4.0"/>
   <requires lib="libadwaita" version="1.6"/>
   <template class="StreamlinkGtkWidgetsPlayersVlcPreferencesGroup" parent="AdwPreferencesGroup">
-    <property name="description">All options for VLC player - not working yet</property>
+    <property name="description">All options for VLC player</property>
     <property name="title">VLC preferences</property>
     <child>
       <object class="GtkListBox">

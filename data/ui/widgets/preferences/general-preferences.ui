@@ -3,7 +3,7 @@
 <interface domain="org.gnome.gstreamlink">
   <!-- interface-name preferences-interface.ui -->
   <requires lib="libadwaita" version="1.5"/>
-  <template class="StreamlinkGtkPreferencesPageGeneral" parent="AdwPreferencesPage">
+  <template class="StreamlinkGtkPreferencesGeneralPreferences" parent="AdwPreferencesPage">
     <property name="icon-name">preferences-system-symbolic</property>
     <property name="name">page_interface</property>
     <property name="title" translatable="yes">Interface</property>

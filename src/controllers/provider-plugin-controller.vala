@@ -252,6 +252,7 @@ namespace StreamlinkGtk.Controllers {
             this.provider.scrolled_window_contents.scrolled_window.edge_reached.connect (this.scrolled_window_edge_reached_handler);
             this.provider.scrolled_window_contents.resource_play_button_clicked.connect (this.resource_play_button_clicked_handler);
             this.provider.scrolled_window_contents.resource_stop_button_clicked.connect (this.resource_stop_button_clicked_handler);
+            this.provider.scrolled_window_contents.resource_chat_button_clicked.connect (this.resource_chat_button_clicked_handler);
         }
 
         // Get user information from current provider.
@@ -346,6 +347,21 @@ namespace StreamlinkGtk.Controllers {
         private void resource_stop_button_clicked_handler (Models.Resource resource, Widgets.Providers.Default.Resource resource_widget) {
 
             this.window.streaming_provider_controller.stop_resource (resource, this.provider, resource_widget);
+        }
+
+        private void resource_chat_button_clicked_handler (Models.Resource resource, Widgets.Providers.Default.Resource resource_widget) {
+            string login = resource.content_url;
+            int last_slash = login.last_index_of_char ('/');
+            if (last_slash != -1) {
+                login = login.substring (last_slash + 1);
+            } else {
+                login = resource.title.down ();
+            }
+            
+            var chat_window = this.provider.get_chat_window (login);
+            if (chat_window != null) {
+                chat_window.present ();
+            }
         }
 
         private void debug_log (string message) {

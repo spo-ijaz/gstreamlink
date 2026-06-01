@@ -111,6 +111,10 @@ namespace StreamlinkGtk.Widgets.Providers.Default {
 
                         this.resource_play_button_clicked (resource_to_play, resource_widget);
                     });
+                resource_widget.chat_button_clicked.connect ((resource_to_play) => {
+
+                        this.resource_chat_button_clicked (resource_to_play, resource_widget);
+                    });
                 resource_widget.stop_button_clicked.connect ((resource_to_play) => {
 
                         if(running_player != null) {

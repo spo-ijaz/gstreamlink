@@ -23,9 +23,9 @@ using StreamlinkGtk.Settings;
 
 namespace StreamlinkGtk.Preferences {
 
-    [GtkTemplate (ui = "/org/gnome/gstreamlink/widgets/preferences/page-general.ui")]
+    [GtkTemplate (ui = "/org/gnome/gstreamlink/widgets/preferences/general-preferences.ui")]
 
-    public class PageGeneral : PreferencesPage {
+    public class GeneralPreferences : PreferencesPage {
 
         [GtkChild]
         public unowned SwitchRow switch_row_minimize_gui;
@@ -48,7 +48,7 @@ namespace StreamlinkGtk.Preferences {
    
         }
 
-        public PageGeneral () {
+        public GeneralPreferences () {
             Object ();
         }
 

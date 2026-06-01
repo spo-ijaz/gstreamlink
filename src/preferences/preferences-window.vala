@@ -36,9 +36,9 @@ namespace StreamlinkGtk.Preferences {
 
         construct {
 
-            this.add (new PageGeneral ());
-            this.add (new PageProviders (this.provider_plugin_controller));
-            this.add (new PagePlayers (this.player_plugin_controller));
+            this.add (new GeneralPreferences ());
+            this.add (new ProviderPreferences (this.provider_plugin_controller));
+            this.add (new PlayerPreferences (this.player_plugin_controller));
         }
 
         public PreferencesWindow (

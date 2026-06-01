@@ -4,7 +4,7 @@
   <!-- interface-name preferences-interface.ui -->
   <requires lib="gtk" version="4.18"/>
   <requires lib="libadwaita" version="1.5"/>
-  <template class="StreamlinkGtkPreferencesPagePlayers" parent="AdwPreferencesPage">
+  <template class="StreamlinkGtkPreferencesPlayerPreferences" parent="AdwPreferencesPage">
     <property name="icon-name">multimedia-player-symbolic</property>
     <property name="name">page_player</property>
     <property name="title" translatable="yes">Players</property>
@@ -28,7 +28,7 @@
     </child>
     <child>
       <object class="AdwPreferencesGroup">
-        <property name="description">Settings common to all player - not working yet</property>
+        <property name="description">Settings common to all player</property>
         <property name="title">Common settings</property>
         <child>
           <object class="AdwSwitchRow" id="player_on_all_workspaces">

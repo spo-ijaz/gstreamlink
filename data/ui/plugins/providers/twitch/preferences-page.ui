@@ -4,44 +4,39 @@
   <!-- interface-name preferences-group.ui -->
   <requires lib="gtk" version="4.16"/>
   <requires lib="libadwaita" version="1.6"/>
-  <template class="StreamlinkGtkWidgetsProvidersTwitchPreferencesPage" parent="AdwPreferencesPage">
+  <template class="StreamlinkGtkWidgetsProvidersTwitchPreferencesPage" parent="AdwPreferencesGroup">
+    <property name="description">All options for the Twitch provider</property>
+    <property name="title">Twitch preferences</property>
     <child>
-      <object class="AdwPreferencesGroup">
-        <property name="description">All options for the Twitch provider</property>
-        <property name="separate-rows">True</property>
-        <property name="title">Twitch preferences</property>
+      <object class="GtkListBox">
+        <property name="activate-on-single-click">False</property>
         <child>
-          <object class="GtkListBox">
-            <property name="activate-on-single-click">False</property>
-            <child>
-              <object class="AdwEntryRow" id="twitch_session_id">
-                <property name="input-hints">no-emoji | no-spellcheck</property>
-                <property name="title">Twitch session ID</property>
+          <object class="AdwEntryRow" id="twitch_session_id">
+            <property name="input-hints">no-emoji | no-spellcheck</property>
+            <property name="title">Twitch session ID</property>
+          </object>
+        </child>
+        <child>
+          <object class="AdwSwitchRow" id="switch_enable_notifications">
+            <property name="subtitle">If activated, it will display a notifiation when a stream start.</property>
+            <property name="title">Notifications enabled</property>
+          </object>
+        </child>
+        <child>
+          <object class="AdwSpinRow" id="spin_auto_refresh_interval">
+            <property name="adjustment">
+              <object class="GtkAdjustment">
+                <property name="lower">1.0</property>
+                <property name="page-increment">10.0</property>
+                <property name="step-increment">1.0</property>
+                <property name="upper">720.0</property>
+                <property name="value">5.0</property>
               </object>
-            </child>
-            <child>
-              <object class="AdwSwitchRow" id="switch_enable_notifications">
-                <property name="subtitle">If activated, it will display a notifiation when a stream start.</property>
-                <property name="title">Notifications enabled</property>
-              </object>
-            </child>
-            <child>
-              <object class="AdwSpinRow" id="spin_auto_refresh_interval">
-                <property name="adjustment">
-                  <object class="GtkAdjustment">
-                    <property name="lower">1.0</property>
-                    <property name="page-increment">10.0</property>
-                    <property name="step-increment">1.0</property>
-                    <property name="upper">720.0</property>
-                    <property name="value">5.0</property>
-                  </object>
-                </property>
-                <property name="icon-name">resources-symbolic</property>
-                <property name="sensitive">False</property>
-                <property name="subtitle">How often do you want to check your followed channels status ?</property>
-                <property name="title">Refresh interval (in minutes)</property>
-              </object>
-            </child>
+            </property>
+            <property name="icon-name">resources-symbolic</property>
+            <property name="sensitive">False</property>
+            <property name="subtitle">How often do you want to check your followed channels status ?</property>
+            <property name="title">Refresh interval (in minutes)</property>
           </object>
         </child>
       </object>

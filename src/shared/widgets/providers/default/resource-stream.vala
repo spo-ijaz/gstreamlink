@@ -31,8 +31,8 @@ namespace StreamlinkGtk.Widgets.Providers.Default {
         private Button button_play;
         private Box box_play;
         private Box box_stop;
-        
-        
+
+
         construct {
 
             Builder builder = new Builder.from_resource ("/org/gnome/gstreamlink/shared/widgets/providers/default/resource-stream.ui");
@@ -40,21 +40,26 @@ namespace StreamlinkGtk.Widgets.Providers.Default {
             this.label_viewers_count = builder.get_object ("label_viewers_count") as Label;
 
             Box box_started_at = builder.get_object ("box_started_at") as Box;
-            
+
             this.box_play = builder.get_object ("box_play") as Box;
             this.button_play = builder.get_object ("button_play") as Button;
-            
+
             this.box_stop = builder.get_object ("box_stop") as Box;
             Button button_stop = builder.get_object ("button_stop") as Button;
-            
+
+            Box box_chat = builder.get_object ("box_chat") as Box;
+            Button button_chat = builder.get_object ("button_chat") as Button;
+
             Box box_viewers_count = builder.get_object ("box_viewers_count") as Box;
 
             this.grid_options.attach (box_viewers_count, 0, 0, 1, 1);
-            
+
             this.grid_options.attach (this.box_play, 1, 0, 1, 1);
             this.grid_options.attach (this.box_stop, 1, 0, 1, 1);
 
-            this.grid_options.attach (box_started_at, 2, 0, 1, 1);
+            this.grid_options.attach (box_chat, 2, 0, 1, 1);
+
+            this.grid_options.attach (box_started_at, 3, 0, 1, 1);
 
 
             button_play.clicked.connect (() => {
@@ -66,6 +71,10 @@ namespace StreamlinkGtk.Widgets.Providers.Default {
 
                 this.stop_button_clicked (this.resource);
                 this.stream_stopped ();
+            });
+
+            button_chat.clicked.connect (() => {
+                this.chat_button_clicked (this.resource);
             });
         }
 

@@ -6,9 +6,9 @@
     <file preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
     <file preprocess="xml-stripblanks">widgets/drop-down-plugin-providers.ui</file>
     <file preprocess="xml-stripblanks">widgets/menu-button-provider-user.ui</file>
-    <file preprocess="xml-stripblanks">widgets/preferences/page-general.ui</file>
-    <file preprocess="xml-stripblanks">widgets/preferences/page-players.ui</file>
-    <file preprocess="xml-stripblanks">widgets/preferences/page-providers.ui</file>
+    <file preprocess="xml-stripblanks">widgets/preferences/general-preferences.ui</file>
+    <file preprocess="xml-stripblanks">widgets/preferences/player-preferences.ui</file>
+    <file preprocess="xml-stripblanks">widgets/preferences/provider-preferences.ui</file>
     <!-- <file preprocess="xml-stripblanks">widgets/preferences/page-streaming-providers.ui</file> -->
     <file preprocess="xml-stripblanks">widgets/preferences/preferences-window.ui</file>
     <file preprocess="xml-stripblanks">widgets/running-player.ui</file>

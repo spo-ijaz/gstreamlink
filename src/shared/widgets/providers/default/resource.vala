@@ -50,6 +50,7 @@ namespace StreamlinkGtk.Widgets.Providers.Default {
 
         public signal void play_button_clicked (Models.Resource resource);
         public signal void stop_button_clicked (Models.Resource resource);
+        public signal void chat_button_clicked (Models.Resource resource);
 
         public Models.Resource resource { get; private set; }
 

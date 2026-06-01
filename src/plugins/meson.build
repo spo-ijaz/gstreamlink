@@ -2,6 +2,7 @@ streamlink_plugin_deps = [
     dependency('gee-0.8'),
     dependency('gtk4'),
     dependency('json-glib-1.0'),
+    dependency('libsoup-3.0'),
     dependency('libadwaita-1', version: '>= 1.6'),
 ]
 
@@ -33,6 +34,7 @@ lib_streamlink_gtk_plugin_provider_twitch = shared_library(
         'providers/twitch/twitch.vala',
         'providers/twitch/twitch-settings.vala',
         'providers/twitch/widgets/preferences-page.vala',
+        'providers/twitch/widgets/chat-window.vala',
         'providers/twitch/widgets/sidebar-list-box-row.vala',
         'providers/twitch/widgets/welcome-window-contents.vala',
     ],

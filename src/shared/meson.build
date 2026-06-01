@@ -5,6 +5,7 @@ streamlink_gtk_shared_deps = [
     dependency('gtk4'),
     dependency('libadwaita-1', version: '>= 1.6'),
     dependency('libsoup-3.0'),
+    dependency('json-glib-1.0'),
     meson.get_compiler('vala').find_library('posix'),
 ]
 
@@ -13,6 +14,7 @@ lib_streamlink_gtk_shared_sources = shared_library(
     [
         lib_streamlink_gtk_shared_resources,
 
+        'interfaces/providers/i-chat-window.vala',
         'interfaces/i-exec-options.vala',
         'interfaces/i-player-plugin.vala',
         'interfaces/i-streaming-provider-plugin.vala',

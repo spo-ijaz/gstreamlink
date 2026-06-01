@@ -3,6 +3,7 @@
   <gresource prefix="/org/gnome/gstreamlink">
     <file>styles.css</file>
     <file preprocess="xml-stripblanks">plugins/providers/twitch/preferences-page.ui</file>
+    <file preprocess="xml-stripblanks">plugins/providers/twitch/widgets/chat-window.ui</file>
     <file>plugins/providers/twitch/logo.png</file>
   </gresource>
   <gresource prefix="/org/gnome/gstreamlink">

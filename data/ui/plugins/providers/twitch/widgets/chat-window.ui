@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface domain="org.gnome.gstreamlink">
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="libadwaita" version="1.0"/>
+  <template class="StreamlinkGtkWidgetsProvidersTwitchChatWindow" parent="AdwWindow">
+    <property name="default-width">400</property>
+    <property name="default-height">600</property>
+    <property name="title">Chat</property>
+    <property name="content">
+      <object class="AdwFlap" id="flap">
+        <property name="flap-position">end</property>
+        <property name="reveal-flap">False</property>
+        <property name="locked">True</property>
+        <property name="content">
+          <object class="AdwToolbarView">
+            <child type="top">
+              <object class="AdwHeaderBar" id="header_bar">
+                <property name="title-widget">
+                  <object class="AdwWindowTitle" id="window_title">
+                    <property name="title">Chat</property>
+                  </object>
+                </property>
+                <child type="end">
+                  <object class="GtkToggleButton" id="sidebar_toggle">
+                    <property name="icon-name">sidebar-show-right-symbolic</property>
+                    <property name="active" bind-source="flap" bind-property="reveal-flap" bind-flags="sync-create|bidirectional" />
+                  </object>
+                </child>
+              </object>
+            </child>
+            <property name="content">
+              <object class="GtkBox">
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkScrolledWindow" id="scrolled_window">
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <child>
+                      <object class="GtkListBox" id="chat_list">
+                        <property name="selection-mode">none</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkBox">
+                    <property name="orientation">horizontal</property>
+                    <property name="spacing">6</property>
+                    <property name="margin-top">6</property>
+                    <property name="margin-bottom">6</property>
+                    <property name="margin-start">6</property>
+                    <property name="margin-end">6</property>
+                    <child>
+                      <object class="GtkEntry" id="chat_entry">
+                        <property name="hexpand">True</property>
+                        <property name="placeholder-text">Send a message...</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="send_button">
+                        <property name="icon-name">mail-send-symbolic</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </property>
+          </object>
+        </property>
+        <property name="flap">
+          <object class="GtkBox">
+            <property name="orientation">vertical</property>
+            <property name="width-request">200</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="label">Connected Users</property>
+                <property name="margin-top">12</property>
+                <property name="margin-bottom">12</property>
+                <property name="css-classes">heading</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkScrolledWindow">
+                <property name="hexpand">True</property>
+                <property name="vexpand">True</property>
+                <child>
+                  <object class="GtkListBox" id="users_list">
+                    <property name="selection-mode">none</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </property>
+      </object>
+    </property>
+  </template>
+</interface>

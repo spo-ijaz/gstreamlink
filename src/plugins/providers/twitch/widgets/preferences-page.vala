@@ -26,7 +26,7 @@ namespace StreamlinkGtk.Widgets.Providers.Twitch {
 
     [GtkTemplate (ui = "/org/gnome/gstreamlink/plugins/providers/twitch/preferences-page.ui")]
 
-    public class PreferencesPage : Adw.PreferencesPage {
+    public class PreferencesPage : Adw.PreferencesGroup {
 
         [GtkChild]
         public unowned Adw.EntryRow twitch_session_id;

@@ -32,7 +32,7 @@ namespace StreamlinkGtk.Interfaces.Providers {
         public signal void got_contents ();
         public signal void got_api_error (Toast toast);
         public signal void make_oauth_login ();
-        public signal void notification(string notification_id, Notification notification);
+        public signal void notification (string notification_id, Notification notification);
 
         // `position+1` of the item in the provider drop down.
         public abstract uint id { get; }
@@ -45,7 +45,9 @@ namespace StreamlinkGtk.Interfaces.Providers {
         public abstract IScrolledWindowContents scrolled_window_contents { get; set; }
         public abstract IWelcomeWindowContents welcome_window_contents { get; set; }
         // Configuration
-        public abstract PreferencesPage preferences_page { get; set; }
+        public abstract Gtk.Widget get_preferences ();
+        public abstract IChatWindow ? get_chat_window (string channel_name);
+
         public abstract bool enable_notifications { get; }
         public abstract uint auto_refresh_interval { get; }
 

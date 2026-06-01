@@ -34,13 +34,11 @@ namespace StreamlinkGtk.Widgets {
         private Menu menu_model;
         private MenuItem item_status_login;
         private MenuItem item_login_logout;
-        private MenuItem item_preferences;
 
         construct {
 
             this.item_status_login = new MenuItem ("Not connected", null);
             this.item_login_logout = new MenuItem ("_Login", "app.provider-login-logout");
-            this.item_preferences = new MenuItem ("_Preferences", "app.provider-preferences");
 
             this.menu_model = new Menu ();
             this.menu_button.set_menu_model (this.menu_model);
@@ -55,7 +53,6 @@ namespace StreamlinkGtk.Widgets {
         private void provider_user_updated_handler (Models.ProviderUser provider_user) {
 
             this.menu_model.remove_all ();
-            this.menu_model.append_item (this.item_preferences);
 
             if (provider_user.is_logged == true) {
 

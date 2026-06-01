@@ -47,4 +47,13 @@
       </object>
     </child>
   </object>
+  <object class="GtkBox" id="box_chat">
+    <property name="halign">center</property>
+    <property name="margin-top">3</property>
+    <child>
+      <object class="GtkButton" id="button_chat">
+        <property name="icon-name">user-info-symbolic</property>
+      </object>
+    </child>
+  </object>
 </interface>

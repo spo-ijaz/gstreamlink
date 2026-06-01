@@ -37,7 +37,13 @@ namespace StreamlinkGtk.Providers.Twitch {
         INVALID_USER
     }
 
-    class Twitch : Object, IProviderPlugin {
+    public class Twitch : Object, IProviderPlugin {
+
+        public const string base_url = "https://www.twitch.tv";
+        public const string api_base_url = "https://api.twitch.tv/helix";
+        public const string revoke_access_token_url = "";
+        // Used for OAuth authentication.
+        public const string app_client_id = "nphupig00csx42och5rum6s1gang4z";
 
         public uint id { get; default = 1; }
         public string name { get; default = "Twitch"; }
@@ -48,7 +54,16 @@ namespace StreamlinkGtk.Providers.Twitch {
         public string redirect_uri { get;   default = "http://localhost:3000"; }
         public IScrolledWindowContents scrolled_window_contents { get; set; }
         public IWelcomeWindowContents welcome_window_contents { get; set; }
-        public Adw.PreferencesPage preferences_page { get; set; }
+
+        private Gtk.Widget _preferences_widget;
+        public Gtk.Widget get_preferences () {
+            return this._preferences_widget;
+        }
+
+        public IChatWindow ? get_chat_window (string channel_name) {
+            return new StreamlinkGtk.Widgets.Providers.Twitch.ChatWindow (channel_name);
+        }
+
         public uint auto_refresh_interval { get; }
         public bool enable_notifications { get; }
 
@@ -59,12 +74,6 @@ namespace StreamlinkGtk.Providers.Twitch {
         private Cache cache;
         private ApiRequest api_request;
         private Json.Parser json_parser;
-        private string base_url = "https://www.twitch.tv";
-        private string api_base_url = "https://api.twitch.tv/helix";
-        public string revoke_access_token_url;
-        // Used for OAuth authentication.
-        private string app_client_id = "nphupig00csx42och5rum6s1gang4z";
-
         private string authorize_state  {
             owned get {
                 return Uuid.string_random ();
@@ -81,7 +90,7 @@ namespace StreamlinkGtk.Providers.Twitch {
 
         construct {
 
-            this.authorize_url = "https://id.twitch.tv/oauth2/authorize?scope=user%3Aread%3Afollows&response_type=token&client_id=" + this.app_client_id + "&redirect_uri=" + this.redirect_uri + "&state=" + this.authorize_state;
+            this.authorize_url = "https://id.twitch.tv/oauth2/authorize?scope=user%3Aread%3Afollows&response_type=token&client_id=" + Twitch.app_client_id + "&redirect_uri=" + this.redirect_uri + "&state=" + this.authorize_state;
             this.json_parser = new Json.Parser ();
 
             this.store = TwitchSettings.get_default ();
@@ -89,7 +98,7 @@ namespace StreamlinkGtk.Providers.Twitch {
             // Default scrolled window contents.
             this.scrolled_window_contents = new ScrolledWindowContents ();
             this.welcome_window_contents = new WelcomeWindowContents ();
-            this.preferences_page = new StreamlinkGtk.Widgets.Providers.Twitch.PreferencesPage ();
+            this._preferences_widget = new StreamlinkGtk.Widgets.Providers.Twitch.PreferencesPage ();
         }
 
         public Twitch () {
@@ -124,7 +133,7 @@ namespace StreamlinkGtk.Providers.Twitch {
 
                 break;
 
-            default:
+                default :
                 debug ("Streaming provider not handled: %s", streaming_provider.name);
                 break;
             }
@@ -143,7 +152,7 @@ namespace StreamlinkGtk.Providers.Twitch {
             });
 
             SList<KeyValue> post_data = new SList<KeyValue> ();
-            post_data.append (new KeyValue ("client_id", this.app_client_id));
+            post_data.append (new KeyValue ("client_id", Twitch.app_client_id));
             post_data.append (new KeyValue ("token", this.provider_user.bearer_token));
 
             string response = yield logout_api_request.post_request_async ("/oauth2/revoke", post_data);
@@ -158,9 +167,9 @@ namespace StreamlinkGtk.Providers.Twitch {
 
         public void initialize_api_request () {
 
-            this.api_request = new ApiRequest (this.api_base_url);
+            this.api_request = new ApiRequest (Twitch.api_base_url);
             this.api_request.default_request_headers.append (new KeyValue ("Authorization", "Bearer " + this.provider_user.bearer_token));
-            this.api_request.default_request_headers.append (new KeyValue ("Client-Id", this.app_client_id));
+            this.api_request.default_request_headers.append (new KeyValue ("Client-Id", Twitch.app_client_id));
 
             this.api_request.got_error.connect ((error_code, error_message) => {
 
@@ -239,6 +248,7 @@ namespace StreamlinkGtk.Providers.Twitch {
 
             case ContentsId.SEARCH_CHANNELS:
                 contents = yield this.get_contents_search_channels_async (contents_selector);
+
                 break;
 
             case ContentsId.VIDEOS:
@@ -275,6 +285,7 @@ namespace StreamlinkGtk.Providers.Twitch {
 
             case ContentsId.SEARCH_CHANNELS:
                 yield this.get_resource_search_channels_async (ApiEndPoint.SEARCH_CHANNELS, this.scrolled_window_contents.contents);
+
                 break;
 
             case ContentsId.VIDEOS:
@@ -466,7 +477,7 @@ namespace StreamlinkGtk.Providers.Twitch {
                 // 604800s - 1 week cache because why not.
                 Thumbnail thumbnail = new Thumbnail (150, 150, thumbnail_url, thumbnail_path, 604800);
 
-                string content_url = this.base_url + "/" + display_name;
+                string content_url = Twitch.base_url + "/" + display_name;
                 StreamlinkGtk.Models.Resource resource = new ResourceChannel (
                                                                               display_name,
                                                                               thumbnail,
@@ -548,7 +559,7 @@ namespace StreamlinkGtk.Providers.Twitch {
                 // thumbnails refreshed every 5m (300s)
                 Thumbnail thumbnail = new Thumbnail (this.thumbnail_width, this.thumbnail_height, thumbnail_url, thumbnail_path, 300);
 
-                string content_url = this.base_url + "/" + stream_data.get_object ().get_member ("user_login").get_string ();
+                string content_url = Twitch.base_url + "/" + stream_data.get_object ().get_member ("user_login").get_string ();
                 StreamlinkGtk.Models.Resource resource = new StreamlinkGtk.Models.ResourceStream (
                                                                                                   stream_data.get_object ().get_member ("id").get_string (),
                                                                                                   title,
@@ -682,7 +693,7 @@ namespace StreamlinkGtk.Providers.Twitch {
          * Common
          *
          */
-        
+
         /*
          *
          * SEARCH
@@ -694,7 +705,7 @@ namespace StreamlinkGtk.Providers.Twitch {
 
             string uri = ApiEndPoint.SEARCH_CHANNELS;
             if (contents_selector.parameters != null && contents_selector.parameters.has_key ("query")) {
-                uri += "?query=" + Uri.escape_string(contents_selector.parameters.get ("query"));
+                uri += "?query=" + Uri.escape_string (contents_selector.parameters.get ("query"));
             }
 
             yield this.get_resource_search_channels_async (uri, contents);
@@ -720,16 +731,17 @@ namespace StreamlinkGtk.Providers.Twitch {
                 string display_name = stream_data.get_object ().get_member ("display_name").get_string ();
                 string broadcaster_login = stream_data.get_object ().get_member ("broadcaster_login").get_string ();
                 string thumbnail_url = stream_data.get_object ().get_member ("thumbnail_url").get_string ();
+                string content_url = Twitch.base_url + "/" + broadcaster_login;
+                string stream_title = stream_data.get_object ().get_member ("title").get_string ();
 
                 string thumbnail_path = this.cache.thumbnails_channels_cache_dir + "/twitch_" + display_name + ".jpg";
 
                 Thumbnail thumbnail = new Thumbnail (150, 150, thumbnail_url, thumbnail_path, 604800);
 
-                string content_url = this.base_url + "/" + broadcaster_login;
                 StreamlinkGtk.Models.ResourceChannel resource = new ResourceChannel (
-                                                                              display_name,
-                                                                              thumbnail,
-                                                                              content_url);
+                                                                                     display_name,
+                                                                                     thumbnail,
+                                                                                     content_url);
 
                 Array<string> css_classes = new Array<string> ();
                 css_classes.append_val ("title-3");
@@ -754,10 +766,10 @@ namespace StreamlinkGtk.Providers.Twitch {
 
             if (streams_uri_params != "") {
                 streams_uri_params = streams_uri_params.substring (0, streams_uri_params.length - 1);
-                
+
                 Contents temp_contents = new Contents (ContentsId.STREAMS, "");
                 yield this.get_resource_streams_async (ApiEndPoint.STREAMS + "?" + streams_uri_params, temp_contents);
-                
+
                 foreach (StreamlinkGtk.Models.Resource r in temp_contents.resources) {
                     contents.resources.append_val (r);
                     if (contents.pagination_cursor.valid == true) {

@@ -28,9 +28,9 @@ using StreamlinkGtk.Models;
 
 namespace StreamlinkGtk.Preferences {
 
-    [GtkTemplate (ui = "/org/gnome/gstreamlink/widgets/preferences/page-players.ui")]
+    [GtkTemplate (ui = "/org/gnome/gstreamlink/widgets/preferences/player-preferences.ui")]
 
-    public class PagePlayers : PreferencesPage {
+    public class PlayerPreferences : PreferencesPage {
 
         [GtkChild]
         public unowned ComboRow combo_row_player;
@@ -80,7 +80,7 @@ namespace StreamlinkGtk.Preferences {
             this.store.bind ("player-on-top", this.player_on_top, "active", SettingsBindFlags.DEFAULT);
         }
 
-        public PagePlayers (PlayerPluginController player_plugin_controller) {
+        public PlayerPreferences (PlayerPluginController player_plugin_controller) {
             Object (player_plugin_controller: player_plugin_controller);
         }
 
