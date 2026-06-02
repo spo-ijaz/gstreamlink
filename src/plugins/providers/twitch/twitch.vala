@@ -498,6 +498,7 @@ namespace StreamlinkGtk.Providers.Twitch {
                 resource.is_contents_selector = true;
                 Gee.HashMap<string, string> parameters = new Gee.HashMap<string, string> ();
                 parameters.set ("user_id", user_id);
+                parameters.set ("channel_name", display_name);
 
                 resource.contents_selector = new ContentsSelector (ContentsId.VIDEOS, parameters);
                 contents.resources.append_val (resource);
@@ -521,7 +522,12 @@ namespace StreamlinkGtk.Providers.Twitch {
          */
         private async Contents get_contents_streams_async (ContentsSelector? contents_selector = null) {
 
-            Contents contents = new Contents (ContentsId.STREAMS, "Live streams");
+            string title = "Live streams";
+            if (contents_selector != null && contents_selector.parameters != null && contents_selector.parameters.has_key ("category_name")) {
+                title = "Live streams - " + contents_selector.parameters.get ("category_name");
+            }
+            
+            Contents contents = new Contents (ContentsId.STREAMS, title);
             string uri = ApiEndPoint.STREAMS;
 
             if (contents_selector != null && contents_selector.parameters != null && contents_selector.parameters.has_key ("game_id")) {
@@ -679,6 +685,7 @@ namespace StreamlinkGtk.Providers.Twitch {
                 resource.is_contents_selector = true;
                 Gee.HashMap<string, string> parameters = new Gee.HashMap<string, string> ();
                 parameters.set ("game_id", id);
+                parameters.set ("category_name", name);
 
                 resource.contents_selector = new ContentsSelector (ContentsId.STREAMS, parameters);
                 
@@ -701,12 +708,17 @@ namespace StreamlinkGtk.Providers.Twitch {
          */
         private async Contents get_contents_videos_async (ContentsSelector contents_selector) {
 
-            Contents contents = new Contents (ContentsId.VIDEOS, "Live streams");
+            string title = "Recent broadcasts";
+            if (contents_selector.parameters.has_key ("channel_name")) {
+                title = "Recent broadcasts - " + contents_selector.parameters.get ("channel_name");
+            }
+
+            Contents contents = new Contents (ContentsId.VIDEOS, title);
 
             string uri = ApiEndPoint.VIDEOS;
             if (contents_selector.parameters.has_key ("user_id")) {
 
-                uri += "?user_id=" + contents_selector.parameters.get ("user_id");
+                uri += "?user_id=" + contents_selector.parameters.get ("user_id") + "&type=archive";
             }
 
             yield this.get_resource_videos_async (uri, contents);
@@ -725,11 +737,16 @@ namespace StreamlinkGtk.Providers.Twitch {
 
             foreach (unowned Json.Node stream_data in response.data.get_elements ()) {
 
+                string thumbnail_url = stream_data.get_object ().get_member ("thumbnail_url").get_string ();
+                
+                // Exclude current live stream (which has an empty or 404_processing thumbnail url)
+                if (thumbnail_url == null || thumbnail_url == "" || thumbnail_url.contains ("_404")) {
+                    continue;
+                }
+
                 string id = stream_data.get_object ().get_member ("id").get_string ();
 
                 string title = stream_data.get_object ().get_member ("title").get_string ();
-
-                string thumbnail_url = stream_data.get_object ().get_member ("thumbnail_url").get_string ();
                 thumbnail_url = thumbnail_url.replace ("%{width}", this.thumbnail_width.to_string ()).replace ("%{height}", this.thumbnail_height.to_string ()).to_string ();
 
                 string thumbnail_path = this.cache.thumbnails_vod_cache_dir + "/twitch_" + id + ".jpg";
