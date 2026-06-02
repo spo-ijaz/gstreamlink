@@ -215,11 +215,8 @@ namespace StreamlinkGtk.Providers.Twitch {
             SideBarListBoxRow list_box_row_browse = new SideBarListBoxRow ("Browse", false, new ContentsSelector (0, null));
             list_box_rows.append_val (list_box_row_browse);
 
-            // SideBarListBoxRow list_box_row_games = new SideBarListBoxRow ("Games", true, new ContentsSelector (ContentsId.GAMES, null));
-            // list_box_rows.append_val (list_box_row_games);
-
-            SideBarListBoxRow list_box_row_streams = new SideBarListBoxRow ("Streams", true, new ContentsSelector (ContentsId.STREAMS, null));
-            list_box_rows.append_val (list_box_row_streams);
+            SideBarListBoxRow list_box_row_categories = new SideBarListBoxRow ("Categories", true, new ContentsSelector (ContentsId.GAMES, null));
+            list_box_rows.append_val (list_box_row_categories);
         }
 
         public async void get_contents_async (ContentsSelector contents_selector, out Contents contents) {
@@ -234,7 +231,13 @@ namespace StreamlinkGtk.Providers.Twitch {
 
             case ContentsId.STREAMS:
 
-                contents = yield this.get_contents_streams_async ();
+                contents = yield this.get_contents_streams_async (contents_selector);
+
+                break;
+
+            case ContentsId.GAMES:
+
+                contents = yield this.get_contents_games_async ();
 
                 break;
 
@@ -274,6 +277,12 @@ namespace StreamlinkGtk.Providers.Twitch {
             case ContentsId.STREAMS:
 
                 yield this.get_resource_streams_async (ApiEndPoint.STREAMS, this.scrolled_window_contents.contents);
+
+                break;
+
+            case ContentsId.GAMES:
+
+                yield this.get_resource_games_async (ApiEndPoint.GAMES_TOP, this.scrolled_window_contents.contents);
 
                 break;
 
@@ -512,11 +521,20 @@ namespace StreamlinkGtk.Providers.Twitch {
          * STREAMS
          *
          */
-        private async Contents get_contents_streams_async () {
+        private async Contents get_contents_streams_async (ContentsSelector? contents_selector = null) {
 
             Contents contents = new Contents (ContentsId.STREAMS, "Live streams");
+            string uri = ApiEndPoint.STREAMS;
 
-            yield this.get_resource_streams_async (ApiEndPoint.STREAMS, contents);
+            if (contents_selector != null && contents_selector.parameters != null && contents_selector.parameters.has_key ("game_id")) {
+                uri += "?game_id=" + contents_selector.parameters.get ("game_id");
+            }
+
+            yield this.get_resource_streams_async (uri, contents);
+
+            if (contents_selector != null && contents_selector.parameters != null) {
+                contents.pagination_cursor.parameters = contents_selector.parameters;
+            }
 
             return contents;
         }
@@ -604,6 +622,71 @@ namespace StreamlinkGtk.Providers.Twitch {
                 // If we got a cursor, we just update the current scrolled window's grid view model.
                 if (contents.pagination_cursor.valid == true) {
 
+                    this.scrolled_window_contents.list_store.append (resource);
+                }
+            }
+
+            contents.pagination_cursor = response.pagination_cursor;
+
+            return true;
+        }
+
+        /*
+         *
+         * GAMES / CATEGORIES
+         *
+         */
+        private async Contents get_contents_games_async () {
+
+            Contents contents = new Contents (ContentsId.GAMES, "Categories");
+
+            yield this.get_resource_games_async (ApiEndPoint.GAMES_TOP, contents);
+
+            return contents;
+        }
+
+        private async bool get_resource_games_async (string uri, Contents? contents = null) {
+
+            Response response = yield this.get_response_async (uri, contents);
+
+            if (response.data == null) {
+                return false;
+            }
+
+            foreach (unowned Json.Node game_data in response.data.get_elements ()) {
+
+                string id = game_data.get_object ().get_member ("id").get_string ();
+                string name = game_data.get_object ().get_member ("name").get_string ();
+                string box_art_url = game_data.get_object ().get_member ("box_art_url").get_string ();
+
+                string thumbnail_url = box_art_url.replace ("{width}", "188").replace ("{height}", "250");
+                
+                string thumbnail_path = this.cache.thumbnails_channels_cache_dir + "/twitch_game_" + id + ".jpg";
+
+                Thumbnail thumbnail = new Thumbnail (188, 250, thumbnail_url, thumbnail_path, 604800);
+
+                string content_url = Twitch.base_url + "/directory/category/" + Uri.escape_string (name);
+                
+                StreamlinkGtk.Models.ResourceChannel resource = new ResourceChannel (
+                                                                                     name,
+                                                                                     thumbnail,
+                                                                                     content_url);
+
+                Array<string> css_classes = new Array<string> ();
+                css_classes.append_val ("title-3");
+
+                resource.title_css_classes = css_classes;
+                resource.subtitle = "";
+
+                resource.is_contents_selector = true;
+                Gee.HashMap<string, string> parameters = new Gee.HashMap<string, string> ();
+                parameters.set ("game_id", id);
+
+                resource.contents_selector = new ContentsSelector (ContentsId.STREAMS, parameters);
+                
+                contents.resources.append_val (resource);
+
+                if (contents.pagination_cursor.valid == true) {
                     this.scrolled_window_contents.list_store.append (resource);
                 }
             }

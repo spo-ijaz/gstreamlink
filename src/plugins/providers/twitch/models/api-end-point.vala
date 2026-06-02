@@ -29,5 +29,6 @@ namespace StreamlinkGtk.Providers.Twitch.Models {
         public const string USERS = "/users";
         public const string VIDEOS = "/videos";
         public const string SEARCH_CHANNELS = "/search/channels";
+        public const string GAMES_TOP = "/games/top";
     }
 }
