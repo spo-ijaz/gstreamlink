@@ -346,8 +346,6 @@ namespace StreamlinkGtk.Providers.Twitch {
 
 
 
-            post_async_action = true;
-
             if (this.store.get_boolean ("enable-notifications") == false) {
 
                 return;
