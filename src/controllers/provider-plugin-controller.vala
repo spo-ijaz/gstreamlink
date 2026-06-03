@@ -117,7 +117,7 @@ namespace StreamlinkGtk.Controllers {
                                                                               this.application
             );
             new Thread<void> ("Provider Async Tasks Thread", provider_async_tasks.run);
-            provider_async_tasks.get_contents.connect (this.get_contents_handler);
+            provider_async_tasks.get_contents.connect (this.async_get_contents_handler);
         }
 
         public async void provider_user_logout () {
@@ -272,6 +272,20 @@ namespace StreamlinkGtk.Controllers {
             this.oauth_token_receive = null;
             this.window.banner_login.button_label = "Login";
             this.window.banner_login.title = "You need to login.";
+        }
+
+        /**
+         * Handler for background task refresh requests
+         */
+        private void async_get_contents_handler (ContentsSelector contents_selector) {
+
+            if (this.provider != null && this.provider.scrolled_window_contents != null && this.provider.scrolled_window_contents.contents != null) {
+
+                if (this.provider.scrolled_window_contents.contents.contents_id == contents_selector.contents_id) {
+
+                    this.get_contents_handler (contents_selector);
+                }
+            }
         }
 
         /**

@@ -346,9 +346,7 @@ namespace StreamlinkGtk.Providers.Twitch {
 
 
 
-            if (this.scrolled_window_contents.contents != null && this.scrolled_window_contents.contents.contents_id == ContentsId.STREAMS_FOLLOWED) {
-                post_async_action = true;
-            }
+            post_async_action = true;
 
             if (this.store.get_boolean ("enable-notifications") == false) {
 
