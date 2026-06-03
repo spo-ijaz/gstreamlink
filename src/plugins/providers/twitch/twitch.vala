@@ -346,6 +346,10 @@ namespace StreamlinkGtk.Providers.Twitch {
 
 
 
+            if (this.scrolled_window_contents.contents != null && this.scrolled_window_contents.contents.contents_id == ContentsId.STREAMS_FOLLOWED) {
+                post_async_action = true;
+            }
+
             if (this.store.get_boolean ("enable-notifications") == false) {
 
                 return;
@@ -526,7 +530,7 @@ namespace StreamlinkGtk.Providers.Twitch {
             if (contents_selector != null && contents_selector.parameters != null && contents_selector.parameters.has_key ("category_name")) {
                 title = "Live streams - " + contents_selector.parameters.get ("category_name");
             }
-            
+
             Contents contents = new Contents (ContentsId.STREAMS, title);
             string uri = ApiEndPoint.STREAMS;
 
@@ -664,13 +668,13 @@ namespace StreamlinkGtk.Providers.Twitch {
                 string box_art_url = game_data.get_object ().get_member ("box_art_url").get_string ();
 
                 string thumbnail_url = box_art_url.replace ("{width}", "188").replace ("{height}", "250");
-                
+
                 string thumbnail_path = this.cache.thumbnails_channels_cache_dir + "/twitch_game_" + id + ".jpg";
 
                 Thumbnail thumbnail = new Thumbnail (188, 250, thumbnail_url, thumbnail_path, 604800);
 
                 string content_url = Twitch.base_url + "/directory/category/" + Uri.escape_string (name);
-                
+
                 StreamlinkGtk.Models.ResourceChannel resource = new ResourceChannel (
                                                                                      name,
                                                                                      thumbnail,
@@ -688,7 +692,7 @@ namespace StreamlinkGtk.Providers.Twitch {
                 parameters.set ("category_name", name);
 
                 resource.contents_selector = new ContentsSelector (ContentsId.STREAMS, parameters);
-                
+
                 contents.resources.append_val (resource);
 
                 if (contents.pagination_cursor.valid == true) {
@@ -738,7 +742,7 @@ namespace StreamlinkGtk.Providers.Twitch {
             foreach (unowned Json.Node stream_data in response.data.get_elements ()) {
 
                 string thumbnail_url = stream_data.get_object ().get_member ("thumbnail_url").get_string ();
-                
+
                 // Exclude current live stream (which has an empty or 404_processing thumbnail url)
                 if (thumbnail_url == null || thumbnail_url == "" || thumbnail_url.contains ("_404")) {
                     continue;
