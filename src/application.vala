@@ -75,12 +75,12 @@ namespace StreamlinkGtk {
             string[] developers = { "PORQUET Sébastien <sebastien.porquet@ijaz.fr>" };
 
             var about = new Adw.AboutDialog () {
-                application_name = "Streamlink GTK",
+                application_name = "GStreamlink",
                 application_icon = AppConfig.APP_ID,
                 developer_name = "PORQUET Sébastien",
                 version = AppConfig.PACKAGE_VERSION,
                 developers = developers,
-                copyright = "© 2025 PORQUET Sébastien",
+                copyright = "© 2026 PORQUET Sébastien",
                 license_type = Gtk.License.GPL_3_0
             };
 

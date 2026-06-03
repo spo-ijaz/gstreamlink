@@ -37,7 +37,7 @@ namespace StreamlinkGtk.Services {
 
         private const string HTML_TWITCH_AUTH_DONE = """<html>
 <head>
-  <title>Streamlink GTK - OAuth-Process</title>
+  <title>GStreamlink - OAuth-Process</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
@@ -47,10 +47,10 @@ namespace StreamlinkGtk.Services {
   <div class="card" style="width: 18rem;">
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Twitch.jpg/250px-Twitch.jpg" class="card-img-top" alt="twitch logo">
     <div class="card-body">
-      <h3 class="card-title">Streamlink GTK</h3>
+      <h3 class="card-title">GStreamlink</h3>
       <p class="card-text">
         You are now successfully authenticated with Twitch.<br/>
-        Click the button below to complete the authentication process with Streamlink GTK.
+        Click the button below to complete the authentication process with GStreamlink.
       </p>
       <script>
         var tokens=document.location.hash.substring(1);
@@ -68,7 +68,7 @@ namespace StreamlinkGtk.Services {
 
         private const string HTML_AUTH_DONE = """<html>
 <head>
-  <title>Streamlink GTK - OAuth-Process</title>
+  <title>GStreamlink - OAuth-Process</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
@@ -78,7 +78,7 @@ namespace StreamlinkGtk.Services {
   <div class="card" style="width: 18rem;">
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Twitch.jpg/250px-Twitch.jpg" class="card-img-top" alt="twitch logo">
     <div class="card-body">
-      <h3 class="card-title">Streamlink GTK</h3>
+      <h3 class="card-title">GStreamlink</h3>
       <p class="card-text">
         Ok, all good.<br/>
         You can close this page.
