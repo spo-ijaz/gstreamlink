@@ -42,6 +42,7 @@ namespace StreamlinkGtk.Services {
             if (module == null) {
                 throw new PluginLoaderError.FAILED (Module.error ());
             }
+            module.make_resident ();
 
             void* function;
             module.symbol (register_plugin_function_name, out function);
@@ -75,8 +76,6 @@ namespace StreamlinkGtk.Services {
             this.player_plugins[0] = null;
         }
 
-        ~PlayerPluginLoader () {
-            this.player_plugin_infos[0].module.close ();
-        }
+
     }
 }
