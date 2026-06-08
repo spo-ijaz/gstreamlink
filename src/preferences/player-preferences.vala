@@ -46,10 +46,12 @@ namespace StreamlinkGtk.Preferences {
         public PlayerPluginController player_plugin_controller { get; construct; }
 
         private PreferencesPlayersSettings store;
+        private AppSettings app_store;
 
         construct {
 
             this.store = PreferencesPlayersSettings.get_default ();
+            this.app_store = AppSettings.get_default ();
 
             // Default  player
             //
@@ -57,7 +59,7 @@ namespace StreamlinkGtk.Preferences {
 
             // VLC as default.
             PluginPlayer startup_plugin_player = this.player_plugin_controller.list_store_plugin_players.get_item (0) as PluginPlayer;
-            uint startup_player_id = this.store.get_uint ("startup-player-id") > 0 ? this.store.get_uint ("startup-player-id") : 1;
+            uint startup_player_id = this.app_store.get_uint ("startup-player-id") > 0 ? this.app_store.get_uint ("startup-player-id") : 1;
 
             for (uint position = 0; position <= this.player_plugin_controller.list_store_plugin_players.get_n_items (); position++) {
 
@@ -116,8 +118,8 @@ namespace StreamlinkGtk.Preferences {
                 PluginPlayer plugin_player_selected = this.combo_row_player.get_model ().get_item (this.combo_row_player.get_selected ()) as PluginPlayer;
                 if (plugin_player_selected != null) {
 
-                    this.store.set_uint ("startup-player-id", plugin_player_selected.id);
-                    // @todo should load the plugin when we change
+                    this.app_store.set_uint ("startup-player-id", plugin_player_selected.id);
+                    this.player_plugin_controller.change_player (plugin_player_selected);
                     this.selected_player_preferences.set_child (this.player_plugin_controller.player.get_preferences ());
 
                 } else {

@@ -2,9 +2,7 @@
 <schemalist gettext-domain="gstreamlink">
   <schema id="org.gnome.gstreamlink.preferences.players"
     path="/org/gnome/gstreamlink/preferences/players/">
-    <key name="startup-player-id" type="i">
-      <default>1</default>
-    </key>
+
     <key name="player-on-all-workspaces" type="b">
       <default>false</default>
     </key>

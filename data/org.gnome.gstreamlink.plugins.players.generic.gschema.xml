@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="gstreamlink">
+  <schema id="org.gnome.gstreamlink.plugins.players.generic"
+    path="/org/gnome/gstreamlink/plugins/players/generic/">
+    <key name="player-executable" type="s">
+      <default>'mpv'</default>
+      <summary>Player executable</summary>
+      <description>The executable of the player to use</description>
+    </key>
+    <key name="player-args" type="s">
+      <default>''</default>
+      <summary>Player arguments</summary>
+      <description>Extra arguments to pass to the player</description>
+    </key>
+  </schema>
+</schemalist>

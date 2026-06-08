@@ -36,6 +36,7 @@ install_data(
         streamlink_gtk_app_id + '.preferences.streaming-providers.gschema.xml',
         # plugins        
         streamlink_gtk_app_id + '.plugins.players.vlc.gschema.xml',
+        streamlink_gtk_app_id + '.plugins.players.generic.gschema.xml',
         streamlink_gtk_app_id + '.plugins.providers.twitch.gschema.xml',
     ],
     install_dir: get_option('datadir') / 'glib-2.0' / 'schemas',

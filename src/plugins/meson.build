@@ -24,6 +24,24 @@ lib_streamlink_gtk_plugin_player_vlc = shared_library(
     install_dir: [true, true, true],
 )
 
+lib_streamlink_gtk_plugin_player_generic = shared_library(
+    'streamlink_gtk_plugin_player_generic',
+    [
+        lib_streamlink_gtk_plugins_resources,
+        'players/generic/generic.vala',
+        'players/generic/generic-settings.vala',
+        'players/generic/widgets/preferences-group.vala',
+    ],
+    vala_header: 'lib_streamlink_gtk_plugin_player_generic.h',
+    vala_vapi: vapi_dir / 'lib_streamlink_gtk_plugin_player_generic.vapi',
+    include_directories: headers_directories,
+    vala_args: streamlink_gtk_vala_args,
+    dependencies: streamlink_plugin_deps,
+    link_with: lib_streamlink_gtk_shared_sources,
+    install: true,
+    install_dir: [true, true, true],
+)
+
 lib_streamlink_gtk_plugin_provider_twitch = shared_library(
     'streamlink_gtk_plugin_provider_twitch',
     [

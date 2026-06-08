@@ -52,6 +52,16 @@ namespace StreamlinkGtk.StreamingProviders {
             this.streaming_provider.player_started.connect (this.player_started_handler);
             this.streaming_provider.player_stopped.connect (this.player_stopped_handler);
             // this.streaming_provider.stream_started.connect(this.stream_started);
+
+            this.player_plugin_controller.player_changed.connect (this.on_player_changed);
+        }
+
+        private void on_player_changed () {
+
+            if (this.streaming_provider != null) {
+
+                this.streaming_provider.init.begin (this.provider_plugin_controller.provider, this.player_plugin_controller.player, this.running_players);
+            }
         }
 
         public StreamingProviderPluginController (PlayerPluginController player_plugin_controller,

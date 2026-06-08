@@ -8,5 +8,6 @@
   </gresource>
   <gresource prefix="/org/gnome/gstreamlink">
     <file preprocess="xml-stripblanks">plugins/players/vlc/preferences-widget.ui</file>
+    <file preprocess="xml-stripblanks">plugins/players/generic/preferences-widget.ui</file>
   </gresource>
 </gresources>

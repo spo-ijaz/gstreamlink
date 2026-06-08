@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="libadwaita" version="1.6"/>
+  <template class="StreamlinkGtkWidgetsPlayersGenericPreferencesGroup" parent="AdwPreferencesGroup">
+    <property name="description">All options for a custom video player</property>
+    <property name="title">Generic player preferences</property>
+    <child>
+      <object class="GtkListBox">
+        <child>
+          <object class="AdwEntryRow" id="entry_player_executable">
+            <property name="title">Player executable</property>
+          </object>
+        </child>
+        <child>
+          <object class="AdwEntryRow" id="entry_player_args">
+            <property name="title">Player arguments</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
