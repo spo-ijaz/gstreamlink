@@ -250,22 +250,30 @@ namespace StreamlinkGtk.Widgets.Providers.Twitch {
                 }
 
                 if (line.contains (" JOIN #")) {
-                    int excl_idx = line.index_of ("!");
-                    if (excl_idx != -1 && line.has_prefix (":")) {
-                        string user = line.substring (1, excl_idx - 1);
-                        if (this.connected_users.add (user)) {
-                            this.update_users_list ();
+                    int prefix_start = line.has_prefix ("@") ? line.index_of (" :") : (line.has_prefix (":") ? 0 : -1);
+                    if (prefix_start != -1) {
+                        int name_start = line.has_prefix ("@") ? prefix_start + 2 : 1;
+                        int excl_idx = line.index_of ("!", name_start);
+                        if (excl_idx != -1) {
+                            string user = line.substring (name_start, excl_idx - name_start);
+                            if (this.connected_users.add (user)) {
+                                this.update_users_list ();
+                            }
                         }
                     }
                     continue;
                 }
 
                 if (line.contains (" PART #")) {
-                    int excl_idx = line.index_of ("!");
-                    if (excl_idx != -1 && line.has_prefix (":")) {
-                        string user = line.substring (1, excl_idx - 1);
-                        if (this.connected_users.remove (user)) {
-                            this.update_users_list ();
+                    int prefix_start = line.has_prefix ("@") ? line.index_of (" :") : (line.has_prefix (":") ? 0 : -1);
+                    if (prefix_start != -1) {
+                        int name_start = line.has_prefix ("@") ? prefix_start + 2 : 1;
+                        int excl_idx = line.index_of ("!", name_start);
+                        if (excl_idx != -1) {
+                            string user = line.substring (name_start, excl_idx - name_start);
+                            if (this.connected_users.remove (user)) {
+                                this.update_users_list ();
+                            }
                         }
                     }
                     continue;
@@ -307,6 +315,7 @@ namespace StreamlinkGtk.Widgets.Providers.Twitch {
 
                 if (line.contains (" PRIVMSG #")) {
                     string author = "Unknown";
+                    string username = "";
                     string msg_text = "";
                     string color = "";
                     string emotes_str = "";
@@ -328,12 +337,23 @@ namespace StreamlinkGtk.Widgets.Providers.Twitch {
                                     badges_str = tag.substring (7);
                                 }
                             }
+                            int colon_idx2 = line.index_of (" :", space_idx);
+                            if (colon_idx2 != -1) {
+                                int excl_idx = line.index_of ("!", colon_idx2);
+                                if (excl_idx != -1) {
+                                    username = line.substring (colon_idx2 + 2, excl_idx - colon_idx2 - 2);
+                                }
+                            }
+                        }
+                        if (author == "Unknown" || author == "") {
+                            if (username != "") author = username;
                         }
                     } else {
                         // fallback if no tags
                         int excl_idx = line.index_of ("!");
                         if (excl_idx != -1 && line.has_prefix (":")) {
                             author = line.substring (1, excl_idx - 1);
+                            username = author;
                         }
                     }
 
@@ -346,6 +366,11 @@ namespace StreamlinkGtk.Widgets.Providers.Twitch {
                     }
 
                     if (msg_text != "") {
+                        if (username != "") {
+                            if (this.connected_users.add (username)) {
+                                this.update_users_list ();
+                            }
+                        }
                         this.add_message (author, msg_text, color, badges_str, emotes_str);
                     }
                 }
