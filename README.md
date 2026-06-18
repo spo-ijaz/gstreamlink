@@ -52,3 +52,12 @@ meson setup builddir_prod -Dprofile=prod --prefix=/usr --wipe
 ninja -C builddir_prod
 sudo ninja -C builddir_prod install
 ```
+
+# AI usage
+
+* this application was mainly architectured and coded without AI in the first place ;
+* AI is now used to :
+    * find and fix issues ;
+    * help me to remember how this app is working when I want to add changes ;
+* AI full code generation has been really used :
+    * twitch - chat window implementation - and that's clearly visible..
